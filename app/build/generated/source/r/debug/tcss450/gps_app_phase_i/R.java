@@ -1726,7 +1726,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a0043;
         public static final int action_mode_bar_stub=0x7f0a0042;
         public static final int action_mode_close_button=0x7f0a0035;
-        public static final int action_settings=0x7f0a0064;
+        public static final int action_settings=0x7f0a0065;
         public static final int activity_chooser_view_content=0x7f0a0036;
         public static final int adjust_height=0x7f0a0017;
         public static final int adjust_width=0x7f0a0018;
@@ -1736,6 +1736,7 @@ containing a value of this type.
         public static final int buyButton=0x7f0a0029;
         public static final int buy_now=0x7f0a002d;
         public static final int buy_with_google=0x7f0a002e;
+        public static final int checkBox=0x7f0a0061;
         public static final int checkbox=0x7f0a003e;
         public static final int classic=0x7f0a0030;
         public static final int collapseActionView=0x7f0a001d;
@@ -1780,7 +1781,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f0a0005;
         public static final int progress_horizontal=0x7f0a0006;
         public static final int radio=0x7f0a0040;
-        public static final int register_button=0x7f0a0061;
+        public static final int register_button=0x7f0a0062;
         public static final int register_text=0x7f0a005c;
         public static final int sandbox=0x7f0a0027;
         public static final int satellite=0x7f0a001a;
@@ -1795,8 +1796,8 @@ containing a value of this type.
         public static final int search_plate=0x7f0a004e;
         public static final int search_src_text=0x7f0a004f;
         public static final int search_voice_btn=0x7f0a0053;
-        public static final int security_answer=0x7f0a0063;
-        public static final int security_question=0x7f0a0062;
+        public static final int security_answer=0x7f0a0064;
+        public static final int security_question=0x7f0a0063;
         public static final int selectionDetails=0x7f0a002a;
         public static final int shortcut=0x7f0a003f;
         public static final int showCustom=0x7f0a000f;
