@@ -24,6 +24,10 @@ public class AuthTable {
     private DatabaseHelper my_helper;
     private SQLiteDatabase my_db;
 
+    public AuthTable(Context context)
+    {
+        ctxt = context;
+    }
 
     private class DatabaseHelper extends SQLiteOpenHelper {
 

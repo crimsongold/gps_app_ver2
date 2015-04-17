@@ -70,6 +70,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         SharedPreferences prefs = this.getSharedPreferences("tcss450.gps_app_phase_i",
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor pref_editor = prefs.edit();
+        AuthTable user_base = new AuthTable(this);
 
 
         // Set up the login form.
