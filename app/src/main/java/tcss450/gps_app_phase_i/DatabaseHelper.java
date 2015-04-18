@@ -24,7 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     private DatabaseHelper my_helper;
     private SQLiteDatabase my_db;
 
-    public DatabaseHelper (Context context)
+    public DatabaseHelper(Context context)
     {
         super(context, db_name, null, 1);
     }
@@ -33,10 +33,10 @@ public class DatabaseHelper extends SQLiteOpenHelper
     {
         Log.i("Database", "Creating Database...");
         db.execSQL("CREATE TABLE IF NOT EXISTS AUTHENTICATION (" +
-            "Email TEXT PRIMARY KEY, " +
-            "Password TEXT, " +
-            "SecurityQuestion TEXT, " +
-            "SecurityAnswer TEXT)");
+                "Email TEXT PRIMARY KEY, " +
+                "Password TEXT, " +
+                "SecurityQuestion TEXT, " +
+                "SecurityAnswer TEXT)");
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
@@ -46,7 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
 
 
     public boolean add_user(final String user, final String pass, final String question,
-                    final String answer)
+                            final String answer)
     {
         if (!user.contains("@") || pass.length() < 1 || question.length() < 1 ||
                 answer.length() < 1)
@@ -69,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
     {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getReadableDatabase();
-        crs = my_db.query(true, table_name, new String[] {key_user_id}, key_user_id + "=" +
+        crs = my_db.query(true, table_name, new String[]{key_user_id}, key_user_id + "=" +
                 user_id, null, null, null, null, null);
 
         crs.close();
@@ -86,8 +86,8 @@ public class DatabaseHelper extends SQLiteOpenHelper
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getReadableDatabase();
         crs = my_db.rawQuery("SELECT Email, Password, SecurityQuestion, SecurityAnswer " +
-                "FROM AUTHENTICATION WHERE Email = ? AND Password = ?",
-                new String[] {user_id, pass});
+                        "FROM AUTHENTICATION WHERE Email = ? AND Password = ?",
+                new String[]{user_id, pass});
 
         if (crs == null)
             return null;

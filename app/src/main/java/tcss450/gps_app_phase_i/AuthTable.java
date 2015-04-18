@@ -10,7 +10,8 @@ import android.util.Log;
 /**
  * Created by jake on 4/17/15.
  */
-public class AuthTable {
+public class AuthTable
+{
 
     public static final String db_name = "AUTH_DB";
     public static final String table_name = "AUTHENTICATION";
@@ -29,13 +30,16 @@ public class AuthTable {
         ctxt = context;
     }
 
-    private class DatabaseHelper extends SQLiteOpenHelper {
+    private class DatabaseHelper extends SQLiteOpenHelper
+    {
 
-        DatabaseHelper(Context context) {
+        DatabaseHelper(Context context)
+        {
             super(context, db_name, null, 1);
         }
 
-        public void onCreate(SQLiteDatabase db) {
+        public void onCreate(SQLiteDatabase db)
+        {
             Log.i("Database", "Creating Database...");
             db.execSQL("CREATE TABLE IF NOT EXISTS AUTHENTICATION (" +
                     "Email TEXT PRIMARY KEY, " +
@@ -44,14 +48,16 @@ public class AuthTable {
                     "SecurityAnswer TEXT)");
         }
 
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+        {
             //No changes to make so far...
         }
     }
 
 
     public boolean add_user(final String user, final String pass, final String question,
-                            final String answer) {
+                            final String answer)
+    {
         if (!user.contains("@") || pass.length() < 1 || question.length() < 1 ||
                 answer.length() < 1)
             return false;
@@ -69,7 +75,8 @@ public class AuthTable {
         return true;
     }
 
-    protected boolean user_exist(final String user_id) {
+    protected boolean user_exist(final String user_id)
+    {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getReadableDatabase();
         crs = my_db.query(true, table_name, new String[]{key_user_id}, key_user_id + "=" +
@@ -86,7 +93,8 @@ public class AuthTable {
 
     protected boolean authenticate(final String user_id, final String pass)
     {
-        if (this.user_exist(user_id)) {
+        if (this.user_exist(user_id))
+        {
             my_helper = new DatabaseHelper(ctxt);
             my_db = my_helper.getReadableDatabase();
             crs = my_db.query(true, table_name, new String[]{key_user_pass}, key_user_id + "=" +
@@ -99,7 +107,8 @@ public class AuthTable {
         return false;
     }
 
-    protected String[] fetch_user(final String user_id, final String pass) {
+    protected String[] fetch_user(final String user_id, final String pass)
+    {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getReadableDatabase();
         crs = my_db.rawQuery("SELECT Email, Password, SecurityQuestion, SecurityAnswer " +
