@@ -134,7 +134,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(email, password)) {
+        if (!TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -160,7 +160,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            //mAuthTask.execute((Void) null);
+            mAuthTask.login(email, password);
         }
     }
 
@@ -322,7 +322,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         protected void login(final String email, final String password)
         {
-            
+            if (user_base.authenticate(email, password))
+            {
+                Intent intent = new Intent(LoginActivity.this, MyAccountActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
     }
 }
