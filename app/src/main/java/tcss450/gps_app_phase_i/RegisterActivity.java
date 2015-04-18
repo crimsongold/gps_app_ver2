@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,11 +16,30 @@ import android.widget.TextView;
 public class RegisterActivity extends ActionBarActivity
 {
 
+    private String m_pass_prompt_string;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        EditText mEmailView = (EditText) findViewById(R.id.email_prompt);
+        mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
+            {
+                if (textView.getText().toString().contains("@"))
+                {
+                    return true;
+                } else
+                {
+                    //Somehow display that the email is not valid
+                    return false;
+                }
+            }
+        });
 
         EditText mPassPrompt = (EditText) findViewById(R.id.pass_prompt);
         mPassPrompt.setOnEditorActionListener(new TextView.OnEditorActionListener()
@@ -29,9 +49,11 @@ public class RegisterActivity extends ActionBarActivity
             {
                 if (textView.getText().toString().length() > 4)
                 {
+                    m_pass_prompt_string = textView.getText().toString();
                     return true;
                 } else
                 {
+                    //Somehow display that the password is not long enough
                     return false;
                 }
             }
@@ -45,9 +67,19 @@ public class RegisterActivity extends ActionBarActivity
             {
                 if (textView.getText().toString().length() > 4)
                 {
-                    return true;
+                    if (m_pass_prompt_string == textView.getText())
+                    {
+                        return true;
+                    } else
+                    {
+                        return false;
+                        //Somehow display that the passwords do not match
+                    }
+                } else
+                {
+                    //Somehow display that the password is not long enough
+                    return false;
                 }
-                return false;
             }
         });
 
