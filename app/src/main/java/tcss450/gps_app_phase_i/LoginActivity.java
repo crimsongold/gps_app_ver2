@@ -13,6 +13,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -44,6 +45,8 @@ import java.util.List;
  */
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
+    protected AuthTable user_base;
+
     /**
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
@@ -69,8 +72,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         SharedPreferences prefs = this.getSharedPreferences("tcss450.gps_app_phase_i",
                 Context.MODE_PRIVATE);
-        SharedPreferences.Editor pref_editor = prefs.edit();
-        AuthTable user_base = new AuthTable(this);
+        //.Editor pref_editor = prefs.edit();
+        user_base = new AuthTable(this);
+
 
 
         // Set up the login form.
@@ -130,7 +134,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (!TextUtils.isEmpty(password) && !isPasswordValid(email, password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -156,18 +160,18 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             // perform the user login attempt.
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+            //mAuthTask.execute((Void) null);
         }
     }
 
-    private boolean isEmailValid(String email) {
+    private boolean isEmailValid(final String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return email.contains("@") && user_base.user_exist(email);
     }
 
-    private boolean isPasswordValid(String password) {
+    private boolean isPasswordValid(final String  email, final String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 4 && user_base.authenticate(email, password);
     }
 
     /**
@@ -314,6 +318,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+
+        protected void login(final String email, final String password)
+        {
+            
         }
     }
 }

@@ -69,7 +69,7 @@ public class AuthTable {
         return true;
     }
 
-    public boolean user_exist(final String user_id) {
+    protected boolean user_exist(final String user_id) {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getReadableDatabase();
         crs = my_db.query(true, table_name, new String[]{key_user_id}, key_user_id + "=" +
@@ -82,6 +82,21 @@ public class AuthTable {
             return true;
         else
             return false;
+    }
+
+    protected boolean authenticate(final String user_id, final String pass)
+    {
+        if (this.user_exist(user_id)) {
+            my_helper = new DatabaseHelper(ctxt);
+            my_db = my_helper.getReadableDatabase();
+            crs = my_db.query(true, table_name, new String[]{key_user_pass}, key_user_id + "=" +
+                    user_id, null, null, null, null, null);
+
+            if (crs.getString(1) == pass)
+                return true;
+        }
+
+        return false;
     }
 
     protected String[] fetch_user(final String user_id, final String pass) {
