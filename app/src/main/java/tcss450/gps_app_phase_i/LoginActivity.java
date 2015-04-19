@@ -69,6 +69,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
     private View mLoginFormView;
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -187,16 +190,26 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         }
     }
 
+    /**
+     * Checks to see whether or not the email is valid and exists in the user database.
+     * @param email is the string representing the email to be input.
+     * @return boolean indicating whether or not the email is valid.
+     */
     private boolean isEmailValid(final String email)
     {
         //TODO: Replace this with your own logic
         return email.contains("@") && user_base.user_exist(email);
     }
 
-    private boolean isPasswordValid(final String email, final String password)
+    /**
+     * Checks to see whether or not the password is valid.
+     * @param password is the string representing the password to be checked.
+     * @return boolean representing whether or not the password is valid.
+     */
+    private boolean isPasswordValid(final String password)
     {
         //TODO: Replace this with your own logic
-        return password.length() > 4 && user_base.authenticate(email, password);
+        return password.length() > 4;
     }
 
     /**
@@ -243,6 +256,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle)
     {
         return new CursorLoader(this,
@@ -261,6 +277,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor)
     {
         List<String> emails = new ArrayList<String>();
@@ -275,9 +294,22 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public void onLoaderReset(Loader<Cursor> cursorLoader)
     {
 
+    }
+
+    /**
+     * Redirects the user from the LoginActivity to the RegisterActivity.
+     */
+    public void register()
+    {
+        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private interface ProfileQuery
@@ -291,7 +323,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         int IS_PRIMARY = 1;
     }
 
-
     private void addEmailsToAutoComplete(List<String> emailAddressCollection)
     {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
@@ -300,13 +331,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
-    }
-
-    public void register()
-    {
-        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-        startActivity(intent);
-        finish();
     }
 
     /**
@@ -319,6 +343,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         private final String mEmail;
         private final String mPassword;
 
+        /**
+         * UserLoginTask constructor.
+         * @param email is the user email to be assigned to the mEmail field.
+         * @param password is the user password to be assigned to the mPassword field.
+         */
         UserLoginTask(String email, String password)
         {
             mEmail = email;
@@ -326,6 +355,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         }
 
         @Override
+        /**
+         * {@inheritDoc}
+         */
         protected Boolean doInBackground(Void... params)
         {
             // TODO: attempt authentication against a network service.
@@ -354,6 +386,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         }
 
         @Override
+        /**
+         * {@inheritDoc}
+         */
         protected void onPostExecute(final Boolean success)
         {
             mAuthTask = null;
@@ -370,12 +405,22 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         }
 
         @Override
+        /**
+         * {@inheritDoc}
+         */
         protected void onCancelled()
         {
             mAuthTask = null;
             showProgress(false);
         }
 
+        /**
+         * Checks the entered email and password against the contents of the authentication
+         * database. If the user exists and the password matches, it switches the activity to
+         * the MyAccountActivity.
+         * @param email represents the user_id to be used to login.
+         * @param password represents the password for the user to be used for login.
+         */
         protected void login(final String email, final String password)
         {
             if (user_base.authenticate(email, password))
