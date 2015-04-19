@@ -15,8 +15,17 @@ import android.widget.TextView;
 
 public class RegisterActivity extends ActionBarActivity
 {
+    private EditText mEmailView;
+    private EditText mPassPrompt;
+    private EditText mSecQuestion;
+    private EditText mSecAnswer;
 
     private String m_pass_prompt_string;
+    private boolean chk_email = false;
+    private boolean chk_pass_prompt = false;
+    private boolean chk_pass_confirm = false;
+    private boolean chk_sec_question = false;
+    private boolean chk_sec_answer = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -24,7 +33,7 @@ public class RegisterActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        EditText mEmailView = (EditText) findViewById(R.id.email_prompt);
+        mEmailView = (EditText) findViewById(R.id.email_prompt);
         mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
             @Override
@@ -32,6 +41,7 @@ public class RegisterActivity extends ActionBarActivity
             {
                 if (textView.getText().toString().contains("@"))
                 {
+                    chk_email = true;
                     return true;
                 } else
                 {
@@ -41,7 +51,7 @@ public class RegisterActivity extends ActionBarActivity
             }
         });
 
-        EditText mPassPrompt = (EditText) findViewById(R.id.pass_prompt);
+        mPassPrompt = (EditText) findViewById(R.id.pass_prompt);
         mPassPrompt.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
             @Override
@@ -49,6 +59,7 @@ public class RegisterActivity extends ActionBarActivity
             {
                 if (textView.getText().toString().length() > 4)
                 {
+                    chk_pass_prompt = true;
                     m_pass_prompt_string = textView.getText().toString();
                     return true;
                 } else
@@ -69,6 +80,7 @@ public class RegisterActivity extends ActionBarActivity
                 {
                     if (m_pass_prompt_string == textView.getText())
                     {
+                        chk_pass_confirm = true;
                         return true;
                     } else
                     {
@@ -83,6 +95,43 @@ public class RegisterActivity extends ActionBarActivity
             }
         });
 
+        mSecQuestion = (EditText) findViewById(R.id.security_question);
+        mSecQuestion.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
+            {
+                if (textView.getText().toString().length() > 1)
+                {
+                    chk_sec_question = true;
+                    return true;
+                } else
+                {
+                    //Somehow display that there was no question entered
+                    return false;
+                }
+            }
+        });
+
+        mSecAnswer = (EditText) findViewById(R.id.security_answer);
+        mSecAnswer.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
+            {
+                if (textView.getText().toString().length() > 1)
+                {
+                    chk_sec_answer = true;
+                    return true;
+                } else
+                {
+                    //Somehow display that the answer is not long enough
+                    return false;
+                }
+            }
+        });
+
+
         Button registerButton = (Button) findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener()
         {
@@ -90,6 +139,11 @@ public class RegisterActivity extends ActionBarActivity
             public void onClick(View v)
             {
                 //register();
+                if (chk_email && chk_pass_prompt && chk_pass_confirm && chk_sec_question &&
+                        chk_sec_answer)
+                {
+                    register();
+                }
             }
         });
     }
@@ -120,4 +174,11 @@ public class RegisterActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private void register()
+    {
+        String email = mEmailView.getText().toString();
+        String pass = mPassPrompt.getText().toString();
+        String secQuestion = mSecQuestion.getText().toString();
+        String secAnswer = mSecAnswer.getText().toString();
+    }
 }
