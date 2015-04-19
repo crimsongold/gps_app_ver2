@@ -25,6 +25,10 @@
             android:name=".MyAccountActivity"
             android:label="@string/title_activity_my_account" >
         </activity>
+        <activity
+            android:name=".MovementData"
+            android:label="@string/title_activity_movement_data" >
+        </activity>
     </application>
 
 </manifest>

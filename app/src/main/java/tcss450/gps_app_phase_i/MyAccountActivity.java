@@ -1,5 +1,6 @@
 package tcss450.gps_app_phase_i;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -60,7 +61,13 @@ public class MyAccountActivity extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
+                if (
                 //Some logic to check that there are dates in the start and end date entryboxes
+                true)
+                {
+                    Intent intent = new Intent(MyAccountActivity.this, MovementData.class);
+                    startActivity(intent);
+                }
             }
         });
 

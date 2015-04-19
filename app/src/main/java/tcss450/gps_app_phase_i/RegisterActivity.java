@@ -215,4 +215,12 @@ public class RegisterActivity extends ActionBarActivity
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }
