@@ -1736,7 +1736,7 @@ containing a value of this type.
         public static final int buyButton=0x7f0a0029;
         public static final int buy_now=0x7f0a002d;
         public static final int buy_with_google=0x7f0a002e;
-        public static final int checkBox=0x7f0a0061;
+        public static final int terms_check =0x7f0a0061;
         public static final int checkbox=0x7f0a003e;
         public static final int classic=0x7f0a0030;
         public static final int collapseActionView=0x7f0a001d;
