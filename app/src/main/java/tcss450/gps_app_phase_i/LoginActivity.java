@@ -180,6 +180,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
+            mEmailView.setText("");
+            mPasswordView.setText("");
+            mEmailView.setError("Authentication Error");
         } else
         {
             // Show a progress spinner, and kick off a background task to

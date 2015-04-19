@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         applicationId "tcss450.gps_app_phase_i"
-        minSdkVersion 14
-        targetSdkVersion 21
+        minSdkVersion 15
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
