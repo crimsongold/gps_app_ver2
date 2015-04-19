@@ -16,6 +16,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 
+/**
+ * This is the main screen for the application. It allows the user to enter in a start and end
+ * date for the tracking data to be displayed, and then view it in another activity. Additionally,
+ * it allows the user to reset the password
+ */
 public class MyAccountActivity extends ActionBarActivity
 {
     private AuthTable user_base;
@@ -24,6 +29,9 @@ public class MyAccountActivity extends ActionBarActivity
     private boolean chk_end = false;
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -84,6 +92,9 @@ public class MyAccountActivity extends ActionBarActivity
 
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -92,6 +103,9 @@ public class MyAccountActivity extends ActionBarActivity
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public boolean onOptionsItemSelected(MenuItem item)
     {
         // Handle action bar item clicks here. The action bar will
