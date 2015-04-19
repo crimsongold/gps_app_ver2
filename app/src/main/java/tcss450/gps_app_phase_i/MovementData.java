@@ -11,6 +11,9 @@ public class MovementData extends ActionBarActivity
 {
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -19,6 +22,9 @@ public class MovementData extends ActionBarActivity
 
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -27,6 +33,9 @@ public class MovementData extends ActionBarActivity
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public boolean onOptionsItemSelected(MenuItem item)
     {
         // Handle action bar item clicks here. The action bar will
@@ -44,6 +53,9 @@ public class MovementData extends ActionBarActivity
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public void onBackPressed()
     {
         Intent intent = new Intent(MovementData.this, MyAccountActivity.class);
