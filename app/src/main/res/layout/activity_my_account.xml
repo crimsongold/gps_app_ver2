@@ -38,22 +38,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="**Username**"
-        android:id="@+id/display_username"
-        android:layout_below="@+id/acct_text"
-        android:layout_alignRight="@+id/acct_text"
-        android:layout_alignEnd="@+id/acct_text" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Start Date:"
         android:id="@+id/start_date_text"
-        android:layout_below="@+id/display_username"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="36dp" />
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/acct_text" />
 
     <EditText
         android:layout_width="wrap_content"

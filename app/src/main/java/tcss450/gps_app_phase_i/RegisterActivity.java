@@ -54,6 +54,7 @@ public class RegisterActivity extends ActionBarActivity
                 } else
                 {
                     //Somehow display that the email is not valid
+                    chk_email = false;
                     return false;
                 }
             }
@@ -73,6 +74,7 @@ public class RegisterActivity extends ActionBarActivity
                 } else
                 {
                     //Somehow display that the password is not long enough
+                    chk_pass_prompt = false;
                     return false;
                 }
             }
@@ -92,11 +94,13 @@ public class RegisterActivity extends ActionBarActivity
                         return true;
                     } else
                     {
+                        chk_pass_confirm = false;
                         return false;
                         //Somehow display that the passwords do not match
                     }
                 } else
                 {
+                    chk_pass_confirm = false;
                     //Somehow display that the password is not long enough
                     return false;
                 }
@@ -115,6 +119,7 @@ public class RegisterActivity extends ActionBarActivity
                     return true;
                 } else
                 {
+                    chk_sec_question = false;
                     //Somehow display that there was no question entered
                     return false;
                 }
@@ -133,6 +138,7 @@ public class RegisterActivity extends ActionBarActivity
                     return true;
                 } else
                 {
+                    chk_sec_answer = false;
                     //Somehow display that the answer is not long enough
                     return false;
                 }
