@@ -1802,7 +1802,7 @@ containing a value of this type.
         public static final int search_plate=0x7f0a004e;
         public static final int search_src_text=0x7f0a004f;
         public static final int search_voice_btn=0x7f0a0053;
-        public static final int security_answer=0x7f0a006e;
+        public static final int security_answer=0x7f0a006c;
         public static final int security_question=0x7f0a006d;
         public static final int selectionDetails=0x7f0a002a;
         public static final int shortcut=0x7f0a003f;
@@ -1817,7 +1817,7 @@ containing a value of this type.
         public static final int submit_area=0x7f0a0051;
         public static final int tabMode=0x7f0a000b;
         public static final int terms=0x7f0a006b;
-        public static final int terms_check=0x7f0a006c;
+        public static final int terms_check=0x7f0a006e;
         public static final int terrain=0x7f0a001b;
         public static final int title=0x7f0a003c;
         public static final int up=0x7f0a0008;
