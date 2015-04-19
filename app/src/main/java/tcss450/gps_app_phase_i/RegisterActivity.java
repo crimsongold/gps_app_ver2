@@ -15,7 +15,11 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
+/**
+ * An activity that provides a user with the opportunity to register. The user can create a
+ * username (email), password, security question, and security answer. After confirming that the
+ * terms of service have been read, the user information is added to the authentication database.
+ */
 public class RegisterActivity extends ActionBarActivity
 {
     private EditText mEmailView;
@@ -34,6 +38,9 @@ public class RegisterActivity extends ActionBarActivity
     private boolean chk_ToS = false;
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -171,6 +178,9 @@ public class RegisterActivity extends ActionBarActivity
                         chk_sec_answer && chk_ToS)
                 {
                     register();
+                } else
+                {
+                    mEmailView.setError("Missing Fields...");
                 }
             }
         });
@@ -178,6 +188,9 @@ public class RegisterActivity extends ActionBarActivity
 
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public boolean onCreateOptionsMenu(Menu menu)
     {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -186,6 +199,9 @@ public class RegisterActivity extends ActionBarActivity
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public boolean onOptionsItemSelected(MenuItem item)
     {
         // Handle action bar item clicks here. The action bar will
@@ -202,6 +218,11 @@ public class RegisterActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Gets the strings for all of the entry fields in the activity. Then uses the strings to
+     * enter all of the information into a new row in the database. Afterward, the activity
+     * is switched to the MyAccountActivity and the Register Activity is ended.
+     */
     private void register()
     {
         String email = mEmailView.getText().toString();
@@ -217,6 +238,9 @@ public class RegisterActivity extends ActionBarActivity
     }
 
     @Override
+    /**
+     * {@inheritDoc}
+     */
     public void onBackPressed()
     {
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
