@@ -20,8 +20,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:ems="10"
-        android:hint="e-maill"
-        android:inputType="textEmailAddress"/>
+        android:hint="Enter your email."
+        android:inputType="textEmailAddress"
+        android:layout_alignRight="@+id/pass_prompt"
+        android:layout_alignEnd="@+id/pass_prompt"/>
 
     <EditText
         android:id="@+id/pass_prompt"
@@ -34,7 +36,7 @@
         android:layout_below="@+id/email_prompt"
         android:ems="10"
         android:fontFamily="@string/prompt_password"
-        android:hint="create password"
+        android:hint="Enter a password."
         android:inputType="textPassword"/>
 
     <EditText
@@ -48,7 +50,7 @@
         android:layout_below="@+id/pass_prompt"
         android:ems="10"
         android:fontFamily="@string/prompt_password"
-        android:hint="confirm password"
+        android:hint="Retype the password."
         android:inputType="textPassword"/>
 
     <ScrollView
@@ -62,19 +64,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <TextView
-                android:id="@+id/terms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/security_answer"
-                android:enabled="true"
-                android:focusable="true"
-                android:maxLines="6"
-                android:padding="8sp"
-                android:scrollbars="vertical"
-                android:text="@string/terms_of_service"/>
         </LinearLayout>
     </ScrollView>
 
@@ -93,7 +82,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/pass_confirm"
-        android:hint="Enter a security question."/>
+        android:hint="Enter a security question."
+        android:layout_alignRight="@+id/pass_confirm"
+        android:layout_alignEnd="@+id/pass_confirm"/>
 
     <EditText
         android:id="@+id/security_answer"
@@ -102,7 +93,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/security_question"
-        android:hint="Enter the answer to the question."/>
+        android:hint="Enter the answer to the question."
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
 
     <CheckBox
         android:id="@+id/terms_check"
@@ -114,5 +107,28 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/scrollView"
         android:text="Check here to confirm that you have read and agree to the above Terms of Service."/>
+
+    <TextView
+        android:id="@+id/terms"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:focusable="true"
+        android:maxLines="6"
+        android:padding="8sp"
+        android:scrollbars="vertical"
+        android:text="@string/terms_of_service"
+        android:layout_above="@+id/terms_check"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Terms of Service"
+        android:id="@+id/textView"
+        android:layout_above="@+id/terms"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

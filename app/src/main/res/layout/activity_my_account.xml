@@ -27,9 +27,13 @@
         android:id="@+id/reset_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Reset Password"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Reset Password"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/view_data_button"
@@ -37,9 +41,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/end_date_input"
         android:layout_marginTop="50dp"
-        android:layout_toEndOf="@+id/start_date_text"
-        android:layout_toRightOf="@+id/start_date_text"
-        android:text="View Tracking Data"/>
+        android:text="View Tracking Data"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/start_date_text"
@@ -56,11 +63,11 @@
         android:id="@+id/start_date_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/reset_password"
-        android:layout_alignStart="@+id/reset_password"
-        android:layout_alignTop="@+id/start_date_text"
         android:ems="10"
-        android:inputType="date"/>
+        android:inputType="date"
+        android:layout_alignTop="@+id/start_date_text"
+        android:layout_alignRight="@+id/acct_text"
+        android:layout_alignEnd="@+id/acct_text"/>
 
     <TextView
         android:id="@+id/end_date_text"
@@ -77,20 +84,21 @@
         android:id="@+id/end_date_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/start_date_input"
-        android:layout_alignStart="@+id/start_date_input"
-        android:layout_alignTop="@+id/end_date_text"
         android:ems="10"
-        android:inputType="date"/>
+        android:inputType="date"
+        android:layout_alignTop="@+id/end_date_text"
+        android:layout_alignRight="@+id/view_data_button"
+        android:layout_alignEnd="@+id/view_data_button"/>
 
     <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/reset_password"
-        android:layout_alignEnd="@+id/reset_password"
-        android:layout_alignLeft="@+id/reset_password"
-        android:layout_alignRight="@+id/reset_password"
-        android:layout_alignStart="@+id/reset_password"
-        android:text="Log out"/>
+        android:text="Log out"
+        android:layout_alignRight="@+id/view_data_button"
+        android:layout_alignEnd="@+id/view_data_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="20sp"/>
 </RelativeLayout>
