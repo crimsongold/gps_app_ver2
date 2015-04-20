@@ -77,13 +77,8 @@ public class MyAccountActivity extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
-                if (
-                //Some logic to check that there are dates in the start and end date entryboxes
-                true)
-                {
-                    Intent intent = new Intent(MyAccountActivity.this, MovementData.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(MyAccountActivity.this, MovementData.class);
+                startActivity(intent);
             }
         });
 
