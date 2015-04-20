@@ -79,14 +79,15 @@ public class AuthTable
     {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getReadableDatabase();
-        crs = my_db.query(true, table_name, new String[]{key_user_id}, key_user_id + "=" +
-                user_id, null, null, null, null, null);
-
-        crs.close();
-        my_helper.close();
+        crs = my_db.rawQuery("SELECT Email FROM AUTHENTICATION WHERE Email = ?",
+                new String[]{user_id});
 
         if (crs != null)
+        {
+            crs.close();
+            my_helper.close();
             return true;
+        }
         else
             return false;
     }
@@ -97,13 +98,19 @@ public class AuthTable
         {
             my_helper = new DatabaseHelper(ctxt);
             my_db = my_helper.getReadableDatabase();
-            crs = my_db.query(true, table_name, new String[]{key_user_pass}, key_user_id + "=" +
-                    user_id, null, null, null, null, null);
+            crs = my_db.rawQuery("SELECT Password FROM AUTHENTICATION WHERE Email = ?",
+                    new String[]{user_id});
 
-            if (crs.getString(1) == pass)
+            if (crs != null)
+            {
+                crs.close();
+                my_helper.close();
                 return true;
+            }
         }
 
+        crs.close();
+        my_helper.close();
         return false;
     }
 

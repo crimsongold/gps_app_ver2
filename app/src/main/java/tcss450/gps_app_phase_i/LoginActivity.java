@@ -26,6 +26,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -38,6 +39,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.List;
 
@@ -61,6 +63,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
+
+    SharedPreferences prefs;
+    SharedPreferences.Editor prefs_editor;
+
 
     // UI references.
     private AutoCompleteTextView mEmailView;
@@ -153,30 +159,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         boolean cancel = false;
         View focusView = null;
 
-
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password))
-        {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(email))
-        {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email))
-        {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
-            cancel = true;
-        }
+        cancel = !user_base.authenticate(email, password);
+        Log.i("Authenticate()", "the user was able to run authenticate()");
 
         if (cancel)
         {
+            Log.i("Authenticate()", "authenticate returned false");
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
@@ -187,7 +175,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+            //showProgress(true);
+            Log.i("mAuthTask", "AuthTask reached...");
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.login(email, password);
         }
@@ -238,22 +227,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
                     mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter()
-            {
-                @Override
-                public void onAnimationEnd(Animator animation)
-                {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else
-        {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
@@ -395,7 +368,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         protected void onPostExecute(final Boolean success)
         {
             mAuthTask = null;
-            showProgress(false);
+            //showProgress(false);
 
             if (success)
             {
@@ -414,7 +387,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         protected void onCancelled()
         {
             mAuthTask = null;
-            showProgress(false);
+            //showProgress(false);
         }
 
         /**
@@ -426,12 +399,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
          */
         protected void login(final String email, final String password)
         {
-            if (user_base.authenticate(email, password))
-            {
                 Intent intent = new Intent(LoginActivity.this, MyAccountActivity.class);
                 startActivity(intent);
                 finish();
-            }
         }
     }
 }
