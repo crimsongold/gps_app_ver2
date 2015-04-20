@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Copyright 2014 Google Inc. All Rights Reserved. -->
+<!--
+  ~ Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
+  -->
 <resources>
 
     <!-- Attributes for LoadingImageView -->

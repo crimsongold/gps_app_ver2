@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
+ */
+
 package tcss450.gps_app_phase_i;
 
 import android.content.Intent;
@@ -18,7 +22,7 @@ import android.widget.TextView;
  * username (email), password, security question, and security answer. After confirming that the
  * terms of service have been read, the user information is added to the authentication database.
  */
-public class RegisterActivity extends ActionBarActivity
+public class Registration extends ActionBarActivity
 {
     private EditText mEmailView;
     private EditText mPassPrompt;
@@ -268,7 +272,7 @@ public class RegisterActivity extends ActionBarActivity
 
         user_base.add_user(email, pass, secQuestion, secAnswer);
 
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        Intent intent = new Intent(Registration.this, Login.class);
         startActivity(intent);
         finish();
     }
@@ -279,7 +283,7 @@ public class RegisterActivity extends ActionBarActivity
      */
     public void onBackPressed()
     {
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+        Intent intent = new Intent(Registration.this, Login.class);
         startActivity(intent);
         finish();
     }

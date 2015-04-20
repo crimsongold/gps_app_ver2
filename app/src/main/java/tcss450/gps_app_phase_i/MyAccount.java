@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
+ */
+
 package tcss450.gps_app_phase_i;
 
 import android.content.Context;
@@ -12,7 +16,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -21,7 +24,7 @@ import java.util.Date;
  * date for the tracking data to be displayed, and then view it in another activity. Additionally,
  * it allows the user to reset the password
  */
-public class MyAccountActivity extends ActionBarActivity
+public class MyAccount extends ActionBarActivity
 {
     private AuthTable user_base;
     private SharedPreferences prefs;
@@ -75,7 +78,7 @@ public class MyAccountActivity extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MyAccountActivity.this, MovementData.class);
+                Intent intent = new Intent(MyAccount.this, MovementData.class);
                 startActivity(intent);
             }
         });
@@ -98,7 +101,7 @@ public class MyAccountActivity extends ActionBarActivity
             {
                 prefs_editor.clear();
                 prefs_editor.commit();
-                Intent intent = new Intent(MyAccountActivity.this, LoginActivity.class);
+                Intent intent = new Intent(MyAccount.this, Login.class);
                 startActivity(intent);
                 finish();
             }

@@ -1,10 +1,7 @@
 /*
-Initial Change to test Git Functionality.
-TCSS 450 - Langholz, Jaeger, Coons
-
-
-At this point, this class should be complete. Moving on to the Register Activity next.
+ * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
  */
+
 package tcss450.gps_app_phase_i;
 
 import android.animation.Animator;
@@ -42,7 +39,7 @@ import java.util.List;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
+public class Login extends Activity implements LoaderCallbacks<Cursor>
 {
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
@@ -75,7 +72,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
 
         if (prefs.contains("Email") && prefs.contains("Password"))
         {
-            Intent intent = new Intent(LoginActivity.this, MyAccountActivity.class);
+            Intent intent = new Intent(Login.this, MyAccount.class);
             startActivity(intent);
             finish();
         }
@@ -273,11 +270,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
     }
 
     /**
-     * Redirects the user from the LoginActivity to the RegisterActivity.
+     * Redirects the user from the Login to the Registration.
      */
     public void register()
     {
-        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+        Intent intent = new Intent(Login.this, Registration.class);
         startActivity(intent);
         finish();
     }
@@ -297,7 +294,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
     {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(LoginActivity.this,
+                new ArrayAdapter<String>(Login.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
         mEmailView.setAdapter(adapter);
@@ -397,7 +394,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
             prefs_editor.commit();
             prefs_editor.putString("Password", password);
             prefs_editor.commit();
-            Intent intent = new Intent(LoginActivity.this, MyAccountActivity.class);
+            Intent intent = new Intent(Login.this, MyAccount.class);
             startActivity(intent);
             finish();
         }

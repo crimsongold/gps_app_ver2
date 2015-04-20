@@ -1,13 +1,15 @@
-<resources>
-    <string name="app_name">gps_app_phase_I</string>
-    <string name="title_activity_to_s">ToSActivity</string>
+<!--
+  ~ Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
+  -->
 
+<resources>
+    <string name="app_name">Sly</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_register">Registration</string>
     <string name="title_activity_load_screen">LoadScreenActivity</string>
-    <string name="title_activity_my_account">MyAccountActivity</string>
-    <string name="title_activity_movement_data">MovementData</string>
+    <string name="title_activity_my_account">My Account</string>
+    <string name="title_activity_movement_data">Movement Data</string>
     <string name="terms_of_service">We reserve the right to capture and use any and all user and
         location data. By checking this box, you are agreeing to provide us with the aforementioned
         information, and that we are not liable for any damages that could be caused by such.

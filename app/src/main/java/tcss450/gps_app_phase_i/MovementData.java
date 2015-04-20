@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
+ */
+
 package tcss450.gps_app_phase_i;
 
 import android.content.Intent;
@@ -58,7 +62,7 @@ public class MovementData extends ActionBarActivity
      */
     public void onBackPressed()
     {
-        Intent intent = new Intent(MovementData.this, MyAccountActivity.class);
+        Intent intent = new Intent(MovementData.this, MyAccount.class);
         startActivity(intent);
         finish();
     }
