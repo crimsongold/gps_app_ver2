@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
+ * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons,
+ * and Caleb Jaeger. The collective content within was created by them and them alone to fulfill
+ * the requirements of the mobile gps application project for TCSS 450.
  */
 
 package tcss450.gps_app_phase_i;
@@ -34,31 +36,6 @@ public class AuthTable
         ctxt = context;
     }
 
-    private class DatabaseHelper extends SQLiteOpenHelper
-    {
-
-        DatabaseHelper(Context context)
-        {
-            super(context, db_name, null, 1);
-        }
-
-        public void onCreate(SQLiteDatabase db)
-        {
-            Log.i("Database", "Creating Database...");
-            db.execSQL("CREATE TABLE IF NOT EXISTS AUTHENTICATION (" +
-                    "Email TEXT PRIMARY KEY, " +
-                    "Password TEXT, " +
-                    "SecurityQuestion TEXT, " +
-                    "SecurityAnswer TEXT)");
-        }
-
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-        {
-            //No changes to make so far...
-        }
-    }
-
-
     public boolean add_user(final String user, final String pass, final String question,
                             final String answer)
     {
@@ -91,8 +68,7 @@ public class AuthTable
             crs.close();
             my_helper.close();
             return true;
-        }
-        else
+        } else
             return false;
     }
 
@@ -136,5 +112,29 @@ public class AuthTable
         crs.close();
         my_helper.close();
         return user_info;
+    }
+
+    private class DatabaseHelper extends SQLiteOpenHelper
+    {
+
+        DatabaseHelper(Context context)
+        {
+            super(context, db_name, null, 1);
+        }
+
+        public void onCreate(SQLiteDatabase db)
+        {
+            Log.i("Database", "Creating Database...");
+            db.execSQL("CREATE TABLE IF NOT EXISTS AUTHENTICATION (" +
+                    "Email TEXT PRIMARY KEY, " +
+                    "Password TEXT, " +
+                    "SecurityQuestion TEXT, " +
+                    "SecurityAnswer TEXT)");
+        }
+
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
+        {
+            //No changes to make so far...
+        }
     }
 }

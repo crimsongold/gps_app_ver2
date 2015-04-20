@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
+ * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons,
+ * and Caleb Jaeger. The collective content within was created by them and them alone to fulfill
+ * the requirements of the mobile gps application project for TCSS 450.
  */
 
 package tcss450.gps_app_phase_i;
@@ -17,7 +19,6 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -175,6 +176,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
 
     /**
      * Checks to see whether or not the email is valid and exists in the user database.
+     *
      * @param email is the string representing the email to be input.
      * @return boolean indicating whether or not the email is valid.
      */
@@ -186,6 +188,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
 
     /**
      * Checks to see whether or not the password is valid.
+     *
      * @param password is the string representing the password to be checked.
      * @return boolean representing whether or not the password is valid.
      */
@@ -279,6 +282,16 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         finish();
     }
 
+    private void addEmailsToAutoComplete(List<String> emailAddressCollection)
+    {
+        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(Login.this,
+                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
+
+        mEmailView.setAdapter(adapter);
+    }
+
     private interface ProfileQuery
     {
         String[] PROJECTION = {
@@ -288,16 +301,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
-    }
-
-    private void addEmailsToAutoComplete(List<String> emailAddressCollection)
-    {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(Login.this,
-                        android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
-
-        mEmailView.setAdapter(adapter);
     }
 
     /**
@@ -312,7 +315,8 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
 
         /**
          * UserLoginTask constructor.
-         * @param email is the user email to be assigned to the mEmail field.
+         *
+         * @param email    is the user email to be assigned to the mEmail field.
          * @param password is the user password to be assigned to the mPassword field.
          */
         UserLoginTask(String email, String password)
@@ -385,7 +389,8 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
          * Checks the entered email and password against the contents of the authentication
          * database. If the user exists and the password matches, it switches the activity to
          * the MyAccountActivity.
-         * @param email represents the user_id to be used to login.
+         *
+         * @param email    represents the user_id to be used to login.
          * @param password represents the password for the user to be used for login.
          */
         protected void login(final String email, final String password)

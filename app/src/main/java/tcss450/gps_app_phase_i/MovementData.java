@@ -1,12 +1,14 @@
 /*
- * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
+ * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons,
+ * and Caleb Jaeger. The collective content within was created by them and them alone to fulfill
+ * the requirements of the mobile gps application project for TCSS 450.
  */
 
 package tcss450.gps_app_phase_i;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 

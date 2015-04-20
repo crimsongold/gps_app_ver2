@@ -3,111 +3,116 @@
   -->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="tcss450.gps_app_phase_i.Registration">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                tools:context="tcss450.gps_app_phase_i.Registration">
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
         android:id="@+id/email_prompt"
-        android:hint="e-maill"
-        android:layout_alignParentTop="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:hint="e-maill"
+        android:inputType="textEmailAddress"/>
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
         android:id="@+id/pass_prompt"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:hint="create password"
-        android:fontFamily="@string/prompt_password"
-        android:layout_below="@+id/email_prompt"
-        android:layout_alignParentLeft="true"/>
-
-    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/pass_confirm"
-        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/email_prompt"
+        android:ems="10"
+        android:fontFamily="@string/prompt_password"
+        android:hint="create password"
+        android:inputType="textPassword"/>
+
+    <EditText
+        android:id="@+id/pass_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/pass_prompt"
+        android:ems="10"
         android:fontFamily="@string/prompt_password"
         android:hint="confirm password"
-        android:layout_below="@+id/pass_prompt"
-        android:layout_alignParentLeft="true"/>
+        android:inputType="textPassword"/>
 
-    <ScrollView android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/security_answer"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/security_answer">
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/terms"
-                    android:maxLines="6"
-                    android:scrollbars="vertical"
-                    android:text="@string/terms_of_service"
-                    android:enabled="true"
-                    android:padding="8sp"
-                    android:focusable="true"
-                    android:layout_below="@+id/security_answer"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:id="@+id/terms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/security_answer"
+                android:enabled="true"
+                android:focusable="true"
+                android:maxLines="6"
+                android:padding="8sp"
+                android:scrollbars="vertical"
+                android:text="@string/terms_of_service"/>
         </LinearLayout>
     </ScrollView>
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REGISTER"
         android:id="@+id/register_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:text="REGISTER"/>
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/security_question"
-        android:layout_alignParentStart="true"
-        android:hint="Enter a security question."
-        android:layout_below="@+id/pass_confirm"
-        android:layout_alignParentLeft="true"/>
-
-    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/security_answer"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Enter the answer to the question."
+        android:layout_below="@+id/pass_confirm"
+        android:hint="Enter a security question."/>
+
+    <EditText
+        android:id="@+id/security_answer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/security_question"
-        android:layout_alignParentLeft="true"/>
+        android:hint="Enter the answer to the question."/>
 
     <CheckBox
+        android:id="@+id/terms_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Check here to confirm that you have read and agree to the above Terms of Service."
-        android:id="@+id/terms_check"
         android:layout_above="@+id/register_button"
+        android:layout_alignEnd="@+id/scrollView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/scrollView"
-        android:layout_alignEnd="@+id/scrollView" />
+        android:text="Check here to confirm that you have read and agree to the above Terms of Service."/>
 
 </RelativeLayout>

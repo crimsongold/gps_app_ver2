@@ -1,12 +1,14 @@
 /*
- * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
+ * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons,
+ * and Caleb Jaeger. The collective content within was created by them and them alone to fulfill
+ * the requirements of the mobile gps application project for TCSS 450.
  */
 
 package tcss450.gps_app_phase_i;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -157,9 +159,9 @@ public class Registration extends ActionBarActivity
         CheckBox terms_chkBox = (CheckBox) findViewById(R.id.terms_check);
         terms_chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
         {
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked)
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
             {
-                if(isChecked)
+                if (isChecked)
                 {
                     chk_ToS = true;
                 } else
@@ -177,39 +179,46 @@ public class Registration extends ActionBarActivity
             {
 
 
-
-
-                if(mEmailView.getText().toString().contains("@")) {
+                if (mEmailView.getText().toString().contains("@"))
+                {
                     chk_email = true;
-                } else {
+                } else
+                {
                     mEmailView.setError("Missing Fields...");
                 }
 
-                if(mPassPrompt.getText().toString().length() > 4){
+                if (mPassPrompt.getText().toString().length() > 4)
+                {
                     chk_pass_prompt = true;
-                } else {
+                } else
+                {
                     mPassPrompt.setError("Length");
                 }
 
-                if(mSecQuestion.getText().toString().length() > 2) {
+                if (mSecQuestion.getText().toString().length() > 2)
+                {
                     chk_sec_question = true;
-                } else {
+                } else
+                {
                     mSecQuestion.setError("Length");
                 }
 
-                if(mSecAnswer.getText().toString().length() > 2) {
+                if (mSecAnswer.getText().toString().length() > 2)
+                {
                     chk_sec_answer = true;
-                } else {
+                } else
+                {
                     mSecAnswer.setError("Length");
                 }
 
                 /**
                  * Doesn't work currently (some shit different for commit)
                  */
-                if(mPassPrompt.getText().toString().equals(mPassPrompt.getText().toString()))
+                if (mPassPrompt.getText().toString().equals(mPassPrompt.getText().toString()))
                 {
-                     chk_pass_confirm = true;
-                } else {
+                    chk_pass_confirm = true;
+                } else
+                {
                     mPassPrompt.setError("Passwords do not match");
                 }
 
