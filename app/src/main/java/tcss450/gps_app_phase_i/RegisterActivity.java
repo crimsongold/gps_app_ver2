@@ -87,7 +87,7 @@ public class RegisterActivity extends ActionBarActivity
             }
         });
 
-        EditText mPassConfirm = (EditText) findViewById(R.id.pass_confirm);
+        final EditText mPassConfirm = (EditText) findViewById(R.id.pass_confirm);
         mPassConfirm.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
             @Override
@@ -173,7 +173,45 @@ public class RegisterActivity extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
-                //register();
+
+
+
+
+                if(mEmailView.getText().toString().contains("@")) {
+                    chk_email = true;
+                } else {
+                    mEmailView.setError("Missing Fields...");
+                }
+
+                if(mPassPrompt.getText().toString().length() > 4){
+                    chk_pass_prompt = true;
+                } else {
+                    mPassPrompt.setError("Length");
+                }
+
+                if(mSecQuestion.getText().toString().length() > 2) {
+                    chk_sec_question = true;
+                } else {
+                    mSecQuestion.setError("Length");
+                }
+
+                if(mSecAnswer.getText().toString().length() > 2) {
+                    chk_sec_answer = true;
+                } else {
+                    mSecAnswer.setError("Length");
+                }
+
+                /**
+                 * Doesn't work currently
+                 */
+                if(mPassPrompt.getText().toString().equals(mPassPrompt.getText().toString()))
+                {
+                     chk_pass_confirm = true;
+                } else {
+                    mPassPrompt.setError("Passwords do not match");
+                }
+
+                //chk_pass_confirm = true;
                 if (chk_email && chk_pass_prompt && chk_pass_confirm && chk_sec_question &&
                         chk_sec_answer && chk_ToS)
                 {
