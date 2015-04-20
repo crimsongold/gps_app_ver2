@@ -80,12 +80,16 @@ public class AuthTable
             my_db = my_helper.getReadableDatabase();
             crs = my_db.rawQuery("SELECT Password FROM AUTHENTICATION WHERE Email = ?",
                     new String[]{user_id});
+            crs.moveToFirst();
 
-            if (crs != null)
+            if (crs.getColumnCount() > 0)
             {
-                crs.close();
-                my_helper.close();
-                return true;
+                if (pass.equals(crs.getString(crs.getColumnIndex("Password"))))
+                {
+                    crs.close();
+                    my_helper.close();
+                    return true;
+                }
             }
         }
 

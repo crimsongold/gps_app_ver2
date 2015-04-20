@@ -159,7 +159,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             Log.i("Authenticate()", "authenticate returned false");
             // There was an error; don't attempt login and focus the first
             // form field with an error.
-            focusView.requestFocus();
             mEmailView.setText("");
             mPasswordView.setText("");
             mEmailView.setError("Authentication Error");

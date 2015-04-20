@@ -1728,7 +1728,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a0043;
         public static final int action_mode_bar_stub=0x7f0a0042;
         public static final int action_mode_close_button=0x7f0a0035;
-        public static final int action_settings=0x7f0a0070;
+        public static final int action_settings=0x7f0a0071;
         public static final int activity_chooser_view_content=0x7f0a0036;
         public static final int adjust_height=0x7f0a0017;
         public static final int adjust_width=0x7f0a0018;
@@ -1792,7 +1792,7 @@ containing a value of this type.
         public static final int reset_password=0x7f0a0061;
         public static final int sandbox=0x7f0a0027;
         public static final int satellite=0x7f0a001a;
-        public static final int scrollView=0x7f0a006f;
+        public static final int scrollView=0x7f0a006e;
         public static final int search_badge=0x7f0a004a;
         public static final int search_bar=0x7f0a0049;
         public static final int search_button=0x7f0a004b;
@@ -1804,7 +1804,7 @@ containing a value of this type.
         public static final int search_src_text=0x7f0a004f;
         public static final int search_voice_btn=0x7f0a0053;
         public static final int security_answer=0x7f0a006b;
-        public static final int security_question=0x7f0a006d;
+        public static final int security_question=0x7f0a006c;
         public static final int selectionDetails=0x7f0a002a;
         public static final int shortcut=0x7f0a003f;
         public static final int showCustom=0x7f0a000f;
@@ -1817,9 +1817,10 @@ containing a value of this type.
         public static final int strict_sandbox=0x7f0a0028;
         public static final int submit_area=0x7f0a0051;
         public static final int tabMode=0x7f0a000b;
-        public static final int terms=0x7f0a006c;
-        public static final int terms_check=0x7f0a006e;
+        public static final int terms=0x7f0a006f;
+        public static final int terms_check=0x7f0a006d;
         public static final int terrain=0x7f0a001b;
+        public static final int textView=0x7f0a0070;
         public static final int title=0x7f0a003c;
         public static final int up=0x7f0a0008;
         public static final int useLogo=0x7f0a0012;
