@@ -1,5 +1,6 @@
 package tcss450.gps_app_phase_i;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -46,7 +47,7 @@ public class RegisterActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        user_base = new AuthTable(this);
+        user_base = new AuthTable(this.getApplicationContext());
 
         mEmailView = (EditText) findViewById(R.id.email_prompt);
         mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener()
@@ -270,7 +271,7 @@ public class RegisterActivity extends ActionBarActivity
 
         user_base.add_user(email, pass, secQuestion, secAnswer);
 
-        Intent intent = new Intent(RegisterActivity.this, MyAccountActivity.class);
+        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }

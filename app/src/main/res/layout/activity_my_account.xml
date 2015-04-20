@@ -76,4 +76,15 @@
         android:layout_alignTop="@+id/end_date_text"
         android:layout_alignLeft="@+id/start_date_input"
         android:layout_alignStart="@+id/start_date_input" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log out"
+        android:id="@+id/logout_button"
+        android:layout_above="@+id/reset_password"
+        android:layout_alignLeft="@+id/reset_password"
+        android:layout_alignStart="@+id/reset_password"
+        android:layout_alignRight="@+id/reset_password"
+        android:layout_alignEnd="@+id/reset_password"/>
 </RelativeLayout>

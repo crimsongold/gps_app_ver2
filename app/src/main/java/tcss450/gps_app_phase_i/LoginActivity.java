@@ -12,7 +12,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -25,7 +24,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -38,9 +36,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 import java.util.List;
 
 
@@ -49,29 +44,20 @@ import java.util.List;
  */
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
 {
-
-    protected AuthTable user_base;
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
 
-    SharedPreferences prefs;
-    SharedPreferences.Editor prefs_editor;
+    private AuthTable user_base;
+    private UserLoginTask mAuthTask = null;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor prefs_editor;
 
 
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    private View mProgressView;
+    //private View mProgressView;
     private View mLoginFormView;
 
     @Override
@@ -83,8 +69,16 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        user_base = new AuthTable(this);
+        user_base = new AuthTable(this.getApplicationContext());
+        prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
+        prefs_editor = prefs.edit();
 
+        if (prefs.contains("Email") && prefs.contains("Password"))
+        {
+            Intent intent = new Intent(LoginActivity.this, MyAccountActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -399,9 +393,13 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor>
          */
         protected void login(final String email, final String password)
         {
-                Intent intent = new Intent(LoginActivity.this, MyAccountActivity.class);
-                startActivity(intent);
-                finish();
+            prefs_editor.putString("Email", email);
+            prefs_editor.commit();
+            prefs_editor.putString("Password", password);
+            prefs_editor.commit();
+            Intent intent = new Intent(LoginActivity.this, MyAccountActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

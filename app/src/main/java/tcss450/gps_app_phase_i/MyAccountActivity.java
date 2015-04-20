@@ -1,6 +1,8 @@
 package tcss450.gps_app_phase_i;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -24,6 +26,9 @@ import java.util.Date;
 public class MyAccountActivity extends ActionBarActivity
 {
     private AuthTable user_base;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor prefs_editor;
+
 
     private boolean chk_start = false;
     private boolean chk_end = false;
@@ -37,6 +42,9 @@ public class MyAccountActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
+        user_base = new AuthTable(this.getApplicationContext());
+        prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
+        prefs_editor = prefs.edit();
         Date start;
 
         EditText startBox = (EditText) findViewById(R.id.start_date_input);
@@ -88,6 +96,20 @@ public class MyAccountActivity extends ActionBarActivity
                 //do nothing for now
             }
         });*/
+
+        Button logOut = (Button) findViewById(R.id.logout_button);
+        logOut.setOnClickListener(new OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                prefs_editor.clear();
+                prefs_editor.commit();
+                Intent intent = new Intent(MyAccountActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 
