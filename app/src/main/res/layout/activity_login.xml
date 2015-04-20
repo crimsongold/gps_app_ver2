@@ -74,7 +74,7 @@
             android:text="Log In"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#ffffffff"/>
+            android:textColor="#ff000000"/>
 
     </LinearLayout>
 
@@ -85,7 +85,7 @@
         android:layout_gravity="center_horizontal"
         android:text="Register"
         android:textSize="20sp"
-        android:textColor="#ffffffff"/>
+        android:textColor="#ff000000"/>
 
     <Button
         android:layout_width="355dp"
@@ -93,7 +93,7 @@
         android:text="Forgot Password"
         android:id="@+id/button"
         android:layout_gravity="center_horizontal"
-        android:textColor="#ffffffff"
+        android:textColor="#ff000000"
         android:textSize="20sp"/>
 
 </LinearLayout>
