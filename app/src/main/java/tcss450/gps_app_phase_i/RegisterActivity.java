@@ -202,7 +202,7 @@ public class RegisterActivity extends ActionBarActivity
                 }
 
                 /**
-                 * Doesn't work currently
+                 * Doesn't work currently (some shit different for commit)
                  */
                 if(mPassPrompt.getText().toString().equals(mPassPrompt.getText().toString()))
                 {
