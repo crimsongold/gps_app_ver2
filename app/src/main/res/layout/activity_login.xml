@@ -43,8 +43,7 @@
             android:layout_width="match_parent" android:layout_height="wrap_content"
             android:layout_marginTop="16dp" android:text="Log In"
             android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#ffffffff" />
+            android:textSize="20sp" />
 
     </LinearLayout>
 

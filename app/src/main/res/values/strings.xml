@@ -8,4 +8,8 @@
     <string name="title_activity_load_screen">LoadScreenActivity</string>
     <string name="title_activity_my_account">MyAccountActivity</string>
     <string name="title_activity_movement_data">MovementData</string>
+    <string name="terms_of_service">We reserve the right to capture and use any and all user and
+        location data. By checking this box, you are agreeing to provide us with the aforementioned
+        information, and that we are not liable for any damages that could be caused by such.
+        </string>
 </resources>

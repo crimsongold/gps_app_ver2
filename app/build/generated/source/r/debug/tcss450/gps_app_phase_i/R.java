@@ -1750,7 +1750,7 @@ containing a value of this type.
         public static final int edit_query=0x7f0a0048;
         public static final int email=0x7f0a0059;
         public static final int email_login_form=0x7f0a0058;
-        public static final int email_prompt=0x7f0a0069;
+        public static final int email_prompt=0x7f0a0068;
         public static final int email_sign_in_button=0x7f0a005c;
         public static final int end=0x7f0a0015;
         public static final int end_date_input=0x7f0a0062;
@@ -1779,8 +1779,8 @@ containing a value of this type.
         public static final int never=0x7f0a001f;
         public static final int none=0x7f0a000e;
         public static final int normal=0x7f0a000a;
-        public static final int pass_confirm=0x7f0a006b;
-        public static final int pass_prompt=0x7f0a006a;
+        public static final int pass_confirm=0x7f0a006a;
+        public static final int pass_prompt=0x7f0a0069;
         public static final int password=0x7f0a005a;
         public static final int production=0x7f0a0026;
         public static final int progress_circular=0x7f0a0005;
@@ -1788,11 +1788,11 @@ containing a value of this type.
         public static final int raccoon_img=0x7f0a0055;
         public static final int radio=0x7f0a0040;
         public static final int register_button=0x7f0a005d;
-        public static final int register_text=0x7f0a0068;
+        public static final int register_text=0x7f0a0067;
         public static final int reset_password=0x7f0a0060;
         public static final int sandbox=0x7f0a0027;
         public static final int satellite=0x7f0a001a;
-        public static final int scrollView=0x7f0a0067;
+        public static final int scrollView=0x7f0a006f;
         public static final int search_badge=0x7f0a004a;
         public static final int search_bar=0x7f0a0049;
         public static final int search_button=0x7f0a004b;
@@ -1803,8 +1803,8 @@ containing a value of this type.
         public static final int search_plate=0x7f0a004e;
         public static final int search_src_text=0x7f0a004f;
         public static final int search_voice_btn=0x7f0a0053;
-        public static final int security_answer=0x7f0a006d;
-        public static final int security_question=0x7f0a006e;
+        public static final int security_answer=0x7f0a006b;
+        public static final int security_question=0x7f0a006d;
         public static final int selectionDetails=0x7f0a002a;
         public static final int shortcut=0x7f0a003f;
         public static final int showCustom=0x7f0a000f;
@@ -1818,7 +1818,7 @@ containing a value of this type.
         public static final int submit_area=0x7f0a0051;
         public static final int tabMode=0x7f0a000b;
         public static final int terms=0x7f0a006c;
-        public static final int terms_check=0x7f0a006f;
+        public static final int terms_check=0x7f0a006e;
         public static final int terrain=0x7f0a001b;
         public static final int title=0x7f0a003c;
         public static final int up=0x7f0a0008;
@@ -1941,16 +1941,17 @@ containing a value of this type.
         public static final int prompt_password=0x7f0c003d;
         public static final int store_picture_message=0x7f0c003e;
         public static final int store_picture_title=0x7f0c003f;
-        public static final int title_activity_load_screen=0x7f0c0040;
-        public static final int title_activity_movement_data=0x7f0c0041;
-        public static final int title_activity_my_account=0x7f0c0042;
-        public static final int title_activity_register=0x7f0c0043;
-        public static final int title_activity_to_s=0x7f0c0044;
-        public static final int wallet_buy_button_place_holder=0x7f0c0045;
+        public static final int terms_of_service=0x7f0c0040;
+        public static final int title_activity_load_screen=0x7f0c0041;
+        public static final int title_activity_movement_data=0x7f0c0042;
+        public static final int title_activity_my_account=0x7f0c0043;
+        public static final int title_activity_register=0x7f0c0044;
+        public static final int title_activity_to_s=0x7f0c0045;
+        public static final int wallet_buy_button_place_holder=0x7f0c0046;
     }
     public static final class style {
         public static final int Animation_AppCompat_DropDownUp=0x7f0d0000;
-        /**  Customize your theme here. 
+        /**  
          */
         public static final int AppTheme=0x7f0d0001;
         public static final int Base_Animation_AppCompat_DropDownUp=0x7f0d0002;

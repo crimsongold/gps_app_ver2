@@ -6,43 +6,16 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="tcss450.gps_app_phase_i.RegisterActivity">
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/scrollView"
-        android:scrollbars="vertical"
-        android:fillViewport="false">
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        </LinearLayout>
-    </ScrollView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Registration"
-        android:id="@+id/register_text"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="36sp" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/email_prompt"
-        android:layout_below="@+id/register_text"
+        android:hint="e-maill"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="35dp"
-        android:layout_alignRight="@+id/scrollView"
-        android:layout_alignEnd="@+id/scrollView"
-        android:hint="e-maill" />
+        android:layout_alignParentStart="true"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -50,13 +23,12 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/pass_prompt"
-        android:layout_below="@+id/email_prompt"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:hint="create password"
-        android:fontFamily="@string/prompt_password" />
+        android:fontFamily="@string/prompt_password"
+        android:layout_below="@+id/email_prompt"
+        android:layout_alignParentLeft="true"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -64,56 +36,62 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/pass_confirm"
-        android:layout_below="@+id/pass_prompt"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:fontFamily="@string/prompt_password"
-        android:hint="confirm password" />
+        android:hint="confirm password"
+        android:layout_below="@+id/pass_prompt"
+        android:layout_alignParentLeft="true"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/terms"
-        android:maxLines="4"
-        android:scrollbars="vertical"
-        android:text="&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;"
-        android:enabled="true"
-        android:padding="8sp"
-        android:layout_below="@+id/security_answer"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+    <ScrollView android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/security_answer"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/terms"
+                    android:maxLines="6"
+                    android:scrollbars="vertical"
+                    android:text="@string/terms_of_service"
+                    android:enabled="true"
+                    android:padding="8sp"
+                    android:focusable="true"
+                    android:layout_below="@+id/security_answer"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"/>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="REGISTER"
         android:id="@+id/register_button"
-        android:layout_alignBottom="@+id/scrollView"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/security_question"
-        android:layout_below="@+id/pass_confirm"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/scrollView"
-        android:layout_alignEnd="@+id/scrollView"
-        android:hint="Enter a security question." />
+        android:hint="Enter a security question."
+        android:layout_below="@+id/pass_confirm"
+        android:layout_alignParentLeft="true"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/security_answer"
-        android:layout_below="@+id/security_question"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/scrollView"
-        android:layout_alignEnd="@+id/scrollView"
-        android:hint="Enter the answer to the question." />
+        android:hint="Enter the answer to the question."
+        android:layout_below="@+id/security_question"
+        android:layout_alignParentLeft="true"/>
 
     <CheckBox
         android:layout_width="wrap_content"
@@ -125,4 +103,5 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/scrollView"
         android:layout_alignEnd="@+id/scrollView" />
+
 </RelativeLayout>
