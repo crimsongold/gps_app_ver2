@@ -9,4 +9,12 @@
     <TextView android:text="PRETEND THAT THERE IS CONTENT HERE!!!" android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/raccoon_transparent"/>
+
 </RelativeLayout>
