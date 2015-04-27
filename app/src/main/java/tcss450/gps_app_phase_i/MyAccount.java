@@ -96,9 +96,11 @@ public class MyAccount extends ActionBarActivity
                 URL url;
                 //TODO
                 //this needs to have the email in it too
+                //Email needs to be passed after login or stored locally
 
                 try{
                      url = new URL("450.atwebpages.com/reset.php");
+
 
                 }catch (MalformedURLException e) {
                     e.printStackTrace();
