@@ -33,6 +33,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,6 +152,9 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
 
         boolean cancel = false;
         View focusView = null;
+        //TODO
+        LoginTask login = new LoginTask();
+        AsyncTask<String, void, String> var = login.execute(new String[]{email, password});
 
         cancel = !user_base.authenticate(email, password);
         Log.i("Authenticate()", "the user was able to run authenticate()");
@@ -401,6 +406,16 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             Intent intent = new Intent(Login.this, MyAccount.class);
             startActivity(intent);
             finish();
+        }
+    }
+    class  LoginTask extends AsyncTask<String,void, String>{
+
+        @Override
+        //TODO
+        protected String doInBackground(String... params) {
+            String url = "http://450.atwebpages.com/login.php?email=" + params[0] + "&password=" + params[1];
+
+            return null;
         }
     }
 }
