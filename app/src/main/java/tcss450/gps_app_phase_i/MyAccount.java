@@ -18,6 +18,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 
 
@@ -86,14 +88,24 @@ public class MyAccount extends ActionBarActivity
         });
 
         Button resetPass = (Button) findViewById(R.id.reset_password);
-        /*resetPass.setOnClickListener(new OnClickListener()
+        resetPass.setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                //do nothing for now
+                URL url;
+                //TODO
+                //this needs to have the email in it too
+
+                try{
+                     url = new URL("450.atwebpages.com/reset.php");
+
+                }catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+
             }
-        });*/
+        });
 
         Button logOut = (Button) findViewById(R.id.logout_button);
         logOut.setOnClickListener(new OnClickListener()
