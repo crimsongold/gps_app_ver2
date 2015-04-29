@@ -33,6 +33,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONTokener;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -413,8 +429,29 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         @Override
         //TODO
         protected String doInBackground(String... params) {
-            String url = "http://450.atwebpages.com/login.php?email=" + params[0] + "&password=" + params[1];
+            String url = "http://450.atwebpages.com/login.php";
+            HttpClient client = new DefaultHttpClient();
+            HttpPost post = new HttpPost(url);
+            List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+            pairs.add(new BasicNameValuePair("email", params[0]));
+            pairs.add(new BasicNameValuePair("password", params[1]));
+            try {
+                post.setEntity(new UrlEncodedFormEntity(pairs));
+                HttpResponse response = client.execute(post);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                String json = reader.readLine();
+                JSONTokener tokener = new JSONTokener(json);
+                JSONArray finalResult = new JSONArray(tokener);
 
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             return null;
         }
     }
