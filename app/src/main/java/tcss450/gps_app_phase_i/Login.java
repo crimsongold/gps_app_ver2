@@ -154,7 +154,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         View focusView = null;
         //TODO
         LoginTask login = new LoginTask();
-        AsyncTask<String, void, String> var = login.execute(new String[]{email, password});
+        AsyncTask<String, Void, String> var = login.execute(new String[]{email, password});
 
         cancel = !user_base.authenticate(email, password);
         Log.i("Authenticate()", "the user was able to run authenticate()");
@@ -408,7 +408,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             finish();
         }
     }
-    class  LoginTask extends AsyncTask<String,void, String>{
+    class  LoginTask extends AsyncTask<String,Void, String>{
 
         @Override
         //TODO
