@@ -38,19 +38,19 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +65,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
     };
 
     private AuthTable user_base;
-    private UserLoginTask mAuthTask = null;
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefs_editor;
 
@@ -153,10 +152,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
      */
     public void attemptLogin()
     {
-        if (mAuthTask != null)
-        {
-            return;
-        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -165,33 +160,23 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+        if(!isEmailValid(email)){
+            //TODO Make string for this
+            mEmailView.setError("Invalid Email");
+            return;
+        }else if(!isPasswordValid(password)){
+            mPasswordView.setError("Password Is Too Short");
+            return;
+        }
 
-        boolean cancel = false;
         View focusView = null;
         //TODO
-        LoginTask login = new LoginTask();
-        AsyncTask<String, Void, String> var = login.execute(new String[]{email, password});
-
-        cancel = !user_base.authenticate(email, password);
-        Log.i("Authenticate()", "the user was able to run authenticate()");
-
-        if (cancel)
-        {
-            Log.i("Authenticate()", "authenticate returned false");
-            // There was an error; don't attempt login and focus the first
-            // form field with an error.
-            mEmailView.setText("");
-            mPasswordView.setText("");
-            mEmailView.setError("Authentication Error");
-        } else
-        {
+        AsyncTask<String, Void, String> var = (new LoginTask()).execute(new String[]{email, password});
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             //showProgress(true);
             Log.i("mAuthTask", "AuthTask reached...");
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.login(email, password);
-        }
+
     }
 
     /**
@@ -202,6 +187,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
      */
     private boolean isEmailValid(final String email)
     {
+        String pattern = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
         //TODO: Replace this with your own logic
         return email.contains("@") && user_base.user_exist(email);
     }
@@ -215,7 +201,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
     private boolean isPasswordValid(final String password)
     {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 7;
     }
 
     /**
@@ -327,92 +313,36 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean>
-    {
-
-        private final String mEmail;
-        private final String mPassword;
-
-        /**
-         * UserLoginTask constructor.
-         *
-         * @param email    is the user email to be assigned to the mEmail field.
-         * @param password is the user password to be assigned to the mPassword field.
-         */
-        UserLoginTask(String email, String password)
-        {
-            mEmail = email;
-            mPassword = password;
-        }
+    class  LoginTask extends AsyncTask<String,Void, String>{
 
         @Override
-        /**
-         * {@inheritDoc}
-         */
-        protected Boolean doInBackground(Void... params)
-        {
-            // TODO: attempt authentication against a network service.
+        //TODO
+        protected String doInBackground(String... params) {
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme("http")
+                    .authority("450.atwebpages.com")
+                    .appendPath("login.php")
+                    .appendQueryParameter("email",params[0] )
+                    .appendQueryParameter("password", params[1]);
+            String url = builder.build().toString();
 
-            try
-            {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e)
-            {
-                return false;
+//            String url = "http://450.atwebpages.com/login.php?email=" + params[0]+"&password=" + params[1];
+            HttpClient client = new DefaultHttpClient();
+            HttpGet get = new HttpGet(url);
+            try {
+                HttpResponse response = client.execute(get);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                return reader.readLine();
+            } catch (UnsupportedEncodingException e) {
+                return null;
+            } catch (ClientProtocolException e) {
+                return null;
+            } catch (IOException e) {
+                return null;
             }
-
-            for (String credential : DUMMY_CREDENTIALS)
-            {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail))
-                {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
-            // TODO: register the new account here.
-            return true;
+            //return null;
         }
 
-        @Override
-        /**
-         * {@inheritDoc}
-         */
-        protected void onPostExecute(final Boolean success)
-        {
-            mAuthTask = null;
-            //showProgress(false);
-
-            if (success)
-            {
-                finish();
-            } else
-            {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        @Override
-        /**
-         * {@inheritDoc}
-         */
-        protected void onCancelled()
-        {
-            mAuthTask = null;
-            //showProgress(false);
-        }
-
-        /**
-         * Checks the entered email and password against the contents of the authentication
-         * database. If the user exists and the password matches, it switches the activity to
-         * the MyAccountActivity.
-         *
-         * @param email    represents the user_id to be used to login.
-         * @param password represents the password for the user to be used for login.
-         */
         protected void login(final String email, final String password)
         {
             prefs_editor.putString("Email", email);
@@ -423,40 +353,31 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             startActivity(intent);
             finish();
         }
-    }
-    class  LoginTask extends AsyncTask<String,Void, String>{
-
-        @Override
-        //TODO
-        protected String doInBackground(String... params) {
-            String url = "http://450.atwebpages.com/login.php";
-            HttpClient client = new DefaultHttpClient();
-            HttpPost post = new HttpPost(url);
-            List<NameValuePair> pairs = new ArrayList<NameValuePair>();
-            pairs.add(new BasicNameValuePair("email", params[0]));
-            pairs.add(new BasicNameValuePair("password", params[1]));
+        protected void onPostExecute(String result)
+        {
+            //showProgress(false);
+            JSONTokener tokener = new JSONTokener(result);
+            String success = "";
             try {
-                post.setEntity(new UrlEncodedFormEntity(pairs));
-                HttpResponse response = client.execute(post);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-                String json = reader.readLine();
-                JSONTokener tokener = new JSONTokener(json);
-                JSONArray finalResult = new JSONArray(tokener);
-
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+                JSONObject finalResult = new JSONObject(tokener);
+                success = finalResult.getString("result");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return null;
+            if (success.equals("success"))
+            {
+                finish();
+            } else
+            {
+                JSONObject finalResult = null;
+                try {
+                    finalResult = new JSONObject(tokener);
+                    mPasswordView.setError(finalResult.getString("error"));
+                } catch (JSONException e) {
+                    mPasswordView.setError("VERIFICATION ERROR");
+                }
+                mPasswordView.requestFocus();
+            }
         }
     }
 }
-
-
-
-
