@@ -355,26 +355,30 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         }
         protected void onPostExecute(String result)
         {
+            Log.i("mAuthTask", result);
+            //result = "{\"result\" : \"success\"}";
             //showProgress(false);
             JSONTokener tokener = new JSONTokener(result);
+            JSONObject finalResult = null;
             String success = "";
             try {
-                JSONObject finalResult = new JSONObject(tokener);
+                finalResult = new JSONObject(tokener);
                 success = finalResult.getString("result");
             } catch (JSONException e) {
+                Log.i("mAuthTask", "ERROR");
                 e.printStackTrace();
             }
             if (success.equals("success"))
             {
+                //TODO redirect and save info
                 finish();
             } else
             {
-                JSONObject finalResult = null;
                 try {
-                    finalResult = new JSONObject(tokener);
                     mPasswordView.setError(finalResult.getString("error"));
                 } catch (JSONException e) {
-                    mPasswordView.setError("VERIFICATION ERROR");
+                    mPasswordView.setError("Incorrect Email/Password combination");
+                    e.printStackTrace();
                 }
                 mPasswordView.requestFocus();
             }
