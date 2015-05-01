@@ -9,6 +9,8 @@
     <string name="title_activity_register">Registration</string>
     <string name="title_activity_load_screen">LoadScreenActivity</string>
     <string name="title_activity_my_account">My Account</string>
+    <string name="web_service_protocol">http</string>
+    <string name="web_service_url">450.atwebpages.com</string>
     <string name="title_activity_movement_data">Movement Data</string>
     <string name="terms_of_service">We reserve the right to capture and use any and all user and
         location data. By checking this box, you are agreeing to provide us with the aforementioned

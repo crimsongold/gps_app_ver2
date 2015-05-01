@@ -319,8 +319,8 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         protected String[] doInBackground(String... params) {
             Uri.Builder builder = new Uri.Builder();
             //TODO: Make strings for these.
-            builder.scheme("http")
-                    .authority("450.atwebpages.com")
+            builder.scheme(getString(R.string.web_service_protocol))
+                    .authority(getString(R.string.web_service_url))
                     .appendPath("login.php")
                     .appendQueryParameter("email",params[0] )
                     .appendQueryParameter("password", params[1]);
