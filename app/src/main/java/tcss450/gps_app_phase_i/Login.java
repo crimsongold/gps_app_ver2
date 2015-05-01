@@ -168,14 +168,11 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             mPasswordView.setError("Password Is Too Short");
             return;
         }
-
-        View focusView = null;
-        //TODO
-        AsyncTask<String, Void, String> var = (new LoginTask()).execute(new String[]{email, password});
+        AsyncTask<String, Void, String[]> var = (new LoginTask()).execute(new String[]{email, password});
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             //showProgress(true);
-            Log.i("mAuthTask", "AuthTask reached...");
+            //Log.i("mAuthTask", "AuthTask reached...");
 
     }
 
@@ -201,7 +198,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
     private boolean isPasswordValid(final String password)
     {
         //TODO: Replace this with your own logic
-        return password.length() > 7;
+        return password.length() >= 7;
     }
 
     /**
@@ -313,11 +310,11 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    class  LoginTask extends AsyncTask<String,Void, String>{
+    class  LoginTask extends AsyncTask<String,Void, String[]>{
 
         @Override
         //TODO
-        protected String doInBackground(String... params) {
+        protected String[] doInBackground(String... params) {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme("http")
                     .authority("450.atwebpages.com")
@@ -332,7 +329,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             try {
                 HttpResponse response = client.execute(get);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-                return reader.readLine();
+                return new String[]{params[0],reader.readLine()};
             } catch (UnsupportedEncodingException e) {
                 return null;
             } catch (ClientProtocolException e) {
@@ -343,22 +340,22 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             //return null;
         }
 
-        protected void login(final String email, final String password)
+        protected void login(final String email, final String ID)
         {
             prefs_editor.putString("Email", email);
             prefs_editor.commit();
-            prefs_editor.putString("Password", password);
+            prefs_editor.putString("ID", ID);
             prefs_editor.commit();
             Intent intent = new Intent(Login.this, MyAccount.class);
             startActivity(intent);
             finish();
         }
-        protected void onPostExecute(String result)
+        protected void onPostExecute(String[] result)
         {
-            Log.i("mAuthTask", result);
-            //result = "{\"result\" : \"success\"}";
+            Log.i("mAuthTask", result[1]);
             //showProgress(false);
-            JSONTokener tokener = new JSONTokener(result);
+            //result[1] = "{\"result\": \"success\", \"userid\": \"5567899878\"}";
+            JSONTokener tokener = new JSONTokener(result[1]);
             JSONObject finalResult = null;
             String success = "";
             try {
@@ -371,6 +368,14 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             if (success.equals("success"))
             {
                 //TODO redirect and save info
+                try {
+                    login(result[0],finalResult.getString("userid"));
+                } catch (JSONException e) {
+                    mPasswordView.setError("Internal Error");
+                    return;
+                }
+                Intent intent = new Intent(Login.this, MyAccount.class);
+                startActivity(intent);
                 finish();
             } else
             {
