@@ -161,10 +161,11 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
         if(!isEmailValid(email)){
-            //TODO Make string for this
+            //TODO: Make strings for this.
             mEmailView.setError("Invalid Email");
             return;
         }else if(!isPasswordValid(password)){
+            //TODO: Make strings for this.
             mPasswordView.setError("Password Is Too Short");
             return;
         }
@@ -184,8 +185,10 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
      */
     private boolean isEmailValid(final String email)
     {
+        //pattern for valid password
         String pattern = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
         //TODO: Replace this with your own logic
+        boolean result = email.matches(pattern);
         return email.contains("@") && user_base.user_exist(email);
     }
 
@@ -313,9 +316,9 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
     class  LoginTask extends AsyncTask<String,Void, String[]>{
 
         @Override
-        //TODO
         protected String[] doInBackground(String... params) {
             Uri.Builder builder = new Uri.Builder();
+            //TODO: Make strings for these.
             builder.scheme("http")
                     .authority("450.atwebpages.com")
                     .appendPath("login.php")
@@ -337,7 +340,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             } catch (IOException e) {
                 return null;
             }
-            //return null;
         }
 
         protected void login(final String email, final String ID)
@@ -354,6 +356,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         {
             Log.i("mAuthTask", result[1]);
             //showProgress(false);
+            //Test For successful login
             //result[1] = "{\"result\": \"success\", \"userid\": \"5567899878\"}";
             JSONTokener tokener = new JSONTokener(result[1]);
             JSONObject finalResult = null;
@@ -365,9 +368,9 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
                 Log.i("mAuthTask", "ERROR");
                 e.printStackTrace();
             }
+            //TODO: Make strings for this.
             if (success.equals("success"))
             {
-                //TODO redirect and save info
                 try {
                     login(result[0],finalResult.getString("userid"));
                 } catch (JSONException e) {
@@ -382,6 +385,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
                 try {
                     mPasswordView.setError(finalResult.getString("error"));
                 } catch (JSONException e) {
+                    //TODO: Make strings for this.
                     mPasswordView.setError("Incorrect Email/Password combination");
                     e.printStackTrace();
                 }
