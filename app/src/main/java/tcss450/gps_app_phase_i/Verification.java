@@ -10,6 +10,13 @@ package tcss450.gps_app_phase_i;
 public class Verification {
 
     //TODO I think that these should return a string or result number. A boolean doesn't provide enough info.
+
+    /**
+     * Checks to see whether or not the email is valid and exists in the user database.
+     *
+     * @param email is the string representing the email to be input.
+     * @return boolean indicating whether or not the email is valid.
+     */
     public static boolean isEmailValid(final String email)
     {
         //pattern for valid password

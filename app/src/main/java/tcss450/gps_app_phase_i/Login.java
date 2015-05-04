@@ -160,11 +160,11 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
-        if(!isEmailValid(email)){
+        if(!Verification.isEmailValid(email)){
             //TODO: Make strings for this.
             mEmailView.setError("Invalid Email");
             return;
-        }else if(!isPasswordValid(password)){
+        }else if(!Verification.isPasswordValid(password)){
             //TODO: Make strings for this.
             mPasswordView.setError("Password Is Too Short");
             return;
@@ -175,33 +175,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             //showProgress(true);
             //Log.i("mAuthTask", "AuthTask reached...");
 
-    }
-
-    /**
-     * Checks to see whether or not the email is valid and exists in the user database.
-     *
-     * @param email is the string representing the email to be input.
-     * @return boolean indicating whether or not the email is valid.
-     */
-    private boolean isEmailValid(final String email)
-    {
-        //pattern for valid password
-        String pattern = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-        //TODO: Replace this with your own logic
-        boolean result = email.matches(pattern);
-        return email.contains("@") && user_base.user_exist(email);
-    }
-
-    /**
-     * Checks to see whether or not the password is valid.
-     *
-     * @param password is the string representing the password to be checked.
-     * @return boolean representing whether or not the password is valid.
-     */
-    private boolean isPasswordValid(final String password)
-    {
-        //TODO: Replace this with your own logic
-        return password.length() >= 7;
     }
 
     /**
