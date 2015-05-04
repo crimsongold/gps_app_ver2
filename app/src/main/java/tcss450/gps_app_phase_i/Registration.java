@@ -6,9 +6,13 @@
 
 package tcss450.gps_app_phase_i;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,14 +23,28 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 /**
  * An activity that provides a user with the opportunity to register. The user can create a
  * username (email), password, security question, and security answer. After confirming that the
  * terms of service have been read, the user information is added to the authentication database.
  */
-public class Registration extends ActionBarActivity
-{
+public class Registration extends ActionBarActivity {
     private EditText mEmailView;
     private EditText mPassPrompt;
     private EditText mSecQuestion;
@@ -46,8 +64,7 @@ public class Registration extends ActionBarActivity
     /**
      * {@inheritDoc}
      */
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_register);
@@ -55,17 +72,13 @@ public class Registration extends ActionBarActivity
         user_base = new AuthTable(this.getApplicationContext());
 
         mEmailView = (EditText) findViewById(R.id.email_prompt);
-        mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
+        mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
-            {
-                if (textView.getText().toString().contains("@"))
-                {
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (textView.getText().toString().contains("@")) {
                     chk_email = true;
                     return true;
-                } else
-                {
+                } else {
                     //Somehow display that the email is not valid
                     chk_email = false;
                     return false;
@@ -74,18 +87,14 @@ public class Registration extends ActionBarActivity
         });
 
         mPassPrompt = (EditText) findViewById(R.id.pass_prompt);
-        mPassPrompt.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
+        mPassPrompt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
-            {
-                if (textView.getText().toString().length() > 4)
-                {
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (textView.getText().toString().length() > 4) {
                     chk_pass_prompt = true;
                     m_pass_prompt_string = textView.getText().toString();
                     return true;
-                } else
-                {
+                } else {
                     //Somehow display that the password is not long enough
                     chk_pass_prompt = false;
                     return false;
@@ -94,25 +103,19 @@ public class Registration extends ActionBarActivity
         });
 
         final EditText mPassConfirm = (EditText) findViewById(R.id.pass_confirm);
-        mPassConfirm.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
+        mPassConfirm.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
-            {
-                if (textView.getText().toString().length() > 4)
-                {
-                    if (m_pass_prompt_string == textView.getText())
-                    {
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (textView.getText().toString().length() > 4) {
+                    if (m_pass_prompt_string == textView.getText()) {
                         chk_pass_confirm = true;
                         return true;
-                    } else
-                    {
+                    } else {
                         chk_pass_confirm = false;
                         return false;
                         //Somehow display that the passwords do not match
                     }
-                } else
-                {
+                } else {
                     chk_pass_confirm = false;
                     //Somehow display that the password is not long enough
                     return false;
@@ -121,17 +124,13 @@ public class Registration extends ActionBarActivity
         });
 
         mSecQuestion = (EditText) findViewById(R.id.security_question);
-        mSecQuestion.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
+        mSecQuestion.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
-            {
-                if (textView.getText().toString().length() > 1)
-                {
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (textView.getText().toString().length() > 1) {
                     chk_sec_question = true;
                     return true;
-                } else
-                {
+                } else {
                     chk_sec_question = false;
                     //Somehow display that there was no question entered
                     return false;
@@ -140,17 +139,13 @@ public class Registration extends ActionBarActivity
         });
 
         mSecAnswer = (EditText) findViewById(R.id.security_answer);
-        mSecAnswer.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
+        mSecAnswer.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
-            {
-                if (textView.getText().toString().length() > 1)
-                {
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (textView.getText().toString().length() > 1) {
                     chk_sec_answer = true;
                     return true;
-                } else
-                {
+                } else {
                     chk_sec_answer = false;
                     //Somehow display that the answer is not long enough
                     return false;
@@ -159,78 +154,60 @@ public class Registration extends ActionBarActivity
         });
 
         CheckBox terms_chkBox = (CheckBox) findViewById(R.id.terms_check);
-        terms_chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
-        {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
-            {
-                if (isChecked)
-                {
+        terms_chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
                     chk_ToS = true;
-                } else
-                {
+                } else {
                     chk_ToS = false;
                 }
             }
         });
 
         Button registerButton = (Button) findViewById(R.id.register_button);
-        registerButton.setOnClickListener(new View.OnClickListener()
-        {
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
 
-                if (mEmailView.getText().toString().contains("@"))
-                {
+                if (mEmailView.getText().toString().contains("@")) {
                     chk_email = true;
-                } else
-                {
+                } else {
                     mEmailView.setError("Missing Fields...");
                 }
 
-                if (mPassPrompt.getText().toString().length() > 4)
-                {
+                if (mPassPrompt.getText().toString().length() > 4) {
                     chk_pass_prompt = true;
-                } else
-                {
+                } else {
                     mPassPrompt.setError("Length");
                 }
 
-                if (mSecQuestion.getText().toString().length() > 2)
-                {
+                if (mSecQuestion.getText().toString().length() > 2) {
                     chk_sec_question = true;
-                } else
-                {
+                } else {
                     mSecQuestion.setError("Length");
                 }
 
-                if (mSecAnswer.getText().toString().length() > 2)
-                {
+                if (mSecAnswer.getText().toString().length() > 2) {
                     chk_sec_answer = true;
-                } else
-                {
+                } else {
                     mSecAnswer.setError("Length");
                 }
 
                 /**
                  * Doesn't work currently (some shit different for commit)
                  */
-                if (mPassPrompt.getText().toString().equals(mPassPrompt.getText().toString()))
-                {
+                if (mPassPrompt.getText().toString().equals(mPassPrompt.getText().toString())) {
                     chk_pass_confirm = true;
-                } else
-                {
+                } else {
                     mPassPrompt.setError("Passwords do not match");
                 }
 
                 //chk_pass_confirm = true;
                 if (chk_email && chk_pass_prompt && chk_pass_confirm && chk_sec_question &&
-                        chk_sec_answer && chk_ToS)
-                {
+                        chk_sec_answer && chk_ToS) {
                     register();
-                } else
-                {
+                } else {
                     mEmailView.setError("Missing Fields...");
                 }
             }
@@ -242,8 +219,7 @@ public class Registration extends ActionBarActivity
     /**
      * {@inheritDoc}
      */
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_register, menu);
         return true;
@@ -253,16 +229,14 @@ public class Registration extends ActionBarActivity
     /**
      * {@inheritDoc}
      */
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
-        {
+        if (id == R.id.action_settings) {
             return true;
         }
 
@@ -274,8 +248,7 @@ public class Registration extends ActionBarActivity
      * enter all of the information into a new row in the database. Afterward, the activity
      * is switched to the MyAccountActivity and the Register Activity is ended.
      */
-    private void register()
-    {
+    private void register() {
         String email = mEmailView.getText().toString();
         String pass = mPassPrompt.getText().toString();
         String secQuestion = mSecQuestion.getText().toString();
@@ -292,10 +265,98 @@ public class Registration extends ActionBarActivity
     /**
      * {@inheritDoc}
      */
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         Intent intent = new Intent(Registration.this, Login.class);
         startActivity(intent);
         finish();
+    }
+
+
+    class registerUser extends AsyncTask<String, Void, String[]> {
+
+
+        protected String[] doInBackground(String... params) {
+            Uri.Builder builder = new Uri.Builder();
+            
+            builder.scheme("http")
+                    .authority("450.atwebpages.com")
+                    .appendPath("adduser.php")
+                    .appendQueryParameter("email", params[0])
+                    .appendQueryParameter("password", params[1])
+                    .appendQueryParameter("question", params[2])
+                    .appendQueryParameter("answer", params[3]);
+            String url = builder.build().toString();
+
+
+            HttpClient client = new DefaultHttpClient();
+            HttpGet get = new HttpGet(url);
+
+
+            /**
+             * Link example
+             * 450.atwebpages.com/adduser.php?email=smith@aol.com&password=mypass& question=favorite%20color%3F&answer=blue
+             */
+
+
+            try {
+                HttpResponse response = client.execute(get);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                return new String[]{params[0], reader.readLine()};
+            } catch (UnsupportedEncodingException e) {
+                return null;
+            } catch (ClientProtocolException e) {
+                return null;
+            } catch (IOException e) {
+                return null;
+            }
+        }
+
+        protected void registerUser(String[] result) {
+
+            JSONTokener tokener = new JSONTokener(result[1]);
+            JSONObject finalResult = null;
+            String regResult = "";
+            try {
+                finalResult = new JSONObject(tokener);
+                regResult = finalResult.getString("result");
+            } catch (JSONException e) {
+                Log.i("mAuthTask", "ERROR");
+                e.printStackTrace();
+            }
+
+
+            if (regResult.equals("success")) {
+
+
+                Context context = getApplicationContext();
+                CharSequence text = "Registration complete";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                //if success, url has been posted and user has been created, send activity to login
+                //may want to auto complete email field on login activity from here
+                Intent i = new Intent(Registration.this, Login.class);
+                startActivity(i);
+                finish();
+
+
+            } else {
+
+                //temp error.  replace with json error message
+                Context context = getApplicationContext();
+                CharSequence text = "Generic Error message";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+            }
+
+
+        }
+
+
     }
 }
