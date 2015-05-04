@@ -34,15 +34,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -60,11 +55,7 @@ import java.util.List;
  */
 public class Login extends Activity implements LoaderCallbacks<Cursor>
 {
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
 
-    private AuthTable user_base;
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefs_editor;
 
@@ -84,7 +75,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        user_base = new AuthTable(this.getApplicationContext());
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
 
