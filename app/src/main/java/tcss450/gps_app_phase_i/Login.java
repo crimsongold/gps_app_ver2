@@ -147,16 +147,60 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         mEmailView.setError(null);
         mPasswordView.setError(null);
 
+        //TODO: Make strings for this.
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
-        if(!Verification.isEmailValid(email)){
-            //TODO: Make strings for this.
-            mEmailView.setError("Invalid Email");
+        int valid = Verification.isEmailValid(email);
+        if(valid == Verification.VALID_EMAIL){
+        }else if(valid == Verification.BLANK) {
+            mEmailView.setError("Email Can't be blank");
+            mEmailView.requestFocus();
             return;
-        }else if(!Verification.isPasswordValid(password)){
-            //TODO: Make strings for this.
+        }else if(valid == Verification.INVALID_SYMBOLS){
+            mEmailView.setError("Email can't contain +-,!#$%^&*();\\/|<>\"'");
+            mEmailView.requestFocus();
+            return;
+        }else if(valid == Verification.NO_USER){
+            mEmailView.setError("Email needs to have a user");
+            mEmailView.requestFocus();
+            return;
+        }else if(valid == Verification.NO_AT){
+            mEmailView.setError("Email needs an '@' symbol");
+            mEmailView.requestFocus();
+            return;
+        }else if(valid == Verification.NO_DOMAIN_NAME){
+            mEmailView.setError("Email needs a domain name");
+            mEmailView.requestFocus();
+            return;
+        }else if(valid == Verification.NO_DOT){
+            mEmailView.setError("Email needs a '.' after the domain name");
+            mEmailView.requestFocus();
+            return;
+        }else if(valid == Verification.NO_TOP_DOMAIN){
+            mEmailView.setError("Email needs a valid top level domain");
+            mEmailView.requestFocus();
+            return;
+        }
+
+        valid = Verification.isPasswordValid(password);
+        if(valid == Verification.VALID_PASSWORD){
+
+        }else if(valid == Verification.SHORT_PASSWORD){
             mPasswordView.setError("Password Is Too Short");
+            mPasswordView.requestFocus();
+            return;
+        }else if(valid == Verification.NO_UPPER){
+            mPasswordView.setError("Password Must contain an upper case letter");
+            mPasswordView.requestFocus();
+            return;
+        }else if(valid == Verification.NO_LOWER){
+            mPasswordView.setError("Password Must contain a Lower case letter");
+            mPasswordView.requestFocus();
+            return;
+        }else if(valid == Verification.NO_SPECIAL){
+            mPasswordView.setError("Password Must contain one of the following: +\\-.,!@#$%^&*();\\\\/|<>\"'");
+            mPasswordView.requestFocus();
             return;
         }
         AsyncTask<String, Void, String[]> var = (new LoginTask()).execute(new String[]{email, password});
