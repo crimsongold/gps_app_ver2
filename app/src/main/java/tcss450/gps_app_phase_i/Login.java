@@ -97,7 +97,11 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             {
                 if (id == R.id.login || id == EditorInfo.IME_NULL)
                 {
-                    attemptLogin();
+                    /* I commented out attemptLogin() because this is effectively like clicking
+                    the login button every time you edit the password, which is not how this should
+                    function.
+                     */
+                    //attemptLogin();
                     return true;
                 }
                 return false;
@@ -142,7 +146,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
      */
     public void attemptLogin()
     {
-
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
@@ -151,36 +154,30 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
+
         int valid = Verification.isEmailValid(email);
         if(valid == Verification.VALID_EMAIL){
         }else if(valid == Verification.BLANK) {
             mEmailView.setError("Email Can't be blank");
             mEmailView.requestFocus();
-            return;
         }else if(valid == Verification.INVALID_SYMBOLS){
             mEmailView.setError("Email can't contain +-,!#$%^&*();\\/|<>\"'");
             mEmailView.requestFocus();
-            return;
         }else if(valid == Verification.NO_USER){
             mEmailView.setError("Email needs to have a user");
             mEmailView.requestFocus();
-            return;
         }else if(valid == Verification.NO_AT){
             mEmailView.setError("Email needs an '@' symbol");
             mEmailView.requestFocus();
-            return;
         }else if(valid == Verification.NO_DOMAIN_NAME){
             mEmailView.setError("Email needs a domain name");
             mEmailView.requestFocus();
-            return;
         }else if(valid == Verification.NO_DOT){
             mEmailView.setError("Email needs a '.' after the domain name");
             mEmailView.requestFocus();
-            return;
         }else if(valid == Verification.NO_TOP_DOMAIN){
             mEmailView.setError("Email needs a valid top level domain");
             mEmailView.requestFocus();
-            return;
         }
 
         valid = Verification.isPasswordValid(password);
@@ -189,26 +186,23 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         }else if(valid == Verification.SHORT_PASSWORD){
             mPasswordView.setError("Password Is Too Short");
             mPasswordView.requestFocus();
-            return;
         }else if(valid == Verification.NO_UPPER){
             mPasswordView.setError("Password Must contain an upper case letter");
             mPasswordView.requestFocus();
-            return;
         }else if(valid == Verification.NO_LOWER){
             mPasswordView.setError("Password Must contain a Lower case letter");
             mPasswordView.requestFocus();
-            return;
         }else if(valid == Verification.NO_SPECIAL){
-            mPasswordView.setError("Password Must contain one of the following: +\\-.,!@#$%^&*();\\\\/|<>\"'");
+            mPasswordView.setError(
+                    "Password Must contain one of the following: +\\-.,!@#$%^&*();\\\\/|<>\"'");
             mPasswordView.requestFocus();
-            return;
+        } else {
+            showProgress(true);
+            AsyncTask<String, Void, String[]> var =
+                    (new LoginTask()).execute(new String[]{email, password});
         }
-        AsyncTask<String, Void, String[]> var = (new LoginTask()).execute(new String[]{email, password});
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            //showProgress(true);
-            //Log.i("mAuthTask", "AuthTask reached...");
-
     }
 
     /**
@@ -333,12 +327,13 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
                     .appendQueryParameter("password", params[1]);
             String url = builder.build().toString();
 
-//            String url = "http://450.atwebpages.com/login.php?email=" + params[0]+"&password=" + params[1];
+//String url = "http://450.atwebpages.com/login.php?email=" + params[0]+"&password=" + params[1];
             HttpClient client = new DefaultHttpClient();
             HttpGet get = new HttpGet(url);
             try {
                 HttpResponse response = client.execute(get);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
                 return new String[]{params[0],reader.readLine()};
             } catch (UnsupportedEncodingException e) {
                 return null;
@@ -362,7 +357,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         protected void onPostExecute(String[] result)
         {
             Log.i("mAuthTask", result[1]);
-            //showProgress(false);
             //Test For successful login
             //result[1] = "{\"result\": \"success\", \"userid\": \"5567899878\"}";
             JSONTokener tokener = new JSONTokener(result[1]);
@@ -385,6 +379,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
                     return;
                 }
                 Intent intent = new Intent(Login.this, MyAccount.class);
+                showProgress(false);
                 startActivity(intent);
                 finish();
             } else
@@ -398,6 +393,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
                 }
                 mPasswordView.requestFocus();
             }
+            showProgress(false);
         }
     }
 }
