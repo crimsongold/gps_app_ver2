@@ -111,17 +111,17 @@ public class Registration extends ActionBarActivity {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (textView.getText().toString().length() > 4) {
-                    if (m_pass_prompt_string == textView.getText()) {
+                    if (m_pass_prompt_string.equals(textView.getText())) {
                         chk_pass_confirm = true;
                         return true;
                     } else {
                         chk_pass_confirm = false;
+                        mPassConfirm.setError("Passwords do not match");
                         return false;
-                        //Somehow display that the passwords do not match
                     }
                 } else {
                     chk_pass_confirm = false;
-                    //Somehow display that the password is not long enough
+                    mPassConfirm.setError("Invalid password entered.");
                     return false;
                 }
             }
@@ -137,6 +137,7 @@ public class Registration extends ActionBarActivity {
                 } else {
                     chk_sec_question = false;
                     //Somehow display that there was no question entered
+                    mSecQuestion.setError("No question has been entered.");
                     return false;
                 }
             }
@@ -151,7 +152,7 @@ public class Registration extends ActionBarActivity {
                     return true;
                 } else {
                     chk_sec_answer = false;
-                    //Somehow display that the answer is not long enough
+                    mSecAnswer.setError("Answer is too short.");
                     return false;
                 }
             }

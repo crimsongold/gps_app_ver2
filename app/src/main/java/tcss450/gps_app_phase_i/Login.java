@@ -63,7 +63,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    //private View mProgressView;
+    private View mProgressView;
     private View mLoginFormView;
 
     @Override
@@ -90,23 +90,23 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        /*mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
             {
                 if (id == R.id.login || id == EditorInfo.IME_NULL)
                 {
-                    /* I commented out attemptLogin() because this is effectively like clicking
+                     I commented out attemptLogin() because this is effectively like clicking
                     the login button every time you edit the password, which is not how this should
                     function.
-                     */
+
                     //attemptLogin();
                     return true;
                 }
                 return false;
             }
-        });
+        });*/
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener()

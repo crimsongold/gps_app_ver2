@@ -65,21 +65,21 @@
             android:maxLines="1"
             android:singleLine="true"/>
 
-        <Button
-            android:id="@+id/email_sign_in_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Log In"
-            android:textSize="20sp"
-            android:textColor="#ff000000"/>
-
     </LinearLayout>
 
     <Button
+        android:id="@+id/email_sign_in_button"
+        android:layout_width="355dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Log In"
+        android:textSize="20sp"
+        android:textColor="#ff000000"/>
+
+    <Button
         android:id="@+id/register_button"
-        android:layout_width="354dp"
+        android:layout_width="355dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:text="Register"
