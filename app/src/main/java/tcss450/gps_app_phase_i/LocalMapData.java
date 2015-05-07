@@ -4,15 +4,18 @@
 
 package tcss450.gps_app_phase_i;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 /**
  * Created by Jake on 5/7/2015.
@@ -36,21 +39,36 @@ public class LocalMapData {
     private DatabaseHelper my_helper;
     private SQLiteDatabase my_db;
 
-    public LocalMapData(Context context) { ctxt = context; }
+    protected LocalMapData(Context context) { ctxt = context; }
 
-    protected void push_data ()
+    protected void push_data (final String user_id)
     {
-        //Not quite sure which data type is best to use with datetime (Calendar, or parse a string)
+        //Push the recent data from the database into the webservice database
     }
 
     protected void pull_data()
     {
         //Pull all of the data down from the database for a specific user.
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.US);
     }
 
-    protected void add_data_point(final String time, final double longitude, final double latitude)
+    //places a new data point into the local data table
+    protected void add_point(final Calendar datetime, final double longitude, final double latitude)
     {
-        //shove the data into the database.
+        my_helper = new DatabaseHelper(ctxt);
+        my_db = my_helper.getWritableDatabase();
+
+        String string_datetime = datetime.get(Calendar.DAY_OF_MONTH) + "/" +
+                datetime.get(Calendar.MONTH) + "/" + datetime.get(Calendar.YEAR) + " " +
+                datetime.get(Calendar.HOUR_OF_DAY) + ":" + datetime.get(Calendar.MINUTE);
+
+        ContentValues init_vals = new ContentValues();
+        init_vals.put(key_datetime, string_datetime);
+        init_vals.put(key_long, longitude);
+        init_vals.put(key_lat, latitude);
+
+        my_db.insert(table_name, null, init_vals);
+        my_helper.close();
     }
 
     protected void wipe_data()
