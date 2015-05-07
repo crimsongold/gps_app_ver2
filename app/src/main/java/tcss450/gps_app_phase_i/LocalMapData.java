@@ -43,6 +43,21 @@ public class LocalMapData {
         //Not quite sure which data type is best to use with datetime (Calendar, or parse a string)
     }
 
+    protected void pull_data()
+    {
+        //Pull all of the data down from the database for a specific user.
+    }
+
+    protected void add_data_point(final String time, final double longitude, final double latitude)
+    {
+        //shove the data into the database.
+    }
+
+    protected void wipe_data()
+    {
+        my_db.execSQL("DROP TABLE + " + table_name);
+    }
+
     private class DatabaseHelper extends SQLiteOpenHelper
     {
         DatabaseHelper(Context context) { super(context, db_name, null, 1); }
