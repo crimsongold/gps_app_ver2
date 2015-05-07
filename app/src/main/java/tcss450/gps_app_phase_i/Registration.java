@@ -183,50 +183,6 @@ public class Registration extends ActionBarActivity {
             public void onClick(View v) {
 
                 attemptRegister();
-
-
-
-//
-//                if (mEmailView.getText().toString().contains("@")) {
-//                    chk_email = true;
-//                } else {
-//                    mEmailView.setError("Missing Fields...");
-//                }
-//
-//                if (mPassPrompt.getText().toString().length() > 4) {
-//                    chk_pass_prompt = true;
-//                } else {
-//                    mPassPrompt.setError("Length");
-//                }
-//
-//                if (mSecQuestion.getText().toString().length() > 2) {
-//                    chk_sec_question = true;
-//                } else {
-//                    mSecQuestion.setError("Length");
-//                }
-//
-//                if (mSecAnswer.getText().toString().length() > 2) {
-//                    chk_sec_answer = true;
-//                } else {
-//                    mSecAnswer.setError("Length");
-//                }
-//
-//                /**
-//                 * Doesn't work currently (some shit different for commit)
-//                 */
-//                if (mPassPrompt.getText().toString().equals(mPassPrompt.getText().toString())) {
-//                    chk_pass_confirm = true;
-//                } else {
-//                    mPassPrompt.setError("Passwords do not match");
-//                }
-//
-//                //chk_pass_confirm = true;
-//                if (chk_email && chk_pass_prompt && chk_pass_confirm && chk_sec_question &&
-//                        chk_sec_answer && chk_ToS) {
-//                    register();
-//                } else {
-//                    mEmailView.setError("Missing Fields...");
-//                }
             }
         });
     }
