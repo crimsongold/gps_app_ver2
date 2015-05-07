@@ -31,11 +31,11 @@ public class DataLog {
      * sqlite does not have boolean values or a simple flag so integers are used for keeping track
      * of uploaded or not.  0 for not uploaded, 1 for uploaded.
      */
-    private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS " + DATABASE_NAME + "("
-            + "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-            lat + "REAL NOT NULL" +
-            lng + "REAL NOT NULL" +
-            uploaded + "INTEGER NOT NULL";
+    private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS " + DATABASE_NAME + " ( "
+            + " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            lat + " REAL NOT NULL, " +
+            lng +  "REAL NOT NULL, " +
+            uploaded + " INTEGER NOT NULL )";
 
 
     public DataLog(Context ctxt) {
@@ -55,6 +55,15 @@ public class DataLog {
         my_helper.close();
 
 
+    }
+
+    public void clearCache(){
+
+        this.my_db.delete(TABLE_NAME, "WHERE UP > 0", null);
+    }
+
+    public void setUploaded() {
+        //this.my_db.update();
     }
 
     private class DatabaseHelper extends SQLiteOpenHelper
