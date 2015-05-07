@@ -83,7 +83,7 @@ public class Registration extends ActionBarActivity {
                     chk_email = true;
                     return true;
                 } else {
-                    //Somehow display that the email is not valid
+                    mEmailView.setError("Not a valid email.");
                     chk_email = false;
                     return false;
                 }
@@ -99,7 +99,7 @@ public class Registration extends ActionBarActivity {
                     m_pass_prompt_string = textView.getText().toString();
                     return true;
                 } else {
-                    //Somehow display that the password is not long enough
+                    mPassPrompt.setError("Password is too short.");
                     chk_pass_prompt = false;
                     return false;
                 }
