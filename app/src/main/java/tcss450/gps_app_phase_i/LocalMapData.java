@@ -9,8 +9,20 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.util.Log;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -44,11 +56,42 @@ public class LocalMapData {
 
     protected LocalMapData(Context context) { ctxt = context; }
 
-    protected void push_data()
+    class PushTask extends AsyncTask<String[], Void, String[]>
     {
         //Push the recent data from the database into the webservice database
+        @Override
+        protected String[] doInBackground(String... params)
+        {
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme(getString(R.string.web_service_protocol))
+                    .authority(getString(R.string.web_service_url))
+                    .appendPath("addLog.php")
+                    .appendQueryParameter("lat",params[0])
+                    .appendQueryParameter("lon", params[1])
+                    .appendQueryParameter("source",params[2])
+                    .appendQueryParameter("timestamp", params[3]);
+            String url = builder.build().toString();
 
-        wipe_data();
+            HttpClient client = new DefaultHttpClient();
+            HttpGet get = new HttpGet(url);
+            try {
+                HttpResponse response = client.execute(get);
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                return new String[]{params[0],reader.readLine()};
+            } catch (UnsupportedEncodingException e) {
+                return null;
+            } catch (ClientProtocolException e) {
+                return null;
+            } catch (IOException e) {
+                return null;
+            }
+        }
+
+        protected void push_data()
+        {
+
+        }
     }
 
     //places a new data point into the local data table
