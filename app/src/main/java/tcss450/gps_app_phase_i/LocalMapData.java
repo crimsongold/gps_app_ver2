@@ -30,9 +30,12 @@ public class LocalMapData {
 
     public static final String db_name = "LOCALDATA_DB";
     public static final String table_name = "LOCAL_MAP_DATA";
-    public static final String key_long =  "Longitude";         //Stored as REAL
-    public static final String key_lat = "Latitude";            //Stored as REAL
-    public static final String key_datetime = "Datetime";       //"YYYY-MM-DD HH:MM:SS.SSS"
+    public static final String key_lat = "lat";                     //Stored as REAL
+    public static final String key_long =  "lon";                   //Stored as REAL
+    public static final String key_uid = "source";                  //Stored as TEXT
+    public static final String key_datetime = "timestamp";          //"YYYY-MM-DD HH:MM:SS.SSS"
+
+    public static final String log_point_url = "http://450.atwebpages.com/addLog.php";
 
     private Context ctxt;
     private Cursor crs;
@@ -41,29 +44,23 @@ public class LocalMapData {
 
     protected LocalMapData(Context context) { ctxt = context; }
 
-    protected void push_data (final String user_id)
+    protected void push_data()
     {
         //Push the recent data from the database into the webservice database
-    }
 
-    protected void pull_data()
-    {
-        //Pull all of the data down from the database for a specific user.
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.US);
+        wipe_data();
     }
 
     //places a new data point into the local data table
-    protected void add_point(final Calendar datetime, final double longitude, final double latitude)
+    protected void add_point(final String user_id, final int unix_datetime,
+                             final double longitude, final double latitude)
     {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getWritableDatabase();
 
-        String string_datetime = datetime.get(Calendar.DAY_OF_MONTH) + "/" +
-                datetime.get(Calendar.MONTH) + "/" + datetime.get(Calendar.YEAR) + " " +
-                datetime.get(Calendar.HOUR_OF_DAY) + ":" + datetime.get(Calendar.MINUTE);
-
         ContentValues init_vals = new ContentValues();
-        init_vals.put(key_datetime, string_datetime);
+        init_vals.put(key_uid, user_id);
+        init_vals.put(key_datetime, unix_datetime);
         init_vals.put(key_long, longitude);
         init_vals.put(key_lat, latitude);
 
@@ -84,9 +81,10 @@ public class LocalMapData {
         {
             Log.i("Database", "Creating Database...");
             db.execSQL("CREATE TABLE IF NOT EXISTS LOCAL_MAP_DATA (" +
-                    "Datetime TEXT PRIMARY KEY, " +
-                    "Latitude REAL, " +
-                    "Longitude REAL)");
+                    "lat REAL, " +
+                    "lon REAL, " +
+                    "source TEXT," +
+                    "timestamp TEXT PRIMARY KEY)");
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)

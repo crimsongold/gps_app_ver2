@@ -282,7 +282,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
     /**
      * Redirects the user from the Login to the Registration.
      */
-    public void register()
+    private void register()
     {
         Intent intent = new Intent(Login.this, Registration.class);
         startActivity(intent);
@@ -348,7 +348,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         {
             prefs_editor.putString("Email", email);
             prefs_editor.commit();
-            prefs_editor.putString("ID", ID);
+            prefs_editor.putString("ID", ID); //uid for logging stored as ID
             prefs_editor.commit();
             Intent intent = new Intent(Login.this, MyAccount.class);
             startActivity(intent);
