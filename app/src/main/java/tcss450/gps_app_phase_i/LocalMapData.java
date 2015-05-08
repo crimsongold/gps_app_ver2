@@ -6,6 +6,7 @@ package tcss450.gps_app_phase_i;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -18,6 +19,9 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,19 +60,18 @@ public class LocalMapData {
 
     protected LocalMapData(Context context) { ctxt = context; }
 
-    class PushTask extends AsyncTask<String[], Void, String[]>
+    class PushTask extends AsyncTask<String, Void, String[]>
     {
         //Push the recent data from the database into the webservice database
-        @Override
         protected String[] doInBackground(String... params)
         {
             Uri.Builder builder = new Uri.Builder();
-            builder.scheme(getString(R.string.web_service_protocol))
-                    .authority(getString(R.string.web_service_url))
+            builder.scheme(ctxt.getString(R.string.web_service_protocol))
+                    .authority(ctxt.getString(R.string.web_service_url))
                     .appendPath("addLog.php")
-                    .appendQueryParameter("lat",params[0])
+                    .appendQueryParameter("lat", params[0])
                     .appendQueryParameter("lon", params[1])
-                    .appendQueryParameter("source",params[2])
+                    .appendQueryParameter("source", params[2])
                     .appendQueryParameter("timestamp", params[3]);
             String url = builder.build().toString();
 
@@ -89,6 +92,11 @@ public class LocalMapData {
         }
 
         protected void push_data()
+        {
+
+        }
+
+        protected void onPostExecute(String[] result)
         {
 
         }
