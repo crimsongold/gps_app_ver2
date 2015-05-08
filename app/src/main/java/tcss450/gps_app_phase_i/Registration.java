@@ -341,19 +341,8 @@ public class Registration extends ActionBarActivity {
 
 
 
-
-
-
         // Show a progress spinner, and kick off a background task to
         // perform the user login attempt.
-
-
-
-
-
-
-
-
 
 
     }
@@ -384,7 +373,6 @@ public class Registration extends ActionBarActivity {
 
     class registerUser extends AsyncTask<String, Void, String[]> {
 
-
         protected String[] doInBackground(String... params) {
             Uri.Builder builder = new Uri.Builder();
 
@@ -396,19 +384,13 @@ public class Registration extends ActionBarActivity {
                     .appendQueryParameter("question", params[2])
                     .appendQueryParameter("answer", params[3]);
             String url = builder.build().toString();
-
-
             HttpClient client = new DefaultHttpClient();
             HttpGet get = new HttpGet(url);
-
 
             /**
              * Link example
              * 450.atwebpages.com/adduser.php?email=smith@aol.com&password=mypass& question=favorite%20color%3F&answer=blue
              */
-
-            
-
 
             try {
                 HttpResponse response = client.execute(get);
@@ -428,6 +410,7 @@ public class Registration extends ActionBarActivity {
             JSONTokener tokener = new JSONTokener(result[1]);
             JSONObject finalResult = null;
             String regResult = "";
+
             try {
                 finalResult = new JSONObject(tokener);
                 regResult = finalResult.getString("result");
@@ -436,10 +419,7 @@ public class Registration extends ActionBarActivity {
                 e.printStackTrace();
             }
 
-
             if (regResult.equals("success")) {
-
-
                 Context context = getApplicationContext();
                 CharSequence text = "Registration complete";
                 int duration = Toast.LENGTH_SHORT;
@@ -452,8 +432,6 @@ public class Registration extends ActionBarActivity {
                 Intent i = new Intent(Registration.this, Login.class);
                 startActivity(i);
                 finish();
-
-
             } else {
 
                 //temp error.  replace with json error message
@@ -463,12 +441,7 @@ public class Registration extends ActionBarActivity {
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
-
             }
-
-
         }
-
-
     }
 }
