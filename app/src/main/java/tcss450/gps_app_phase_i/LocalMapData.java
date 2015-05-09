@@ -6,7 +6,6 @@ package tcss450.gps_app_phase_i;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -17,7 +16,7 @@ import android.util.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,11 +26,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
 
 /**
  * Created by Jake on 5/7/2015.
@@ -76,9 +70,9 @@ public class LocalMapData {
             String url = builder.build().toString();
 
             HttpClient client = new DefaultHttpClient();
-            HttpGet get = new HttpGet(url);
+            HttpPost post = new HttpPost(url);
             try {
-                HttpResponse response = client.execute(get);
+                HttpResponse response = client.execute(post);
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
                 return new String[]{params[0],reader.readLine()};
@@ -91,14 +85,25 @@ public class LocalMapData {
             }
         }
 
-        protected void push_data()
-        {
-
-        }
-
         protected void onPostExecute(String[] result)
         {
+            JSONTokener tokener = new JSONTokener(result[1]);
+            JSONObject finalResult = null;
+            String regResult = "";
 
+            try {
+                finalResult = new JSONObject(tokener);
+                regResult = finalResult.getString("result");
+            } catch (JSONException e) {
+                Log.i("PushTask", "ERROR");
+                e.printStackTrace();
+            }
+
+            if (regResult.equals("success")) {
+                // drop row with timestamp = ""
+            } else {
+                // do something
+            }
         }
     }
 
@@ -117,6 +122,33 @@ public class LocalMapData {
 
         my_db.insert(table_name, null, init_vals);
         my_helper.close();
+    }
+
+    protected void push_data()
+    {
+        crs = my_db.rawQuery("SELECT " + key_datetime + " FROM " + table_name, null);
+        int rowCount = crs.getCount();
+        crs = my_db.rawQuery("SELECT " + key_lat + ", " +  key_long + ", " + key_uid + ", " +
+            key_datetime + " FROM " + table_name, null);
+        crs.moveToFirst();
+
+        String[] parameters = new String[4];
+
+        for (int i = 0; i < rowCount; i+=4)
+        {
+            parameters[i] = Double.toString(crs.getDouble(i));
+            parameters[i+1] = Double.toString(crs.getDouble(i+1));
+            parameters[i+2] = crs.getString(i+2);
+            parameters[i+3] = Integer.toString(crs.getInt(i+3));
+            AsyncTask<String, Void, String[]> push = (new PushTask().execute(parameters));
+        }
+    }
+
+    protected boolean isTableEmpty()
+    {
+        crs = my_db.rawQuery("SELECT * FROM " + table_name, null);
+        if (crs.moveToFirst()) return true;
+        return false;
     }
 
     protected void wipe_data()

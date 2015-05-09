@@ -394,7 +394,8 @@ public class Registration extends ActionBarActivity {
 
             try {
                 HttpResponse response = client.execute(get);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        response.getEntity().getContent(), "UTF-8"));
                 return new String[]{params[0], reader.readLine()};
             } catch (UnsupportedEncodingException e) {
                 return null;
