@@ -56,9 +56,12 @@ public class LocalMapData {
 
     class PushTask extends AsyncTask<String, Void, String[]>
     {
+        private String selected_pk;
+
         //Push the recent data from the database into the webservice database
         protected String[] doInBackground(String... params)
         {
+            selected_pk = params[3];
             Uri.Builder builder = new Uri.Builder();
             builder.scheme(ctxt.getString(R.string.web_service_protocol))
                     .authority(ctxt.getString(R.string.web_service_url))
@@ -101,6 +104,8 @@ public class LocalMapData {
 
             if (regResult.equals("success")) {
                 // drop row with timestamp = ""
+                my_db.execSQL("DELETE FROM " + table_name + " WHERE " + key_datetime + " == " +
+                                selected_pk);
             } else {
                 // do something
             }
