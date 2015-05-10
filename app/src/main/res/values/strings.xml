@@ -4,13 +4,16 @@
 
 <resources>
     <string name="app_name">Sly</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="log_in">Log In</string>
+    <string name="register">Register</string>
+    <string name="forgot_password">Forgot Password</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_register">Registration</string>
-    <string name="title_activity_load_screen">LoadScreenActivity</string>
+    <string name="title_activity_load_screen" translatable="false">LoadScreenActivity</string>
     <string name="title_activity_my_account">My Account</string>
-    <string name="web_service_protocol">http</string>
-    <string name="web_service_url">450.atwebpages.com</string>
+    <string name="web_service_protocol" translatable="false">http</string>
+    <string name="web_service_url" translatable="false">450.atwebpages.com</string>
     <string name="title_activity_movement_data">Movement Data</string>
     <string name="terms_of_service">We reserve the right to capture and use any and all user and
         location data. By checking this box, you are agreeing to provide us with the aforementioned
