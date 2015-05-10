@@ -9,9 +9,11 @@ import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.gms.location.LocationListener;
@@ -21,7 +23,10 @@ import com.google.android.gms.location.LocationListener;
  */
 public class GPSService extends IntentService {
 
-    private static final int alarmtime = 60000;  //replace with prefs time
+    private LocalMapData location_data;
+    private SharedPreferences prefs;
+
+    private static final int alarmtime = 6000;  //replace with prefs time
 
     private static final String TAG = "GPSService";
     public GPSService(){
@@ -30,7 +35,33 @@ public class GPSService extends IntentService {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
+        prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
+        location_data = new LocalMapData(this);
+
         Log.i(TAG, "service starting");
+        LocationManager locationManager = (LocationManager) this.getSystemService(
+                Context.LOCATION_SERVICE);
+
+        // Define a listener that responds to location updates
+        android.location.LocationListener locationListener = new android.location.LocationListener() {
+            public void onLocationChanged(Location location) {
+                double longitude = location.getLongitude();
+                double latitude = location.getLatitude();
+                long timestamp = System.currentTimeMillis() / 1000L;
+                Log.i(TAG, "Latitude: " + latitude + " Longitude: " + longitude + " Timestamp: " +
+                        timestamp);
+                //location_data.add_point(prefs.getString("ID", "DEFAULT"), timestamp, latitude,
+                //        longitude);
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+            public void onProviderEnabled(String provider) {}
+            public void onProviderDisabled(String provider) {}
+        };
+
+        // Register the listener with the Location Manager to receive location updates
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                60000, 10, locationListener);
 
         return START_STICKY;
     }
@@ -38,25 +69,6 @@ public class GPSService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         Log.i(TAG, "Received an Intent: " + intent);
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if(location != null) {
-            double longitude = location.getLongitude();
-            System.out.println(longitude);
-            double latitude = location.getLatitude();
-            System.out.println(latitude);
-            Log.i(TAG, "Latitude: " + latitude + " Longitude: " + longitude);
-        }
-//        final LocationListener locationListener = new LocationListener() {
-//            public void onLocationChanged(Location location) {
-//                double longitude = location.getLongitude();
-//                double latitude = location.getLatitude();
-//                Log.i(TAG+1, "Latitude: " + latitude + " Longitude: " + longitude);
-//            }
-//        };
-//        long MIN_TIME = 2000; //miliseconds
-//        float MIN_DISTANCE = 10;//meters
-//         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (android.location.LocationListener) locationListener);
     }
 
     /**

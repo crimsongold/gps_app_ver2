@@ -45,14 +45,29 @@ public class LocalMapData {
     public static final String key_uid = "source";                  //Stored as TEXT
     public static final String key_datetime = "timestamp";          //"YYYY-MM-DD HH:MM:SS.SSS"
 
-    public static final String log_point_url = "http://450.atwebpages.com/addLog.php";
-
     private Context ctxt;
     private Cursor crs;
     private DatabaseHelper my_helper;
     private SQLiteDatabase my_db;
 
     protected LocalMapData(Context context) { ctxt = context; }
+
+    //places a new data point into the local data table
+    protected void add_point(final String user_id, final long unix_datetime,
+                             final double latitude, final double longitude)
+    {
+        my_helper = new DatabaseHelper(ctxt);
+        my_db = my_helper.getWritableDatabase();
+
+        ContentValues init_vals = new ContentValues();
+        init_vals.put(key_uid, user_id);
+        init_vals.put(key_datetime, unix_datetime);
+        init_vals.put(key_long, longitude);
+        init_vals.put(key_lat, latitude);
+
+        my_db.insert(table_name, null, init_vals);
+        my_helper.close();
+    }
 
     class PushTask extends AsyncTask<String, Void, String[]>
     {
@@ -105,28 +120,11 @@ public class LocalMapData {
             if (regResult.equals("success")) {
                 // drop row with timestamp = ""
                 my_db.execSQL("DELETE FROM " + table_name + " WHERE " + key_datetime + " == " +
-                                selected_pk);
+                        selected_pk);
             } else {
                 // do something
             }
         }
-    }
-
-    //places a new data point into the local data table
-    protected void add_point(final String user_id, final long unix_datetime,
-                             final double latitude, final double longitude)
-    {
-        my_helper = new DatabaseHelper(ctxt);
-        my_db = my_helper.getWritableDatabase();
-
-        ContentValues init_vals = new ContentValues();
-        init_vals.put(key_uid, user_id);
-        init_vals.put(key_datetime, unix_datetime);
-        init_vals.put(key_long, longitude);
-        init_vals.put(key_lat, latitude);
-
-        my_db.insert(table_name, null, init_vals);
-        my_helper.close();
     }
 
     protected void push_data()
@@ -174,7 +172,7 @@ public class LocalMapData {
                     "lat REAL, " +
                     "lon REAL, " +
                     "source TEXT," +
-                    "timestamp TEXT PRIMARY KEY)");
+                    "timestamp TEXT INTEGER KEY)");
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
