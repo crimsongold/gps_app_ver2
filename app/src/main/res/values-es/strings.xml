@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
+  -->
+
+<resources>
+    <string name="app_name">Sly</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="action_sign_in">Inicia sesión o regístrate</string>
+    <string name="action_sign_in_short">Registrarse</string>
+    <string name="error_field_required">Este campo es obligatorio</string>
+    <string name="error_incorrect_password">Esta contraseña es incorrecta</string>
+    <string name="error_invalid_email">Esta dirección de correo electrónico no es válido</string>
+    <string name="error_invalid_password">Esta contraseña es demasiado corta</string>
+    <string name="prompt_email">Correo</string>
+    <string name="prompt_password">Contraseña </string>
+    <string name="terms_of_service">Nos reservamos el derecho a capturar y utilizar cualquier y todos los usuarios y          datos de localización. Al marcar esta casilla, usted está de acuerdo que nos proporcione la mencionada          información, y que no somos responsables de los daños que puedan ser causados por tales.</string>
+    <string name="title_activity_movement_data">Movimiento de datos</string>
+    <string name="title_activity_my_account">Mi Cuenta</string>
+    <string name="title_activity_register">Registro</string>
+    <string name="log_in">Iniciar la sesión</string>
+    <string name="register">Registrarse</string>
+    <string name="forgot_password">Olvidé mi contraseña</string>
+
+    <string name="validate_email_blank">El correo electrónico no puede estar en blanco</string>
+    <string name="validate_email_invalid_symbols">El correo electrónico no puede contener: +-,!#$%^*();\/|&quot;&apos;&lt;&gt;&amp;</string>
+    <string name="validate_email_no_at">Email necesita un símbolo \'@\'</string>
+    <string name="validate_email_no_domain_name">Email necesita un nombre de dominio</string>
+    <string name="validate_email_no_dot">Email necesita un \'.\' después de que el nombre de dominio</string>
+    <string name="validate_email_no_top_domain">Email necesita un dominio de nivel superior válido</string>
+    <string name="validate_email_no_user">Email necesita tener un usuario</string>
+</resources>

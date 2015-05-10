@@ -78,7 +78,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
 
-        if (prefs.contains("Email") && prefs.contains("Password"))
+        if (prefs.contains("Email") && prefs.contains("ID"))
         {
             Intent intent = new Intent(Login.this, MyAccount.class);
             startActivity(intent);
@@ -162,31 +162,31 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         if(valid == Verification.VALID_EMAIL){
         }else if(valid == Verification.BLANK) {
             flag = false;
-            mEmailView.setError("Email Can't be blank");
+            mEmailView.setError(getString(R.string.validate_email_blank));
             mEmailView.requestFocus();
         }else if(valid == Verification.INVALID_SYMBOLS){
             flag = false;
-            mEmailView.setError("Email can't contain +-,!#$%^&*();\\/|<>\"'");
-            mEmailView.requestFocus();
+            mEmailView.setError(getString(R.string.validate_email_invalid_symbols));
+                    mEmailView.requestFocus();
         }else if(valid == Verification.NO_USER){
             flag = false;
-            mEmailView.setError("Email needs to have a user");
+            mEmailView.setError(getString(R.string.validate_email_no_user));
             mEmailView.requestFocus();
         }else if(valid == Verification.NO_AT){
             flag = false;
-            mEmailView.setError("Email needs an '@' symbol");
+            mEmailView.setError(getString(R.string.validate_email_no_at));
             mEmailView.requestFocus();
         }else if(valid == Verification.NO_DOMAIN_NAME){
             flag = false;
-            mEmailView.setError("Email needs a domain name");
+            mEmailView.setError(getString(R.string.validate_email_no_domain_name));
             mEmailView.requestFocus();
         }else if(valid == Verification.NO_DOT){
             flag = false;
-            mEmailView.setError("Email needs a '.' after the domain name");
+            mEmailView.setError(getString(R.string.validate_email_no_dot));
             mEmailView.requestFocus();
         }else if(valid == Verification.NO_TOP_DOMAIN){
             flag = false;
-            mEmailView.setError("Email needs a valid top level domain");
+            mEmailView.setError(getString(R.string.validate_email_no_top_domain));
             mEmailView.requestFocus();
         }
 
@@ -225,7 +225,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
              */
             //showProgress(true);
             AsyncTask<String, Void, String[]> var =
-                    (new LoginTask()).execute(new String[]{email, password});
+                    (new LoginTask()).execute(email, password);
         }
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.

@@ -152,8 +152,7 @@ public class LocalMapData {
     protected boolean isTableEmpty()
     {
         crs = my_db.rawQuery("SELECT * FROM " + table_name, null);
-        if (crs.moveToFirst()) return true;
-        return false;
+        return crs.moveToFirst();
     }
 
     protected void wipe_data()

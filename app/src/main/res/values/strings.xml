@@ -4,16 +4,28 @@
 
 <resources>
     <string name="app_name">Sly</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world" translatable="false">Hello world!</string>
+    <string name="log_in">Log In</string>
+    <string name="register">Register</string>
+    <string name="forgot_password">Forgot Password</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_register">Registration</string>
-    <string name="title_activity_load_screen">LoadScreenActivity</string>
+    <string name="title_activity_load_screen" translatable="false">LoadScreenActivity</string>
     <string name="title_activity_my_account">My Account</string>
-    <string name="web_service_protocol">http</string>
-    <string name="web_service_url">450.atwebpages.com</string>
+    <string name="web_service_protocol" translatable="false">http</string>
+    <string name="web_service_url" translatable="false">450.atwebpages.com</string>
     <string name="title_activity_movement_data">Movement Data</string>
     <string name="terms_of_service">We reserve the right to capture and use any and all user and
         location data. By checking this box, you are agreeing to provide us with the aforementioned
         information, and that we are not liable for any damages that could be caused by such.
         </string>
+
+
+    <string name="validate_email_blank">Email can\'t be blank</string>
+    <string name="validate_email_invalid_symbols">Email can\'t contain: +-,!#$%^*();\/|&quot;&apos;&lt;&gt;&amp;</string>
+    <string name="validate_email_no_user">Email needs to have a user</string>
+    <string name="validate_email_no_at">Email needs an \'@\' symbol</string>
+    <string name="validate_email_no_domain_name">Email needs a domain name</string>
+    <string name="validate_email_no_dot">Email needs a \'.\' after the domain name</string>
+    <string name="validate_email_no_top_domain">Email needs a valid top level domain</string>
 </resources>

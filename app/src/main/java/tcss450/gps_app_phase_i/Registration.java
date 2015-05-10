@@ -72,7 +72,7 @@ public class Registration extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_register);
-
+        new getAgreement().execute();
         user_base = new AuthTable(this.getApplicationContext());
 
         mEmailView = (EditText) findViewById(R.id.email_prompt);
@@ -161,11 +161,7 @@ public class Registration extends ActionBarActivity {
         CheckBox terms_chkBox = (CheckBox) findViewById(R.id.terms_check);
         terms_chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    chk_ToS = true;
-                } else {
-                    chk_ToS = false;
-                }
+                chk_ToS = isChecked;
             }
         });
 
@@ -332,10 +328,9 @@ public class Registration extends ActionBarActivity {
             mPassPrompt.requestFocus();
         } else {
 
-            if(validCheck == true) {
+            if(validCheck) {
                 showProgress(true);
-                AsyncTask<String, Void, String[]> var =
-                        (new registerUser()).execute(new String[]{email, password, question, answer});
+                (new registerUser()).execute(email, password, question, answer);
             }
         }
 
@@ -371,13 +366,13 @@ public class Registration extends ActionBarActivity {
     }
 
 
-    class registerUser extends AsyncTask<String, Void, String[]> {
+    class registerUser extends AsyncTask<String, Void, String> {
 
-        protected String[] doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             Uri.Builder builder = new Uri.Builder();
 
-            builder.scheme("http")
-                    .authority("450.atwebpages.com")
+            builder.scheme(getString(R.string.web_service_protocol))
+                    .authority(getString(R.string.web_service_url))
                     .appendPath("adduser.php")
                     .appendQueryParameter("email", params[0])
                     .appendQueryParameter("password", params[1])
@@ -389,14 +384,14 @@ public class Registration extends ActionBarActivity {
 
             /**
              * Link example
-             * 450.atwebpages.com/adduser.php?email=smith@aol.com&password=mypass& question=favorite%20color%3F&answer=blue
+             * 450.atwebpages.com/adduser.php?email=smith@aol.com&password=mypass&question=favorite%20color%3F&answer=blue
              */
 
             try {
                 HttpResponse response = client.execute(get);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
                         response.getEntity().getContent(), "UTF-8"));
-                return new String[]{params[0], reader.readLine()};
+                return reader.readLine();
             } catch (UnsupportedEncodingException e) {
                 return null;
             } catch (ClientProtocolException e) {
@@ -406,42 +401,89 @@ public class Registration extends ActionBarActivity {
             }
         }
 
-        protected void onPostExecute(String[] result) {
+        protected void onPostExecute(String result) {
 
-            JSONTokener tokener = new JSONTokener(result[1]);
+            JSONTokener tokener = new JSONTokener(result);
             JSONObject finalResult = null;
             String regResult = "";
 
             try {
                 finalResult = new JSONObject(tokener);
                 regResult = finalResult.getString("result");
+                if (regResult.equals("success")) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Registration complete";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                    //if success, url has been posted and user has been created, send activity to login
+                    //may want to auto complete email field on login activity from here
+                    Intent i = new Intent(Registration.this, Login.class);
+                    startActivity(i);
+                    finish();
+                } else {
+                    String err = finalResult.getString("error");
+                //temp error.  replace with json error message
+                Context context = getApplicationContext();
+                //CharSequence text = "Generic Error message";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, err, duration);
+                toast.show();
+            }
             } catch (JSONException e) {
                 Log.i("mAuthTask", "ERROR");
                 e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "INTERNAL ERROR", Toast.LENGTH_LONG).show();
             }
+        }
+    }
+    class getAgreement extends AsyncTask<Void, Void, String> {
 
-            if (regResult.equals("success")) {
-                Context context = getApplicationContext();
-                CharSequence text = "Registration complete";
-                int duration = Toast.LENGTH_SHORT;
+        protected String doInBackground(Void... params) {
+            Uri.Builder builder = new Uri.Builder();
+            builder.scheme(getString(R.string.web_service_protocol))
+                    .authority(getString(R.string.web_service_url))
+                    .appendPath("agreement.php");
+            String url = builder.build().toString();
+            HttpClient client = new DefaultHttpClient();
+            HttpGet get = new HttpGet(url);
 
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+            /**
+             * Link example
+             * 450.atwebpages.com/agreement.php
+             */
 
-                //if success, url has been posted and user has been created, send activity to login
-                //may want to auto complete email field on login activity from here
-                Intent i = new Intent(Registration.this, Login.class);
-                startActivity(i);
-                finish();
-            } else {
+            try {
+                HttpResponse response = client.execute(get);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(
+                        response.getEntity().getContent(), "UTF-8"));
+                return reader.readLine();
+            } catch (UnsupportedEncodingException e) {
+                return null;
+            } catch (ClientProtocolException e) {
+                return null;
+            } catch (IOException e) {
+                return null;
+            }
+        }
 
-                //temp error.  replace with json error message
-                Context context = getApplicationContext();
-                CharSequence text = "Generic Error message";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+        protected void onPostExecute(String result) {
+            //result = " {\"agreement\": \"This is a correctly formated Test EULA\"}";
+            //Log.i("mAuthTask", result);
+            JSONTokener tokener = new JSONTokener(result);
+            String regResult = "";
+            try {
+                JSONObject finalResult = new JSONObject(tokener);
+                regResult = finalResult.getString("agreement");
+            } catch (JSONException e) {
+                Log.i("mAuthTask", "Illegal JSON from agreement.php ERROR");
+                e.printStackTrace();
+            }
+            if (!regResult.equals("")) {
+                TextView termsView = (TextView) findViewById(R.id.terms);
+                termsView.setText(regResult);
             }
         }
     }
