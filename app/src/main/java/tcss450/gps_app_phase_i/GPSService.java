@@ -55,6 +55,11 @@ public class GPSService extends IntentService {
 //         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (android.location.LocationListener) locationListener);
     }
 
+    /**
+     * Used to set the service alarm
+     * @param context context
+     * @param active if the setting is to be enabled or disabled
+     */
     public static void setServiceAlarm(Context context, boolean active){
 
 
