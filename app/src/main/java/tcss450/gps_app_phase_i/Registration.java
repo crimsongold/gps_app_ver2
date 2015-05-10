@@ -332,10 +332,9 @@ public class Registration extends ActionBarActivity {
             mPassPrompt.requestFocus();
         } else {
 
-            if(validCheck == true) {
+            if(validCheck) {
                 showProgress(true);
-                AsyncTask<String, Void, String[]> var =
-                        (new registerUser()).execute(new String[]{email, password, question, answer});
+                (new registerUser()).execute(new String[]{email, password, question, answer});
             }
         }
 
@@ -371,9 +370,9 @@ public class Registration extends ActionBarActivity {
     }
 
 
-    class registerUser extends AsyncTask<String, Void, String[]> {
+    class registerUser extends AsyncTask<String, Void, String> {
 
-        protected String[] doInBackground(String... params) {
+        protected String doInBackground(String... params) {
             Uri.Builder builder = new Uri.Builder();
 
             builder.scheme(getString(R.string.web_service_protocol))
@@ -389,14 +388,14 @@ public class Registration extends ActionBarActivity {
 
             /**
              * Link example
-             * 450.atwebpages.com/adduser.php?email=smith@aol.com&password=mypass& question=favorite%20color%3F&answer=blue
+             * 450.atwebpages.com/adduser.php?email=smith@aol.com&password=mypass&question=favorite%20color%3F&answer=blue
              */
 
             try {
                 HttpResponse response = client.execute(get);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
                         response.getEntity().getContent(), "UTF-8"));
-                return new String[]{params[0], reader.readLine()};
+                return reader.readLine();
             } catch (UnsupportedEncodingException e) {
                 return null;
             } catch (ClientProtocolException e) {
@@ -406,42 +405,41 @@ public class Registration extends ActionBarActivity {
             }
         }
 
-        protected void onPostExecute(String[] result) {
+        protected void onPostExecute(String result) {
 
-            JSONTokener tokener = new JSONTokener(result[1]);
+            JSONTokener tokener = new JSONTokener(result);
             JSONObject finalResult = null;
             String regResult = "";
 
             try {
                 finalResult = new JSONObject(tokener);
                 regResult = finalResult.getString("result");
+                if (regResult.equals("success")) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Registration complete";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                    //if success, url has been posted and user has been created, send activity to login
+                    //may want to auto complete email field on login activity from here
+                    Intent i = new Intent(Registration.this, Login.class);
+                    startActivity(i);
+                    finish();
+                } else {
+                    String err = finalResult.getString("error");
+                //temp error.  replace with json error message
+                Context context = getApplicationContext();
+                //CharSequence text = "Generic Error message";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, err, duration);
+                toast.show();
+            }
             } catch (JSONException e) {
                 Log.i("mAuthTask", "ERROR");
                 e.printStackTrace();
-            }
-
-            if (regResult.equals("success")) {
-                Context context = getApplicationContext();
-                CharSequence text = "Registration complete";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-
-                //if success, url has been posted and user has been created, send activity to login
-                //may want to auto complete email field on login activity from here
-                Intent i = new Intent(Registration.this, Login.class);
-                startActivity(i);
-                finish();
-            } else {
-
-                //temp error.  replace with json error message
-                Context context = getApplicationContext();
-                CharSequence text = "Generic Error message";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
+                Toast.makeText(getApplicationContext(), "INTERNAL ERROR", Toast.LENGTH_LONG).show();
             }
         }
     }
