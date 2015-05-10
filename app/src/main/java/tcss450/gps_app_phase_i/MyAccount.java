@@ -104,9 +104,9 @@ public class MyAccount extends ActionBarActivity {
         logOut.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //prefs_editor.clear();
-                //prefs_editor.commit();
-                //location_data.wipe_data();
+                prefs_editor.clear();
+                prefs_editor.commit();
+                location_data.wipe_data();
                 Intent intent = new Intent(MyAccount.this, Login.class);
                 startActivity(intent);
                 finish();
