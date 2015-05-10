@@ -30,8 +30,7 @@ import java.util.Date;
  * date for the tracking data to be displayed, and then view it in another activity. Additionally,
  * it allows the user to reset the password
  */
-public class MyAccount extends ActionBarActivity
-{
+public class MyAccount extends ActionBarActivity {
     private LocalMapData location_data;
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefs_editor;
@@ -44,8 +43,7 @@ public class MyAccount extends ActionBarActivity
     /**
      * {@inheritDoc}
      */
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
@@ -78,32 +76,28 @@ public class MyAccount extends ActionBarActivity
          */
 
         Button viewData = (Button) findViewById(R.id.view_data_button);
-        viewData.setOnClickListener(new OnClickListener()
-        {
+        viewData.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Intent intent = new Intent(MyAccount.this, MovementData.class);
                 startActivity(intent);
             }
         });
 
         Button resetPass = (Button) findViewById(R.id.reset_password);
-        resetPass.setOnClickListener(new OnClickListener()
-        {
+        resetPass.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 URL url;
                 //TODO
                 //this needs to have the email in it too
                 //Email needs to be passed after login or stored locally
 
-                try{
-                     url = new URL("450.atwebpages.com/reset.php");
+                try {
+                    url = new URL("450.atwebpages.com/reset.php");
 
 
-                }catch (MalformedURLException e) {
+                } catch (MalformedURLException e) {
                     e.printStackTrace();
                 }
 
@@ -111,11 +105,9 @@ public class MyAccount extends ActionBarActivity
         });
 
         Button logOut = (Button) findViewById(R.id.logout_button);
-        logOut.setOnClickListener(new OnClickListener()
-        {
+        logOut.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 //prefs_editor.clear();
                 //prefs_editor.commit();
                 //location_data.wipe_data();
@@ -131,18 +123,31 @@ public class MyAccount extends ActionBarActivity
          * need to add some menu features to disable and enable alarm
          */
 
-        GPSService.setServiceAlarm(MyAccount.this, true);
-
-        ComponentName receiver = new ComponentName(MyAccount.this, GPSReceiver.class);
-        PackageManager pm = MyAccount.this.getPackageManager();
-
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);
+        Button alarmButton = (Button) findViewById(R.id.alarm_button);
+        alarmButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
 
 
+                GPSService.setServiceAlarm(v.getContext(), true);
+                ComponentName receiver = new ComponentName(MyAccount.this, GPSService.class);
+                PackageManager pm = MyAccount.this.getPackageManager();
+
+                pm.setComponentEnabledSetting(receiver,
+                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                                PackageManager.DONT_KILL_APP);
+
+//                GPSService.setServiceAlarm(MyAccount.this, true);
+//
+//                ComponentName receiver = new ComponentName(MyAccount.this, GPSReceiver.class);
+//                PackageManager pm = MyAccount.this.getPackageManager();
+//
+//                pm.setComponentEnabledSetting(receiver,
+//                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+//                        PackageManager.DONT_KILL_APP);
 
 
+            }
+        });
 
 
     }
@@ -152,8 +157,7 @@ public class MyAccount extends ActionBarActivity
     /**
      * {@inheritDoc}
      */
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_my_account, menu);
         return true;
@@ -163,16 +167,14 @@ public class MyAccount extends ActionBarActivity
     /**
      * {@inheritDoc}
      */
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
-        {
+        if (id == R.id.action_settings) {
             return true;
         }
 

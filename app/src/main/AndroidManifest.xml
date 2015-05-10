@@ -24,6 +24,11 @@
         android:icon="@mipmap/raccoon_transparent"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
+        <service
+            android:name=".GPSService"
+            android:exported="false" >
+        </service>
         <activity
             android:name=".Login"
             android:label="@string/app_name"
@@ -45,6 +50,14 @@
             android:name=".MovementData"
             android:label="@string/title_activity_movement_data">
         </activity>
+        <receiver android:name=".GPSReceiver"
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
+
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAjOTq3ExKQdhNVLvk7HGE66s-irOKMOOk" />

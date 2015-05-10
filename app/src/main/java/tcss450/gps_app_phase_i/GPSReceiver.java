@@ -11,15 +11,15 @@ import android.content.Intent;
 /**
  * Created by Jon on 5/9/2015.
  */
-public class GPSReceiver extends BroadcastReceiver{
+public class GPSReceiver extends BroadcastReceiver {
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+
             GPSService.setServiceAlarm(context, true);
-        }
+
 
     }
 }
