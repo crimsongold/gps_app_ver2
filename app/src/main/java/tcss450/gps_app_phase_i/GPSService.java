@@ -72,9 +72,6 @@ public class GPSService extends IntentService {
      */
     public static void setServiceAlarm(Context context, boolean active){
 
-
-
-
         Intent i = new Intent(context, GPSService.class);
 
         //this is breaking
@@ -88,16 +85,6 @@ public class GPSService extends IntentService {
         }  else  {
         alarmManager.cancel(pendingIntent);
         pendingIntent.cancel();
+        }
     }
-
-
-
-
-
-
-
-    }
-
-
-
 }

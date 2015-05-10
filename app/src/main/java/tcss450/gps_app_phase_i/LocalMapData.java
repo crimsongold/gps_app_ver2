@@ -157,7 +157,7 @@ public class LocalMapData {
 
     protected void wipe_data()
     {
-        my_db.execSQL("DROP TABLE + " + table_name);
+        my_db.rawQuery("DROP TABLE " + table_name, null);
     }
 
     private class DatabaseHelper extends SQLiteOpenHelper
