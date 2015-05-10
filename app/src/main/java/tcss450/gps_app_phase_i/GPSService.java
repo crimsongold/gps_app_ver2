@@ -36,17 +36,23 @@ public class GPSService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        final LocationListener locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
-                double longitude = location.getLongitude();
-                double latitude = location.getLatitude();
-                Log.i(TAG+1, "Latitude: " + latitude + " Longitude: " + longitude);
-            }
-        };
-        long MIN_TIME = 2000; //miliseconds
-        float MIN_DISTANCE = 10;//meters
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (android.location.LocationListener) locationListener);
+        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if(location != null) {
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+            Log.i(TAG+1, "Latitude: " + latitude + " Longitude: " + longitude);
+        }
+//        final LocationListener locationListener = new LocationListener() {
+//            public void onLocationChanged(Location location) {
+//                double longitude = location.getLongitude();
+//                double latitude = location.getLatitude();
+//                Log.i(TAG+1, "Latitude: " + latitude + " Longitude: " + longitude);
+//            }
+//        };
+//        long MIN_TIME = 2000; //miliseconds
+//        float MIN_DISTANCE = 10;//meters
+//         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (android.location.LocationListener) locationListener);
     }
 
     public static void setServiceAlarm(Context context, boolean active){
