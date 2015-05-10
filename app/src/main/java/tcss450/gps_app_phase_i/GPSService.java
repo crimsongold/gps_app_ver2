@@ -35,10 +35,10 @@ public class GPSService extends IntentService {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-        location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
-        Log.i(TAG, "service starting");
+        location_data = new LocalMapData(this);
 
+        Log.i(TAG, "service starting");
         LocationManager locationManager = (LocationManager) this.getSystemService(
                 Context.LOCATION_SERVICE);
 
@@ -50,12 +50,12 @@ public class GPSService extends IntentService {
                 long timestamp = System.currentTimeMillis() / 1000L;
                 Log.i(TAG, "Latitude: " + latitude + " Longitude: " + longitude + " Timestamp: " +
                         timestamp);
+                //location_data.add_point(prefs.getString("ID", "DEFAULT"), timestamp, latitude,
+                //        longitude);
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {}
-
             public void onProviderEnabled(String provider) {}
-
             public void onProviderDisabled(String provider) {}
         };
 

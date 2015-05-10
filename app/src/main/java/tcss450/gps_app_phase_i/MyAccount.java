@@ -44,6 +44,7 @@ public class MyAccount extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
+        location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
         Date start;
