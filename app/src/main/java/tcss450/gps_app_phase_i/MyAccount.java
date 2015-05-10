@@ -6,9 +6,11 @@
 
 package tcss450.gps_app_phase_i;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -114,14 +116,34 @@ public class MyAccount extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
-                prefs_editor.clear();
-                prefs_editor.commit();
-                location_data.wipe_data();
+                //prefs_editor.clear();
+                //prefs_editor.commit();
+                //location_data.wipe_data();
                 Intent intent = new Intent(MyAccount.this, Login.class);
                 startActivity(intent);
                 finish();
             }
         });
+
+
+        /**
+         * set the alarm on create of my account, need to add some menu features to disable and enable alarm
+         */
+
+        GPSService.setServiceAlarm(MyAccount.this, true);
+
+        ComponentName receiver = new ComponentName(MyAccount.this, GPSReceiver.class);
+        PackageManager pm = MyAccount.this.getPackageManager();
+
+        pm.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
+
+
+
+
+
+
     }
 
 

@@ -4,7 +4,9 @@
 
 package tcss450.gps_app_phase_i;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -17,6 +19,9 @@ import com.google.android.gms.location.LocationListener;
  * Created by caleb on 5/9/15.
  */
 public class GPSService extends IntentService {
+
+    private static final int alarmtime = 6000;  //replace with prefs time
+
     private static final String TAG = "GPSService";
     public GPSService(){
         super("GPSService");
@@ -43,5 +48,32 @@ public class GPSService extends IntentService {
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 10, (android.location.LocationListener) locationListener);
     }
+
+    public static void setServiceAlarm(Context context, boolean active){
+
+
+
+        Intent i = new Intent(context, GPSService.class);
+        PendingIntent pendingIntent = PendingIntent.getService(context, 0, i, 0);
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+
+        if(active == true) {
+            alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis()
+                    , alarmtime, pendingIntent);
+        }  else  {
+        alarmManager.cancel(pendingIntent);
+        pendingIntent.cancel();
+    }
+
+
+
+
+
+
+
+    }
+
+
 
 }
