@@ -118,6 +118,8 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
             }
         });
 
+
+
         Button registerButton = (Button) findViewById(R.id.register_button);
         registerButton.setOnClickListener(new OnClickListener()
         {
@@ -149,6 +151,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         // Reset errors.
         mEmailView.setError(null);
         mPasswordView.setError(null);
+        boolean flag = true;
 
         //TODO: Make strings for this.
         // Store values at the time of the login attempt.
@@ -158,24 +161,31 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         int valid = Verification.isEmailValid(email);
         if(valid == Verification.VALID_EMAIL){
         }else if(valid == Verification.BLANK) {
+            flag = false;
             mEmailView.setError("Email Can't be blank");
             mEmailView.requestFocus();
         }else if(valid == Verification.INVALID_SYMBOLS){
+            flag = false;
             mEmailView.setError("Email can't contain +-,!#$%^&*();\\/|<>\"'");
             mEmailView.requestFocus();
         }else if(valid == Verification.NO_USER){
+            flag = false;
             mEmailView.setError("Email needs to have a user");
             mEmailView.requestFocus();
         }else if(valid == Verification.NO_AT){
+            flag = false;
             mEmailView.setError("Email needs an '@' symbol");
             mEmailView.requestFocus();
         }else if(valid == Verification.NO_DOMAIN_NAME){
+            flag = false;
             mEmailView.setError("Email needs a domain name");
             mEmailView.requestFocus();
         }else if(valid == Verification.NO_DOT){
+            flag = false;
             mEmailView.setError("Email needs a '.' after the domain name");
             mEmailView.requestFocus();
         }else if(valid == Verification.NO_TOP_DOMAIN){
+            flag = false;
             mEmailView.setError("Email needs a valid top level domain");
             mEmailView.requestFocus();
         }
@@ -184,20 +194,36 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
         if(valid == Verification.VALID_PASSWORD){
 
         }else if(valid == Verification.SHORT_PASSWORD){
+            flag = false;
             mPasswordView.setError("Password Is Too Short");
             mPasswordView.requestFocus();
         }else if(valid == Verification.NO_UPPER){
+            flag = false;
             mPasswordView.setError("Password Must contain an upper case letter");
             mPasswordView.requestFocus();
         }else if(valid == Verification.NO_LOWER){
+            flag = false;
             mPasswordView.setError("Password Must contain a Lower case letter");
             mPasswordView.requestFocus();
         }else if(valid == Verification.NO_SPECIAL){
+            flag = false;
             mPasswordView.setError(
                     "Password Must contain one of the following: +\\-.,!@#$%^&*();\\\\/|<>\"'");
             mPasswordView.requestFocus();
         } else {
-            showProgress(true);
+//            showProgress(true);
+//            AsyncTask<String, Void, String[]> var =
+//                    (new LoginTask()).execute(new String[]{email, password});
+        }
+
+        if(flag == true) {
+            System.out.println("IM HERE AND IM CORY");
+
+
+            /**
+             * This seems to be breaking for me (jon)
+             */
+            //showProgress(true);
             AsyncTask<String, Void, String[]> var =
                     (new LoginTask()).execute(new String[]{email, password});
         }
