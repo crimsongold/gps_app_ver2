@@ -426,7 +426,7 @@ public class Registration extends ActionBarActivity {
                     String err = finalResult.getString("error");
                 //temp error.  replace with json error message
                 Context context = getApplicationContext();
-                //CharSequence text = "Generic Error message";
+                CharSequence text = "Generic Error message";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, err, duration);

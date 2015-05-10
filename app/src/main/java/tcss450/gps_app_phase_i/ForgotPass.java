@@ -41,11 +41,14 @@ public class ForgotPass extends Activity {
 
     protected void onCreate(Bundle savedInstanceState) {
 
-        forgotEmailText = (EditText) findViewById(R.id.forgot_email_text);
+        //forgotEmailText = (EditText) findViewById(R.id.forgot_email_text);
+
 
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
+
+        forgotEmailText = (EditText) this.findViewById(R.id.forgot_email_text);
 
 
         Button submit = (Button) findViewById(R.id.send_pw);
@@ -54,61 +57,7 @@ public class ForgotPass extends Activity {
 
             @Override
             public void onClick(View v) {
-                forgotEmailText.setError(null);
-
-                email = " ";
-                email = forgotEmailText.getText().toString();
-                boolean flag = true;
-
-                int valid = Verification.isEmailValid(email);
-                if (valid == Verification.VALID_EMAIL) {
-                } else if (valid == Verification.BLANK) {
-                    flag = false;
-                    forgotEmailText.setError(getString(R.string.validate_email_blank));
-                    forgotEmailText.requestFocus();
-                } else if (valid == Verification.INVALID_SYMBOLS) {
-                    flag = false;
-                    forgotEmailText.setError(getString(R.string.validate_email_invalid_symbols));
-                    forgotEmailText.requestFocus();
-                } else if (valid == Verification.NO_USER) {
-                    flag = false;
-                    forgotEmailText.setError(getString(R.string.validate_email_no_user));
-                    forgotEmailText.requestFocus();
-                } else if (valid == Verification.NO_AT) {
-                    flag = false;
-                    forgotEmailText.setError(getString(R.string.validate_email_no_at));
-                    forgotEmailText.requestFocus();
-                } else if (valid == Verification.NO_DOMAIN_NAME) {
-                    flag = false;
-                    forgotEmailText.setError(getString(R.string.validate_email_no_domain_name));
-                    forgotEmailText.requestFocus();
-                } else if (valid == Verification.NO_DOT) {
-                    flag = false;
-                    forgotEmailText.setError(getString(R.string.validate_email_no_dot));
-                    forgotEmailText.requestFocus();
-                } else if (valid == Verification.NO_TOP_DOMAIN) {
-                    flag = false;
-                    forgotEmailText.setError(getString(R.string.validate_email_no_top_domain));
-                    forgotEmailText.requestFocus();
-                }
-
-
-                //if flag = true try to send the link
-                //some stuff 
-
-
-                if (flag == true) {
-                    (new forgotPass()).execute(email);
-                    Intent intent = new Intent(ForgotPass.this, Login.class);
-                    startActivity(intent);
-
-                }
-
-
-                //send link, toast success or fail, go to login if success, if fail wait
-
-
-
+                sendEmail();
             }
         });
 
@@ -131,7 +80,7 @@ public class ForgotPass extends Activity {
 
 
         /**
-         * 450.atwebpages.com/reset.php
+         *used to send the url for a forgotten password
          *
          * @param params
          * @return
@@ -201,6 +150,64 @@ public class ForgotPass extends Activity {
             }
         }
     }
+
+
+
+    public void sendEmail() {
+
+        forgotEmailText.setError(null);
+
+        //email = "joncoons@gmail.com";
+        email = forgotEmailText.getText().toString();
+
+        boolean flag = true;
+
+        int valid = Verification.isEmailValid(email);
+        if (valid == Verification.VALID_EMAIL) {
+        } else if (valid == Verification.BLANK) {
+            flag = false;
+            forgotEmailText.setError(getString(R.string.validate_email_blank));
+            forgotEmailText.requestFocus();
+        } else if (valid == Verification.INVALID_SYMBOLS) {
+            flag = false;
+            forgotEmailText.setError(getString(R.string.validate_email_invalid_symbols));
+            forgotEmailText.requestFocus();
+        } else if (valid == Verification.NO_USER) {
+            flag = false;
+            forgotEmailText.setError(getString(R.string.validate_email_no_user));
+            forgotEmailText.requestFocus();
+        } else if (valid == Verification.NO_AT) {
+            flag = false;
+            forgotEmailText.setError(getString(R.string.validate_email_no_at));
+            forgotEmailText.requestFocus();
+        } else if (valid == Verification.NO_DOMAIN_NAME) {
+            flag = false;
+            forgotEmailText.setError(getString(R.string.validate_email_no_domain_name));
+            forgotEmailText.requestFocus();
+        } else if (valid == Verification.NO_DOT) {
+            flag = false;
+            forgotEmailText.setError(getString(R.string.validate_email_no_dot));
+            forgotEmailText.requestFocus();
+        } else if (valid == Verification.NO_TOP_DOMAIN) {
+            flag = false;
+            forgotEmailText.setError(getString(R.string.validate_email_no_top_domain));
+            forgotEmailText.requestFocus();
+        }
+
+
+        //if flag = true try to send the link
+        //some stuff
+
+
+        if (flag == true) {
+            (new forgotPass()).execute(email);
+
+
+        }
+
+
+    }
+
 
 
 }
