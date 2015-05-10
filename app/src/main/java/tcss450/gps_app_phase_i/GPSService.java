@@ -13,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.google.android.gms.location.LocationListener;
@@ -38,22 +39,32 @@ public class GPSService extends IntentService {
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         Log.i(TAG, "service starting");
 
+        LocationManager locationManager = (LocationManager) this.getSystemService(
+                Context.LOCATION_SERVICE);
+
+        // Define a listener that responds to location updates
+        android.location.LocationListener locationListener = new android.location.LocationListener() {
+            public void onLocationChanged(Location location) {
+                double longitude = location.getLongitude();
+                double latitude = location.getLatitude();
+                long timestamp = System.currentTimeMillis() / 1000L;
+                Log.i(TAG, "Latitude: " + latitude + " Longitude: " + longitude + " Timestamp: " +
+                        timestamp);
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {}
+            public void onProviderEnabled(String provider) {}
+            public void onProviderDisabled(String provider) {}
+        };
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                60000, 10, locationListener);
+
         return START_STICKY;
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        Log.i(TAG, "Received an Intent: " + intent);
-        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if(location != null) {
-            double longitude = location.getLongitude();
-            double latitude = location.getLatitude();
-            long timestamp = System.currentTimeMillis() / 1000L;
-            Log.i(TAG, "Latitude: " + latitude + " Longitude: " + longitude + " Timestamp: " +
-                    timestamp);
-            location_data.add_point(prefs.getString("ID", null), timestamp, latitude, longitude);
-        }
+
 //        final LocationListener locationListener = new LocationListener() {
 //            public void onLocationChanged(Location location) {
 //                double longitude = location.getLongitude();
