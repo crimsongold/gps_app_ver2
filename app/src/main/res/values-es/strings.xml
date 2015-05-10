@@ -21,4 +21,12 @@
     <string name="log_in">Iniciar la sesión</string>
     <string name="register">Registrarse</string>
     <string name="forgot_password">Olvidé mi contraseña</string>
+
+    <string name="validate_email_blank">El correo electrónico no puede estar en blanco</string>
+    <string name="validate_email_invalid_symbols">El correo electrónico no puede contener: +-,!#$%^*();\/|&quot;&apos;&lt;&gt;&amp;</string>
+    <string name="validate_email_no_at">Email necesita un símbolo \'@\'</string>
+    <string name="validate_email_no_domain_name">Email necesita un nombre de dominio</string>
+    <string name="validate_email_no_dot">Email necesita un \'.\' después de que el nombre de dominio</string>
+    <string name="validate_email_no_top_domain">Email necesita un dominio de nivel superior válido</string>
+    <string name="validate_email_no_user">Email necesita tener un usuario</string>
 </resources>

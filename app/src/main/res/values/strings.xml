@@ -19,4 +19,13 @@
         location data. By checking this box, you are agreeing to provide us with the aforementioned
         information, and that we are not liable for any damages that could be caused by such.
         </string>
+
+
+    <string name="validate_email_blank">Email can\'t be blank</string>
+    <string name="validate_email_invalid_symbols">Email can\'t contain: +-,!#$%^*();\/|&quot;&apos;&lt;&gt;&amp;</string>
+    <string name="validate_email_no_user">Email needs to have a user</string>
+    <string name="validate_email_no_at">Email needs an \'@\' symbol</string>
+    <string name="validate_email_no_domain_name">Email needs a domain name</string>
+    <string name="validate_email_no_dot">Email needs a \'.\' after the domain name</string>
+    <string name="validate_email_no_top_domain">Email needs a valid top level domain</string>
 </resources>

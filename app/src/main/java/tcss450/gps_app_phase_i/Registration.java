@@ -161,11 +161,7 @@ public class Registration extends ActionBarActivity {
         CheckBox terms_chkBox = (CheckBox) findViewById(R.id.terms_check);
         terms_chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    chk_ToS = true;
-                } else {
-                    chk_ToS = false;
-                }
+                chk_ToS = isChecked;
             }
         });
 
@@ -334,7 +330,7 @@ public class Registration extends ActionBarActivity {
 
             if(validCheck) {
                 showProgress(true);
-                (new registerUser()).execute(new String[]{email, password, question, answer});
+                (new registerUser()).execute(email, password, question, answer);
             }
         }
 
