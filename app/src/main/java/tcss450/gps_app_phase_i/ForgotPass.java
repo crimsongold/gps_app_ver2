@@ -80,7 +80,7 @@ public class ForgotPass extends Activity {
 
 
         /**
-         *
+         *used to send the url for a forgotten password
          *
          * @param params
          * @return
