@@ -157,7 +157,10 @@ public class LocalMapData {
 
     protected void wipe_data()
     {
-        my_db.execSQL("DROP TABLE + " + table_name);
+        my_helper = new DatabaseHelper(ctxt);
+        my_db = my_helper.getWritableDatabase();
+        my_db.execSQL("DROP TABLE IF EXISTS " + table_name);
+        my_helper.close();
     }
 
     private class DatabaseHelper extends SQLiteOpenHelper

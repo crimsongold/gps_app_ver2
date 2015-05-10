@@ -31,6 +31,7 @@ import java.util.Date;
  * it allows the user to reset the password
  */
 public class MyAccount extends ActionBarActivity {
+    private LocalMapData location_data;
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefs_editor;
 
@@ -43,6 +44,7 @@ public class MyAccount extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
+        location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
         Date start;
@@ -106,7 +108,7 @@ public class MyAccount extends ActionBarActivity {
             public void onClick(View v) {
                 prefs_editor.clear();
                 prefs_editor.commit();
-                //location_data.wipe_data();
+                location_data.wipe_data();
                 Intent intent = new Intent(MyAccount.this, Login.class);
                 startActivity(intent);
                 finish();
@@ -156,6 +158,7 @@ public class MyAccount extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_my_account, menu);
+        findViewById(R.id.action_settings);
         return true;
     }
 
@@ -171,6 +174,9 @@ public class MyAccount extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(MyAccount.this, Settings.class);
+            startActivity(intent);
+            finish();
             return true;
         }
 

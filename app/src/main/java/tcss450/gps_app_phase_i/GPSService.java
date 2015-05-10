@@ -37,6 +37,7 @@ public class GPSService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        Log.i(TAG, "Received an Intent: " + intent);
         LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(location != null) {
@@ -65,9 +66,6 @@ public class GPSService extends IntentService {
      */
     public static void setServiceAlarm(Context context, boolean active){
 
-
-
-
         Intent i = new Intent(context, GPSService.class);
 
         //this is breaking
@@ -81,16 +79,6 @@ public class GPSService extends IntentService {
         }  else  {
         alarmManager.cancel(pendingIntent);
         pendingIntent.cancel();
+        }
     }
-
-
-
-
-
-
-
-    }
-
-
-
 }
