@@ -113,8 +113,8 @@ public class LocalMapData {
     }
 
     //places a new data point into the local data table
-    protected void add_point(final String user_id, final int unix_datetime,
-                             final double longitude, final double latitude)
+    protected void add_point(final String user_id, final long unix_datetime,
+                             final double latitude, final double longitude)
     {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getWritableDatabase();

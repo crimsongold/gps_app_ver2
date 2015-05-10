@@ -439,6 +439,7 @@ public class Registration extends ActionBarActivity {
             }
         }
     }
+
     class getAgreement extends AsyncTask<Void, Void, String> {
 
         protected String doInBackground(Void... params) {

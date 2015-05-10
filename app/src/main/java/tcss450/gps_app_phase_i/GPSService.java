@@ -9,6 +9,7 @@ import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -21,6 +22,9 @@ import com.google.android.gms.location.LocationListener;
  */
 public class GPSService extends IntentService {
 
+    private LocalMapData location_data;
+    private SharedPreferences prefs;
+
     private static final int alarmtime = 6000;  //replace with prefs time
 
     private static final String TAG = "GPSService";
@@ -30,6 +34,8 @@ public class GPSService extends IntentService {
 
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
+        location_data = new LocalMapData(this);
+        prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         Log.i(TAG, "service starting");
 
         return START_STICKY;
@@ -42,7 +48,10 @@ public class GPSService extends IntentService {
         if(location != null) {
             double longitude = location.getLongitude();
             double latitude = location.getLatitude();
-            Log.i(TAG, "Latitude: " + latitude + " Longitude: " + longitude);
+            long timestamp = System.currentTimeMillis() / 1000L;
+            Log.i(TAG, "Latitude: " + latitude + " Longitude: " + longitude + " Timestamp: " +
+                    timestamp);
+            location_data.add_point(prefs.getString("ID", null), timestamp, latitude, longitude);
         }
 //        final LocationListener locationListener = new LocationListener() {
 //            public void onLocationChanged(Location location) {

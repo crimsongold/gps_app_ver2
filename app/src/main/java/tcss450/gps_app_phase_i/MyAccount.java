@@ -31,13 +31,9 @@ import java.util.Date;
  * it allows the user to reset the password
  */
 public class MyAccount extends ActionBarActivity {
-    private LocalMapData location_data;
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefs_editor;
 
-
-    private boolean chk_start = false;
-    private boolean chk_end = false;
 
     @Override
     /**
