@@ -31,6 +31,7 @@ import java.util.Date;
  * it allows the user to reset the password
  */
 public class MyAccount extends ActionBarActivity {
+    private LocalMapData location_data;
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefs_editor;
 
@@ -43,6 +44,7 @@ public class MyAccount extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
+        location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
         Date start;
@@ -104,9 +106,9 @@ public class MyAccount extends ActionBarActivity {
         logOut.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //prefs_editor.clear();
-                //prefs_editor.commit();
-                //location_data.wipe_data();
+                prefs_editor.clear();
+                prefs_editor.commit();
+                location_data.wipe_data();
                 Intent intent = new Intent(MyAccount.this, Login.class);
                 startActivity(intent);
                 finish();
