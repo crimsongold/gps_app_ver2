@@ -94,6 +94,7 @@ public class ForgotPass extends Activity {
 
 
                 //if flag = true try to send the link
+                //some stuff 
 
 
                 if (flag == true) {
