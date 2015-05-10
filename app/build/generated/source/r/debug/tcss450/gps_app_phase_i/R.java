@@ -1728,7 +1728,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a0043;
         public static final int action_mode_bar_stub=0x7f0a0042;
         public static final int action_mode_close_button=0x7f0a0035;
-        public static final int action_settings=0x7f0a0075;
+        public static final int action_settings=0x7f0a0076;
         public static final int activity_chooser_view_content=0x7f0a0036;
         public static final int adjust_height=0x7f0a0017;
         public static final int adjust_width=0x7f0a0018;
@@ -1748,6 +1748,7 @@ containing a value of this type.
         public static final int disableHome=0x7f0a000c;
         public static final int donate_with_google=0x7f0a002f;
         public static final int dropdown=0x7f0a0022;
+        public static final int editText=0x7f0a0075;
         public static final int edit_query=0x7f0a0048;
         public static final int email=0x7f0a005d;
         public static final int email_login_form=0x7f0a005c;
@@ -1866,7 +1867,8 @@ containing a value of this type.
         public static final int activity_movement_data=0x7f040018;
         public static final int activity_my_account=0x7f040019;
         public static final int activity_register=0x7f04001a;
-        public static final int support_simple_spinner_dropdown_item=0x7f04001b;
+        public static final int activity_settings=0x7f04001b;
+        public static final int support_simple_spinner_dropdown_item=0x7f04001c;
     }
     public static final class menu {
         public static final int menu_load_screen=0x7f0e0000;
