@@ -132,6 +132,15 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
 
         mLoginFormView = findViewById(R.id.login_form);
 
+        Button forgotPass = (Button) findViewById(R.id.forgot_pass_button);
+        forgotPass.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, ForgotPass.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 

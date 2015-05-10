@@ -90,7 +90,7 @@
         android:layout_width="355dp"
         android:layout_height="wrap_content"
         android:text="Forgot Password"
-        android:id="@+id/button"
+        android:id="@+id/forgot_pass_button"
         android:layout_gravity="center_horizontal"
         android:textColor="#ff000000"
         android:textSize="20sp"/>

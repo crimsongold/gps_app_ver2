@@ -41,7 +41,9 @@ public class GPSService extends IntentService {
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if(location != null) {
             double longitude = location.getLongitude();
+            System.out.println(longitude);
             double latitude = location.getLatitude();
+            System.out.println(latitude);
             Log.i(TAG, "Latitude: " + latitude + " Longitude: " + longitude);
         }
 //        final LocationListener locationListener = new LocationListener() {
