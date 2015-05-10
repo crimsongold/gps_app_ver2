@@ -24,18 +24,6 @@
         android:textSize="36sp"/>
 
     <Button
-        android:id="@+id/reset_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reset Password"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="20sp"/>
-
-    <Button
         android:id="@+id/view_data_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -110,4 +98,5 @@
         android:layout_below="@+id/view_data_button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
 </RelativeLayout>

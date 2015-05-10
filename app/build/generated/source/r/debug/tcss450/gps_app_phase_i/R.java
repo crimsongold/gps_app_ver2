@@ -1728,7 +1728,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a0043;
         public static final int action_mode_bar_stub=0x7f0a0042;
         public static final int action_mode_close_button=0x7f0a0035;
-        public static final int action_settings=0x7f0a0076;
+        public static final int action_settings=0x7f0a0075;
         public static final int activity_chooser_view_content=0x7f0a0036;
         public static final int adjust_height=0x7f0a0017;
         public static final int adjust_width=0x7f0a0018;
@@ -1748,15 +1748,14 @@ containing a value of this type.
         public static final int disableHome=0x7f0a000c;
         public static final int donate_with_google=0x7f0a002f;
         public static final int dropdown=0x7f0a0022;
-        public static final int editText=0x7f0a0075;
         public static final int edit_query=0x7f0a0048;
         public static final int email=0x7f0a005d;
         public static final int email_login_form=0x7f0a005c;
         public static final int email_prompt=0x7f0a006d;
         public static final int email_sign_in_button=0x7f0a0060;
         public static final int end=0x7f0a0015;
-        public static final int end_date_input=0x7f0a0067;
-        public static final int end_date_text=0x7f0a006a;
+        public static final int end_date_input=0x7f0a0066;
+        public static final int end_date_text=0x7f0a0069;
         public static final int expand_activities_button=0x7f0a0037;
         public static final int expanded_menu=0x7f0a003d;
         public static final int forgot_cancel=0x7f0a0057;
@@ -1778,7 +1777,7 @@ containing a value of this type.
         public static final int login=0x7f0a005f;
         public static final int login_form=0x7f0a005b;
         public static final int login_progress=0x7f0a005a;
-        public static final int logout_button=0x7f0a006b;
+        public static final int logout_button=0x7f0a006a;
         public static final int match_parent=0x7f0a002b;
         public static final int middle=0x7f0a0016;
         public static final int monochrome=0x7f0a0032;
@@ -1794,7 +1793,7 @@ containing a value of this type.
         public static final int raccoon_img=0x7f0a0059;
         public static final int radio=0x7f0a0040;
         public static final int register_button=0x7f0a0061;
-        public static final int reset_password=0x7f0a0065;
+        public static final int reset_password=0x7f0a006b;
         public static final int sandbox=0x7f0a0027;
         public static final int satellite=0x7f0a001a;
         public static final int search_badge=0x7f0a004a;
@@ -1817,8 +1816,8 @@ containing a value of this type.
         public static final int showTitle=0x7f0a0011;
         public static final int slide=0x7f0a0013;
         public static final int split_action_bar=0x7f0a0007;
-        public static final int start_date_input=0x7f0a0069;
-        public static final int start_date_text=0x7f0a0068;
+        public static final int start_date_input=0x7f0a0068;
+        public static final int start_date_text=0x7f0a0067;
         public static final int strict_sandbox=0x7f0a0028;
         public static final int submit_area=0x7f0a0051;
         public static final int tabMode=0x7f0a000b;
@@ -1829,7 +1828,7 @@ containing a value of this type.
         public static final int title=0x7f0a003c;
         public static final int up=0x7f0a0008;
         public static final int useLogo=0x7f0a0012;
-        public static final int view_data_button=0x7f0a0066;
+        public static final int view_data_button=0x7f0a0065;
         public static final int withText=0x7f0a0020;
         public static final int wrap_content=0x7f0a0023;
     }
