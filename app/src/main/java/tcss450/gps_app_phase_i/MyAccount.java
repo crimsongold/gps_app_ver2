@@ -127,7 +127,8 @@ public class MyAccount extends ActionBarActivity
 
 
         /**
-         * set the alarm on create of my account, need to add some menu features to disable and enable alarm
+         * set the alarm on create of my account,
+         * need to add some menu features to disable and enable alarm
          */
 
         GPSService.setServiceAlarm(MyAccount.this, true);
