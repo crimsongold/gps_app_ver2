@@ -50,6 +50,10 @@
             android:name=".MovementData"
             android:label="@string/title_activity_movement_data">
         </activity>
+        <activity
+            android:name=".ForgotPass"
+            android:label="Forgot Pass">
+            </activity>
         <receiver android:name=".GPSReceiver"
             android:enabled="false">
             <intent-filter>
