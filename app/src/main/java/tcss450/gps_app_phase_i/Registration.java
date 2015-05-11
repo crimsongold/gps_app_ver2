@@ -73,7 +73,7 @@ public class Registration extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_register);
-        new getAgreement().execute();
+//        new getAgreement().execute();
         user_base = new AuthTable(this.getApplicationContext());
 
 
@@ -414,52 +414,52 @@ public class Registration extends ActionBarActivity {
         }
     }
 
-    class getAgreement extends AsyncTask<Void, Void, String> {
-
-        protected String doInBackground(Void... params) {
-            Uri.Builder builder = new Uri.Builder();
-            builder.scheme(getString(R.string.web_service_protocol))
-                    .authority(getString(R.string.web_service_url))
-                    .appendPath("agreement.php");
-            String url = builder.build().toString();
-            HttpClient client = new DefaultHttpClient();
-            HttpGet get = new HttpGet(url);
-
-            /**
-             * Link example
-             * 450.atwebpages.com/agreement.php
-             */
-
-            try {
-                HttpResponse response = client.execute(get);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        response.getEntity().getContent(), "UTF-8"));
-                return reader.readLine();
-            } catch (UnsupportedEncodingException e) {
-                return null;
-            } catch (ClientProtocolException e) {
-                return null;
-            } catch (IOException e) {
-                return null;
-            }
-        }
-
-        protected void onPostExecute(String result) {
-            //result = " {\"agreement\": \"This is a correctly formated Test EULA\"}";
-            //Log.i("mAuthTask", result);
-            JSONTokener tokener = new JSONTokener(result);
-            String regResult = "";
-            try {
-                JSONObject finalResult = new JSONObject(tokener);
-                regResult = finalResult.getString("agreement");
-            } catch (JSONException e) {
-                Log.i("mAuthTask", "Illegal JSON from agreement.php ERROR");
-                e.printStackTrace();
-            }
-            if (!regResult.equals("")) {
-                //TextView termsView = (TextView) findViewById(R.id.terms);
-                //termsView.setText(regResult);
-            }
-        }
-    }
+//    class getAgreement extends AsyncTask<Void, Void, String> {
+//
+//        protected String doInBackground(Void... params) {
+//            Uri.Builder builder = new Uri.Builder();
+//            builder.scheme(getString(R.string.web_service_protocol))
+//                    .authority(getString(R.string.web_service_url))
+//                    .appendPath("agreement.php");
+//            String url = builder.build().toString();
+//            HttpClient client = new DefaultHttpClient();
+//            HttpGet get = new HttpGet(url);
+//
+//            /**
+//             * Link example
+//             * 450.atwebpages.com/agreement.php
+//             */
+//
+//            try {
+//                HttpResponse response = client.execute(get);
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(
+//                        response.getEntity().getContent(), "UTF-8"));
+//                return reader.readLine();
+//            } catch (UnsupportedEncodingException e) {
+//                return null;
+//            } catch (ClientProtocolException e) {
+//                return null;
+//            } catch (IOException e) {
+//                return null;
+//            }
+//        }
+//
+//        protected void onPostExecute(String result) {
+//            //result = " {\"agreement\": \"This is a correctly formated Test EULA\"}";
+//            //Log.i("mAuthTask", result);
+//            JSONTokener tokener = new JSONTokener(result);
+//            String regResult = "";
+//            try {
+//                JSONObject finalResult = new JSONObject(tokener);
+//                regResult = finalResult.getString("agreement");
+//            } catch (JSONException e) {
+//                Log.i("mAuthTask", "Illegal JSON from agreement.php ERROR");
+//                e.printStackTrace();
+//            }
+//            if (!regResult.equals("")) {
+//                //TextView termsView = (TextView) findViewById(R.id.terms);
+//                //termsView.setText(regResult);
+//            }
+//        }
+//    }
 }
