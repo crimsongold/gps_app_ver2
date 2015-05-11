@@ -60,9 +60,9 @@ public class MovementData extends ActionBarActivity
         SharedPreferences prefs = this.getSharedPreferences("tcss450.gps_app_phase_i",
                 Context.MODE_PRIVATE);
 
-//        (new GetPointsTask()).execute(prefs.getString("ID", ""),
-//                Long.toString(prefs.getLong("startTime", 0)),
-//                Long.toString(prefs.getLong("endTime", 0)));
+        (new GetPointsTask()).execute(prefs.getString("ID", ""),
+                Long.toString(prefs.getLong("startTime", 0)),
+                Long.toString(prefs.getLong("endTime", 0)));
         
     }
 
@@ -144,7 +144,7 @@ public class MovementData extends ActionBarActivity
             //result = "{ \"result\": \"success\", \"error\": \"\", \"points\": [ { \"lat\": \"51.000\", \"lon\": \"51.000\", \"speed\": \" 70.000\", \"heading\": \"10.000\", \"time\": 1430118118 }, { \"lat\": \"51.000\", \"lon\": \"51.000\", \"speed\": \"70.000\", \"heading\": \"10.000\", \"time\": 1430118118 } ] }";
             JSONTokener tokener = new JSONTokener(result);
             JSONObject finalResult = null;
-
+            Log.i("GPSService",result);
             try {
                 finalResult = new JSONObject(tokener);
                 String regResult = finalResult.getString("result");
