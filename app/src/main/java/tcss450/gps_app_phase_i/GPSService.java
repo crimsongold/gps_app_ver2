@@ -37,7 +37,6 @@ public class GPSService extends IntentService {
         super.onStartCommand(intent, flags, startId);
         location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
-        Log.i(TAG, "service starting");
 
         LocationManager locationManager = (LocationManager) this.getSystemService(
                 Context.LOCATION_SERVICE);
