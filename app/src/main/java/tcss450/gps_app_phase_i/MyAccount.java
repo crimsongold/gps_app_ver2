@@ -67,8 +67,6 @@ public class MyAccount extends ActionBarActivity {
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP);
 
-        //Date start;
-        //Date end;
 
         Button startDate = (Button) findViewById(R.id.start_button);
         startDate.setOnClickListener(new OnClickListener() {
@@ -76,8 +74,7 @@ public class MyAccount extends ActionBarActivity {
             public void onClick(View v) {
                 showDatePickerDialog(v);
                 dateFlag = "start";
-                //start = new Date(tempDate.getDate());
-                //start = tempDate;
+
             }
 
         });
@@ -89,14 +86,9 @@ public class MyAccount extends ActionBarActivity {
             public void onClick(View v) {
                 showDatePickerDialog(v);
                 dateFlag = "end";
-                //end = new Date(tempDate.getDate());
-                //end = tempDate;
+
             }
         });
-
-
-
-
 
 
         Button viewData = (Button) findViewById(R.id.view_data_button);
@@ -105,15 +97,19 @@ public class MyAccount extends ActionBarActivity {
             public void onClick(View v) {
                 //set shared preferences date
 
-                if(start == null || end == null){
+                prefs.edit().remove("startTime").commit();
+                prefs.edit().remove("endTime").commit();
 
-                    if(start == null && end == null) {
+                if (start == null || end == null) {
+
+                    if (start == null && end == null) {
                         Calendar cal = GregorianCalendar.getInstance();
                         cal.setTime(new Date());
+                        end = cal.getTime();
+
                         cal.add(Calendar.DAY_OF_YEAR, -7);
                         start = cal.getTime();
 
-                        end = new Date(Calendar.DATE);
 
                         Context context = getApplicationContext();
                         CharSequence text = "Last 7 days shown";
@@ -125,17 +121,20 @@ public class MyAccount extends ActionBarActivity {
                         Intent intent = new Intent(MyAccount.this, MovementData.class);
                         startActivity(intent);
 
-                        prefs_editor.putLong("startTime", start.getTime());
-                        prefs_editor.putLong("endTime", end.getTime());
+                        prefs_editor.putLong("startTime", start.getTime() / 1000);
+                        prefs_editor.putLong("endTime", end.getTime() / 1000);
                         prefs_editor.commit();
+
+                        start = null;
+                        end = null;
 
 
                     }
 
-                    if(start == null && end != null) {
+                    if (start == null && end != null) {
                         Calendar cal = GregorianCalendar.getInstance();
                         cal.setTime(end);
-                        cal.set(Calendar.DATE, -1);
+                        cal.add(Calendar.DAY_OF_YEAR, -1);
                         start = cal.getTime();
 
                         Context context = getApplicationContext();
@@ -148,30 +147,23 @@ public class MyAccount extends ActionBarActivity {
                         Intent intent = new Intent(MyAccount.this, MovementData.class);
                         startActivity(intent);
 
-                        prefs_editor.putLong("startTime", start.getTime());
-                        prefs_editor.putLong("endTime", end.getTime());
+                        prefs_editor.putLong("startTime", start.getTime() / 1000);
+                        prefs_editor.putLong("endTime", end.getTime() / 1000);
                         prefs_editor.commit();
+                        start = null;
+                        end = null;
 
 
-                        //cal.add(end.getDay(), -1);
-
-                        //start = new Date(end.getDate());
-
-//                        Calendar cal = GregorianCalendar.getInstance();
-//                        cal.setTime(new Date());
-//                        cal.add(Calendar.DAY_OF_YEAR, -1);
-//                        start = cal.getTime();
                     }
 
 
-
-                    if(end == null && start != null) {
-
-
+                    if (end == null && start != null) {
 
                         Calendar cal = GregorianCalendar.getInstance();
                         cal.setTime(start);
-                        cal.set(Calendar.DATE, 1);
+
+
+                        cal.add(Calendar.DAY_OF_YEAR, 1);
                         end = cal.getTime();
 
                         Context context = getApplicationContext();
@@ -184,29 +176,21 @@ public class MyAccount extends ActionBarActivity {
                         Intent intent = new Intent(MyAccount.this, MovementData.class);
                         startActivity(intent);
 
-                        prefs_editor.putLong("startTime", start.getTime());
-                        prefs_editor.putLong("endTime", end.getTime());
+                        prefs_editor.putLong("startTime", start.getTime() / 1000);
+                        prefs_editor.putLong("endTime", end.getTime() / 1000);
                         prefs_editor.commit();
+                        start = null;
+                        end = null;
                     }
-
-
-
-//                    Context context = getApplicationContext();
-//                    CharSequence text = "Last 7 days shown";
-//                    int duration = Toast.LENGTH_SHORT;
-//
-//                    Toast toast = Toast.makeText(context, text, duration);
-//                    toast.show();
-//
-//                    Intent intent = new Intent(MyAccount.this, MovementData.class);
-//                    startActivity(intent);
 
 
                 } else {
 
-                    prefs_editor.putLong("startTime", start.getTime());
-                    prefs_editor.putLong("endTime", end.getTime());
+                    prefs_editor.putLong("startTime", start.getTime() / 1000);
+                    prefs_editor.putLong("endTime", end.getTime() / 1000);
                     prefs_editor.commit();
+                    start = null;
+                    end = null;
                     Intent intent = new Intent(MyAccount.this, MovementData.class);
                     startActivity(intent);
                 }
@@ -278,16 +262,20 @@ public class MyAccount extends ActionBarActivity {
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            if(dateFlag.equals("start"))
-            {
-                start = new Date(year, month, day);
-            } else if (dateFlag.equals("end")){
-                end = new Date(year, month, day);
+            Calendar cal = new GregorianCalendar();
+            cal.set(year, month, day);
+
+            if (dateFlag.equals("start")) {
+                start = cal.getTime();
+
+            } else if (dateFlag.equals("end")) {
+
+                end = cal.getTime();
+
             }
-            // Do something with the date chosen by the user
+
         }
     }
-
 
 
     public void showDatePickerDialog(View v) {
