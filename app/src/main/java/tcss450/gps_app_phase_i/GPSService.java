@@ -4,9 +4,7 @@
 
 package tcss450.gps_app_phase_i;
 
-import android.app.AlarmManager;
 import android.app.IntentService;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,8 +22,6 @@ public class GPSService extends IntentService {
     private LocalMapData location_data;
     private SharedPreferences prefs;
 
-    private static final int alarmtime = 6000;  //replace with prefs time
-
     private static final String TAG = "GPSService";
     public GPSService(){
         super("GPSService");
@@ -40,7 +36,8 @@ public class GPSService extends IntentService {
                 Context.LOCATION_SERVICE);
 
         // Define a listener that responds to location updates
-        android.location.LocationListener locationListener = new android.location.LocationListener() {
+        android.location.LocationListener locationListener = new android.location.LocationListener()
+        {
             public void onLocationChanged(Location location) {
                 String uid = prefs.getString("ID", "undef");
                 double longitude = location.getLongitude();

@@ -275,7 +275,29 @@ public class Registration extends ActionBarActivity {
 
 
         int valid = Verification.isEmailValid(email);
-        if(valid == Verification.VALID_EMAIL){
+        if(valid == Verification.VALID_EMAIL)
+        {
+            valid = Verification.isPasswordValid(password);
+            if(valid == Verification.VALID_PASSWORD){
+                (new registerUser()).execute(email, password, question, answer);
+            }else if(valid == Verification.SHORT_PASSWORD){
+                validCheck = false;
+                mPassPrompt.setError("Password Is Too Short");
+                mPassPrompt.requestFocus();
+            }else if(valid == Verification.NO_UPPER){
+                validCheck = false;
+                mPassPrompt.setError("Password Must contain an upper case letter");
+                mPassPrompt.requestFocus();
+            }else if(valid == Verification.NO_LOWER){
+                validCheck = false;
+                mPassPrompt.setError("Password Must contain a Lower case letter");
+                mPassPrompt.requestFocus();
+            }else if(valid == Verification.NO_SPECIAL){
+                validCheck = false;
+                mPassPrompt.setError(
+                        "Password Must contain one of the following: +\\-.,!@#$%^&*();\\\\/|<>\"'");
+                mPassPrompt.requestFocus();
+            }
         }else if(valid == Verification.BLANK) {
             validCheck = false;
             mEmailView.setError("Email Can't be blank");
@@ -305,66 +327,7 @@ public class Registration extends ActionBarActivity {
             mEmailView.setError("Email needs a valid top level domain");
             mEmailView.requestFocus();
         }
-
-        valid = Verification.isPasswordValid(password);
-        if(valid == Verification.VALID_PASSWORD){
-
-        }else if(valid == Verification.SHORT_PASSWORD){
-            validCheck = false;
-            mPassPrompt.setError("Password Is Too Short");
-            mPassPrompt.requestFocus();
-        }else if(valid == Verification.NO_UPPER){
-            validCheck = false;
-            mPassPrompt.setError("Password Must contain an upper case letter");
-            mPassPrompt.requestFocus();
-        }else if(valid == Verification.NO_LOWER){
-            validCheck = false;
-            mPassPrompt.setError("Password Must contain a Lower case letter");
-            mPassPrompt.requestFocus();
-        }else if(valid == Verification.NO_SPECIAL){
-            validCheck = false;
-            mPassPrompt.setError(
-                    "Password Must contain one of the following: +\\-.,!@#$%^&*();\\\\/|<>\"'");
-            mPassPrompt.requestFocus();
-        } else {
-
-            if(validCheck) {
-                showProgress(true);
-                (new registerUser()).execute(email, password, question, answer);
-            }
-        }
-
-
-
-        // Show a progress spinner, and kick off a background task to
-        // perform the user login attempt.
-
-
     }
-
-    public void showProgress(final boolean show)
-    {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2)
-        {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mRegisterFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter()
-            {
-                @Override
-                public void onAnimationEnd(Animator animation)
-                {
-                    mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-            mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        }
-    }
-
 
     class registerUser extends AsyncTask<String, Void, String> {
 

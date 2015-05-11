@@ -51,7 +51,7 @@ public class MyAccount extends ActionBarActivity {
         prefs_editor = prefs.edit();
         startAlarm();
 
-        Date start;
+        //Datepicker will not render in Android_Studio
 
         EditText enter_start_date = (EditText) findViewById(R.id.enter_start_date);
         /*startBox.setOnEditorActionListener(new TextView.OnEditorActionListener()
@@ -101,6 +101,7 @@ public class MyAccount extends ActionBarActivity {
         viewData.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                location_data.push_data();
                 Intent intent = new Intent(MyAccount.this, MovementData.class);
                 startActivity(intent);
             }
