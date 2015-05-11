@@ -24,29 +24,16 @@
         android:textSize="36sp"/>
 
     <Button
-        android:id="@+id/reset_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reset Password"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="20sp"/>
-
-    <Button
         android:id="@+id/view_data_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/end_date_input"
-        android:layout_marginTop="50dp"
         android:text="View Tracking Data"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20sp"/>
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/start_date_text"
@@ -59,55 +46,69 @@
         android:text="Start Date:"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-    <EditText
-        android:id="@+id/start_date_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:layout_alignTop="@+id/start_date_text"
-        android:layout_alignRight="@+id/acct_text"
-        android:layout_alignEnd="@+id/acct_text"/>
-
     <TextView
         android:id="@+id/end_date_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/start_date_input"
-        android:layout_marginTop="40dp"
         android:text="End Date:"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    <EditText
-        android:id="@+id/end_date_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:layout_alignTop="@+id/end_date_text"
-        android:layout_alignRight="@+id/view_data_button"
-        android:layout_alignEnd="@+id/view_data_button"/>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_below="@+id/enter_start_time"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/reset_password"
         android:text="Log out"
-        android:layout_alignRight="@+id/view_data_button"
-        android:layout_alignEnd="@+id/view_data_button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="20sp"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alarm Test"
-        android:id="@+id/alarm_button"
-        android:layout_below="@+id/view_data_button"
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/enter_start_date"
+        android:hint="Enter date"
+        android:layout_alignTop="@+id/start_date_text"
+        android:layout_alignRight="@+id/acct_text"
+        android:layout_alignEnd="@+id/acct_text" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/enter_start_time"
+        android:hint="Enter time"
+        android:layout_below="@+id/enter_start_date"
+        android:layout_alignRight="@+id/acct_text" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/enter_end_date"
+        android:layout_alignTop="@+id/end_date_text"
+        android:layout_alignLeft="@+id/enter_start_time"
+        android:layout_alignStart="@+id/enter_start_time"
+        android:hint="Enter date" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:ems="10"
+        android:id="@+id/enter_end_time"
+        android:layout_below="@+id/enter_end_date"
+        android:layout_alignLeft="@+id/enter_end_date"
+        android:layout_alignStart="@+id/enter_end_date"
+        android:hint="Enter time" />
+
 </RelativeLayout>

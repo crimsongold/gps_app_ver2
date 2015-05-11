@@ -53,7 +53,7 @@ public class MyAccount extends ActionBarActivity {
 
         Date start;
 
-        EditText startBox = (EditText) findViewById(R.id.start_date_input);
+        EditText enter_start_date = (EditText) findViewById(R.id.enter_start_date);
         /*startBox.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
 
@@ -64,9 +64,8 @@ public class MyAccount extends ActionBarActivity {
             }
         });*/
 
-        EditText endBox = (EditText) findViewById(R.id.end_date_input);
-        /*
-        endBox.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        EditText enter_start_time = (EditText) findViewById(R.id.enter_start_time);
+        /*startBox.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
 
             @Override
@@ -74,8 +73,29 @@ public class MyAccount extends ActionBarActivity {
             {
                 return false;
             }
-        });
-         */
+        });*/
+
+        EditText enter_end_date = (EditText) findViewById(R.id.enter_end_date);
+        /*startBox.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+            {
+                return false;
+            }
+        });*/
+
+        EditText enter_end_time = (EditText) findViewById(R.id.enter_end_time);
+        /*startBox.setOnEditorActionListener(new TextView.OnEditorActionListener()
+        {
+
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
+            {
+                return false;
+            }
+        });*/
 
         Button viewData = (Button) findViewById(R.id.view_data_button);
         viewData.setOnClickListener(new OnClickListener() {
@@ -83,26 +103,6 @@ public class MyAccount extends ActionBarActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MyAccount.this, MovementData.class);
                 startActivity(intent);
-            }
-        });
-
-        Button resetPass = (Button) findViewById(R.id.reset_password);
-        resetPass.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                URL url;
-                //TODO
-                //this needs to have the email in it too
-                //Email needs to be passed after login or stored locally
-
-                try {
-                    url = new URL("450.atwebpages.com/reset.php");
-
-
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-
             }
         });
 
