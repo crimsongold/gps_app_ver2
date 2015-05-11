@@ -54,6 +54,9 @@
             android:name=".ForgotPass"
             android:label="Forgot Pass">
             </activity>
+        <activity android:name=".Settings"
+                  android:label ="Settings">
+        </activity>
         <receiver android:name=".GPSReceiver"
             android:enabled="false">
             <intent-filter>
