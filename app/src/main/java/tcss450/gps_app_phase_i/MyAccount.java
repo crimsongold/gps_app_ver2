@@ -6,6 +6,8 @@
 
 package tcss450.gps_app_phase_i;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -47,6 +49,8 @@ public class MyAccount extends ActionBarActivity {
         location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
+        startAlarm();
+
         Date start;
 
         EditText startBox = (EditText) findViewById(R.id.start_date_input);
@@ -108,46 +112,13 @@ public class MyAccount extends ActionBarActivity {
             public void onClick(View v) {
                 prefs_editor.clear();
                 prefs_editor.commit();
-                //location_data.wipe_data();
+                stopAlarm();
+                location_data.wipe_data();
                 Intent intent = new Intent(MyAccount.this, Login.class);
                 startActivity(intent);
                 finish();
             }
         });
-
-
-        /**
-         * set the alarm on create of my account,
-         * need to add some menu features to disable and enable alarm
-         */
-
-        Button alarmButton = (Button) findViewById(R.id.alarm_button);
-        alarmButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-
-
-                GPSService.setServiceAlarm(v.getContext(), true);
-                ComponentName receiver = new ComponentName(MyAccount.this, GPSService.class);
-                PackageManager pm = MyAccount.this.getPackageManager();
-
-                pm.setComponentEnabledSetting(receiver,
-                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                                PackageManager.DONT_KILL_APP);
-
-//                GPSService.setServiceAlarm(MyAccount.this, true);
-//
-//                ComponentName receiver = new ComponentName(MyAccount.this, GPSReceiver.class);
-//                PackageManager pm = MyAccount.this.getPackageManager();
-//
-//                pm.setComponentEnabledSetting(receiver,
-//                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-//                        PackageManager.DONT_KILL_APP);
-
-
-            }
-        });
-
-
     }
 
 
@@ -181,5 +152,26 @@ public class MyAccount extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void startAlarm()
+    {
+        // Construct an intent that will execute the AlarmReceiver
+        Intent intent = new Intent(getApplicationContext(), GPSReceiver.class);
+        // Create a PendingIntent to be triggered when the alarm goes off
+        final PendingIntent pIntent = PendingIntent.getBroadcast(this, GPSReceiver.REQUEST_CODE,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
+                2000, pIntent);
+    }
+
+    public void stopAlarm()
+    {
+        Intent intent = new Intent(getApplicationContext(), GPSReceiver.class);
+        final PendingIntent pIntent = PendingIntent.getBroadcast(this, GPSReceiver.REQUEST_CODE,
+                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        alarm.cancel(pIntent);
     }
 }
