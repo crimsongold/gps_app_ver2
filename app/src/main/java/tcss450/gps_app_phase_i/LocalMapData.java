@@ -65,8 +65,9 @@ public class LocalMapData {
         init_vals.put(key_long, longitude);
         init_vals.put(key_lat, latitude);
 
-        my_db.insert(table_name, null, init_vals);
+        //my_db.insert(table_name, null, init_vals);
         my_helper.close();
+        new PushTask().execute("" + latitude,"" + longitude,"" + user_id,"" + unix_datetime);
     }
 
     class PushTask extends AsyncTask<String, Void, String[]>
@@ -80,7 +81,7 @@ public class LocalMapData {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme(ctxt.getString(R.string.web_service_protocol))
                     .authority(ctxt.getString(R.string.web_service_url))
-                    .appendPath("addLog.php")
+                    .appendPath("logAdd.php")
                     .appendQueryParameter("lat", params[0])
                     .appendQueryParameter("lon", params[1])
                     .appendQueryParameter("source", params[2])
@@ -93,7 +94,12 @@ public class LocalMapData {
                 HttpResponse response = client.execute(post);
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-                return new String[]{params[0],reader.readLine()};
+                String r = "";
+                String line;
+                while((line = reader.readLine())!= null) {
+                    r += line;
+                }
+                return new String[]{params[0],r};
             } catch (UnsupportedEncodingException e) {
                 return null;
             } catch (ClientProtocolException e) {
@@ -113,7 +119,7 @@ public class LocalMapData {
                 finalResult = new JSONObject(tokener);
                 regResult = finalResult.getString("result");
             } catch (JSONException e) {
-                Log.i("PushTask", "ERROR");
+                Log.i("PushTask", "ERROR: " + result[1]);
                 e.printStackTrace();
             }
 

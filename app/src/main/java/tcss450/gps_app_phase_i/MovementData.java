@@ -58,7 +58,8 @@ public class MovementData extends ActionBarActivity
         mainListView.setAdapter(listAdapter);
 
         SharedPreferences prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
-        (new GetPointsTask()).execute(prefs.getString("ID", ""), "1008979200", "2555280000");
+
+        (new GetPointsTask()).execute(prefs.getString("ID", ""), prefs.getString("startTime",""), prefs.getString("endTime",""));
     }
 
 
