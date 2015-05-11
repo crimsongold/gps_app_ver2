@@ -77,6 +77,8 @@ public class LocalMapData {
         //Push the recent data from the database into the webservice database
         protected String[] doInBackground(String... params)
         {
+
+            http://450.atwebpages.com/logAdd.php?lat=65.9667&lon=-18.5333&heading=0.0&speed=0.0&timestamp=1431369860&source=7f704b56d4a5c10420f64a6d9708c2060eff434b
             selected_pk = params[3];
             Uri.Builder builder = new Uri.Builder();
             builder.scheme(ctxt.getString(R.string.web_service_protocol))
@@ -84,8 +86,10 @@ public class LocalMapData {
                     .appendPath("logAdd.php")
                     .appendQueryParameter("lat", params[0])
                     .appendQueryParameter("lon", params[1])
-                    .appendQueryParameter("source", params[2])
-                    .appendQueryParameter("timestamp", params[3]);
+                    .appendQueryParameter("heading", params[2])
+                    .appendQueryParameter("speed", params[3])
+                    .appendQueryParameter("timestamp", params[4])
+                    .appendQueryParameter("source", params[5]);
             String url = builder.build().toString();
             Log.i("PushTask",url);
             HttpClient client = new DefaultHttpClient();
@@ -147,8 +151,10 @@ public class LocalMapData {
         {
             parameters[i] = Double.toString(crs.getDouble(i));
             parameters[i+1] = Double.toString(crs.getDouble(i+1));
-            parameters[i+2] = crs.getString(i+2);
-            parameters[i+3] = Integer.toString(crs.getInt(i+3));
+            parameters[i+2] = "0.0";
+            parameters[i+3] = "0.0";
+            parameters[i+5] = crs.getString(i+2);
+            parameters[i+4] = Integer.toString(crs.getInt(i+3));
             AsyncTask<String, Void, String[]> push = (new PushTask().execute(parameters));
         }
     }
@@ -187,6 +193,26 @@ public class LocalMapData {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
         {
             //No changes to make so far...
+        }
+
+        public String getTableAsString(SQLiteDatabase db, long start, long end) {
+            Log.d("DB", "getTableAsString called");
+            String tableString = String.format("Table %s:\n", table_name);
+            Cursor allRows  = db.rawQuery("SELECT * FROM " + table_name + " WHERE " +
+                    key_datetime + " <= " + end + " AND " + key_datetime + " >= " + start, null);
+            if (allRows.moveToFirst() ){
+                String[] columnNames = allRows.getColumnNames();
+                do {
+                    for (String name: columnNames) {
+                        tableString += String.format("%s: %s\n", name,
+                                allRows.getString(allRows.getColumnIndex(name)));
+                    }
+                    tableString += "\n";
+
+                } while (allRows.moveToNext());
+            }
+
+            return tableString;
         }
     }
 }
