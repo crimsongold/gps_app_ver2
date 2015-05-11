@@ -305,7 +305,6 @@ public class Registration extends ActionBarActivity {
             mEmailView.setError("Email needs a valid top level domain");
             mEmailView.requestFocus();
         }
-
         valid = Verification.isPasswordValid(password);
         if(valid == Verification.VALID_PASSWORD){
 
@@ -386,7 +385,7 @@ public class Registration extends ActionBarActivity {
              * Link example
              * 450.atwebpages.com/adduser.php?email=smith@aol.com&password=mypass&question=favorite%20color%3F&answer=blue
              */
-
+            Log.i("caleb", "end");
             try {
                 HttpResponse response = client.execute(get);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
