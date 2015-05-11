@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -190,7 +191,7 @@ public class Registration extends ActionBarActivity {
      */
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_register, menu);
+        //getMenuInflater().inflate(R.menu.menu_register, menu);
         return true;
     }
 
@@ -452,7 +453,7 @@ public class Registration extends ActionBarActivity {
             }
             if (!regResult.equals("")) {
                 TextView termsView = (TextView) findViewById(R.id.terms);
-                termsView.setText(regResult);
+                termsView.setText(Html.fromHtml(regResult));
             }
         }
     }
