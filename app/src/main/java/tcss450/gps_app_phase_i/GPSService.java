@@ -10,13 +10,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-
-import com.google.android.gms.location.LocationListener;
 
 /**
  * Created by caleb on 5/9/15.
