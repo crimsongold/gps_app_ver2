@@ -140,8 +140,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor>
                 startActivity(intent);
             }
         });
-
-
     }
 
     private void populateAutoComplete()

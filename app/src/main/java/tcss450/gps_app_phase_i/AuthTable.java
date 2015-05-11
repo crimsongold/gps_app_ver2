@@ -19,7 +19,7 @@ import android.util.Log;
 public class AuthTable
 {
 
-    public static final String db_name = "AUTH_DB";
+    public static final String db_name = "AUTH.db";
     public static final String table_name = "AUTHENTICATION";
     public static final String key_user_id = "Email";
     public static final String key_user_pass = "Password";
@@ -134,6 +134,7 @@ public class AuthTable
                     "Password TEXT, " +
                     "SecurityQuestion TEXT, " +
                     "SecurityAnswer TEXT)");
+            Log.i("Database", "Database created...");
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)

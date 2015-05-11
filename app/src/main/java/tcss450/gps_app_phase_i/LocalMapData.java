@@ -38,7 +38,7 @@ public class LocalMapData {
     Therefore: the data points will be doubles with 4 decimal places.
      */
 
-    public static final String db_name = "LOCALDATA_DB";
+    public static final String db_name = "LOCALDATA.db";
     public static final String table_name = "LOCAL_MAP_DATA";
     public static final String key_lat = "lat";                     //Stored as REAL
     public static final String key_long =  "lon";                   //Stored as REAL
@@ -149,7 +149,10 @@ public class LocalMapData {
 
     protected boolean isTableEmpty()
     {
+        my_helper = new DatabaseHelper(ctxt);
+        my_db = my_helper.getReadableDatabase();
         crs = my_db.rawQuery("SELECT * FROM " + table_name, null);
+        my_helper.close();
         return crs.moveToFirst();
     }
 

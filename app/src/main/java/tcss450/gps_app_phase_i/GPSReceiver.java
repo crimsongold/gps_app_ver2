@@ -1,25 +1,17 @@
-/*
- * Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
- */
-
 package tcss450.gps_app_phase_i;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
-/**
- * Created by Jon on 5/9/2015.
- */
-public class GPSReceiver extends BroadcastReceiver {
+import tcss450.gps_app_phase_i.GPSService;
 
+public class GPSReceiver extends BroadcastReceiver {
+    public static final int REQUEST_CODE = 12345;
 
     @Override
     public void onReceive(Context context, Intent intent) {
-
-
-            GPSService.setServiceAlarm(context, true);
-
-
+        Intent i = new Intent(context, GPSService.class);
+        context.startService(i);
     }
 }
