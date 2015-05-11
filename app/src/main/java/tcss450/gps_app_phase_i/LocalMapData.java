@@ -87,7 +87,7 @@ public class LocalMapData {
                     .appendQueryParameter("source", params[2])
                     .appendQueryParameter("timestamp", params[3]);
             String url = builder.build().toString();
-
+            Log.i("PushTask",url);
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost(url);
             try {

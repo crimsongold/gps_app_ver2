@@ -57,7 +57,7 @@ public class MyAccount extends ActionBarActivity {
         location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
-        startAlarm();
+        //startAlarm();
 
         //Date start;
         //Date end;
@@ -212,7 +212,7 @@ public class MyAccount extends ActionBarActivity {
             public void onClick(View v) {
                 prefs_editor.clear();
                 prefs_editor.commit();
-                stopAlarm();
+                //stopAlarm();
                 location_data.wipe_data();
                 Intent intent = new Intent(MyAccount.this, Login.class);
                 startActivity(intent);
@@ -254,26 +254,26 @@ public class MyAccount extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void startAlarm()
-    {
-        // Construct an intent that will execute the AlarmReceiver
-        Intent intent = new Intent(getApplicationContext(), GPSReceiver.class);
-        // Create a PendingIntent to be triggered when the alarm goes off
-        final PendingIntent pIntent = PendingIntent.getBroadcast(this, GPSReceiver.REQUEST_CODE,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-                2000, pIntent);
-    }
-
-    public void stopAlarm()
-    {
-        Intent intent = new Intent(getApplicationContext(), GPSReceiver.class);
-        final PendingIntent pIntent = PendingIntent.getBroadcast(this, GPSReceiver.REQUEST_CODE,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarm.cancel(pIntent);
-    }
+//    public void startAlarm()
+//    {
+//        // Construct an intent that will execute the AlarmReceiver
+//        Intent intent = new Intent(getApplicationContext(), GPSReceiver.class);
+//        // Create a PendingIntent to be triggered when the alarm goes off
+//        final PendingIntent pIntent = PendingIntent.getBroadcast(this, GPSReceiver.REQUEST_CODE,
+//                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+//        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
+//                2000, pIntent);
+//    }
+//
+//    public void stopAlarm()
+//    {
+//        Intent intent = new Intent(getApplicationContext(), GPSReceiver.class);
+//        final PendingIntent pIntent = PendingIntent.getBroadcast(this, GPSReceiver.REQUEST_CODE,
+//                intent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+//        alarm.cancel(pIntent);
+//    }
 
 
 
