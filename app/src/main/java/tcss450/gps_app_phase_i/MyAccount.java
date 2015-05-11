@@ -6,8 +6,6 @@
 
 package tcss450.gps_app_phase_i;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -20,11 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
 
 
 /**
@@ -49,59 +43,21 @@ public class MyAccount extends ActionBarActivity {
         location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
-        startAlarm();
 
-        //Datepicker will not render in Android_Studio
+        GPSService.setServiceAlarm(this, true);
+        ComponentName receiver = new ComponentName(MyAccount.this, GPSService.class);
+        PackageManager pm = MyAccount.this.getPackageManager();
 
-        EditText enter_start_date = (EditText) findViewById(R.id.enter_start_date);
-        /*startBox.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
+        pm.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
 
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
-            {
-                return false;
-            }
-        });*/
 
-        EditText enter_start_time = (EditText) findViewById(R.id.enter_start_time);
-        /*startBox.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
-            {
-                return false;
-            }
-        });*/
-
-        EditText enter_end_date = (EditText) findViewById(R.id.enter_end_date);
-        /*startBox.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
-            {
-                return false;
-            }
-        });*/
-
-        EditText enter_end_time = (EditText) findViewById(R.id.enter_end_time);
-        /*startBox.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
-
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
-            {
-                return false;
-            }
-        });*/
 
         Button viewData = (Button) findViewById(R.id.view_data_button);
         viewData.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                location_data.push_data();
                 Intent intent = new Intent(MyAccount.this, MovementData.class);
                 startActivity(intent);
             }
@@ -113,13 +69,16 @@ public class MyAccount extends ActionBarActivity {
             public void onClick(View v) {
                 prefs_editor.clear();
                 prefs_editor.commit();
-                stopAlarm();
+
                 location_data.wipe_data();
                 Intent intent = new Intent(MyAccount.this, Login.class);
                 startActivity(intent);
                 finish();
             }
         });
+
+
+
     }
 
 
@@ -153,26 +112,5 @@ public class MyAccount extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void startAlarm()
-    {
-        // Construct an intent that will execute the AlarmReceiver
-        Intent intent = new Intent(getApplicationContext(), GPSReceiver.class);
-        // Create a PendingIntent to be triggered when the alarm goes off
-        final PendingIntent pIntent = PendingIntent.getBroadcast(this, GPSReceiver.REQUEST_CODE,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(),
-                2000, pIntent);
-    }
-
-    public void stopAlarm()
-    {
-        Intent intent = new Intent(getApplicationContext(), GPSReceiver.class);
-        final PendingIntent pIntent = PendingIntent.getBroadcast(this, GPSReceiver.REQUEST_CODE,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
-        alarm.cancel(pIntent);
     }
 }
