@@ -52,15 +52,16 @@ public class Registration extends ActionBarActivity {
     private EditText mPassPrompt;
     private EditText mSecQuestion;
     private EditText mSecAnswer;
+    private EditText mPassConfirm;
 
     private AuthTable user_base;
 
-    private String m_pass_prompt_string;
-    private boolean chk_email = false;
-    private boolean chk_pass_prompt = false;
-    private boolean chk_pass_confirm = false;
-    private boolean chk_sec_question = false;
-    private boolean chk_sec_answer = false;
+    //    private String m_pass_prompt_string;
+//    private boolean chk_email = false;
+//    private boolean chk_pass_prompt = false;
+//    private boolean chk_pass_confirm = false;
+//    private boolean chk_sec_question = false;
+//    private boolean chk_sec_answer = false;
     private boolean chk_ToS = false;
     private View mRegisterFormView;
 
@@ -72,96 +73,101 @@ public class Registration extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_register);
-        new getAgreement().execute();
+
         user_base = new AuthTable(this.getApplicationContext());
 
         mEmailView = (EditText) findViewById(R.id.email_prompt);
-        mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (textView.getText().toString().contains("@")) {
-                    chk_email = true;
-                    return true;
-                } else {
-                    mEmailView.setError("Not a valid email.");
-                    chk_email = false;
-                    return false;
-                }
-            }
-        });
+//        mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+//                if (textView.getText().toString().contains("@")) {
+//                    chk_email = true;
+//                    return true;
+//                } else {
+//                    //Somehow display that the email is not valid
+//                    chk_email = false;
+//                    return false;
+//                }
+//            }
+//        });
 
         mPassPrompt = (EditText) findViewById(R.id.pass_prompt);
-        mPassPrompt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (textView.getText().toString().length() > 4) {
-                    chk_pass_prompt = true;
-                    m_pass_prompt_string = textView.getText().toString();
-                    return true;
-                } else {
-                    mPassPrompt.setError("Password is too short.");
-                    chk_pass_prompt = false;
-                    return false;
-                }
-            }
-        });
+//        mPassPrompt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+//                if (textView.getText().toString().length() > 4) {
+//                    chk_pass_prompt = true;
+//                    m_pass_prompt_string = textView.getText().toString();
+//                    return true;
+//                } else {
+//                    //Somehow display that the password is not long enough
+//                    chk_pass_prompt = false;
+//                    return false;
+//                }
+//            }
+//        });
 
-        final EditText mPassConfirm = (EditText) findViewById(R.id.pass_confirm);
-        mPassConfirm.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (textView.getText().toString().length() > 4) {
-                    if (m_pass_prompt_string.equals(textView.getText())) {
-                        chk_pass_confirm = true;
-                        return true;
-                    } else {
-                        chk_pass_confirm = false;
-                        mPassConfirm.setError("Passwords do not match");
-                        return false;
-                    }
-                } else {
-                    chk_pass_confirm = false;
-                    mPassConfirm.setError("Invalid password entered.");
-                    return false;
-                }
-            }
-        });
+        mPassConfirm = (EditText) findViewById(R.id.pass_confirm);
+//        mPassConfirm.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+//                if (textView.getText().toString().length() > 4) {
+//                    if (m_pass_prompt_string.equals(textView.getText())) {
+//                        chk_pass_confirm = true;
+//                        return true;
+//                    } else {
+//                        chk_pass_confirm = false;
+//                        mPassConfirm.setError("Passwords do not match");
+//                        return false;
+//                    }
+//                } else {
+//                    chk_pass_confirm = false;
+//                    mPassConfirm.setError("Invalid password entered.");
+//                    return false;
+//                }
+//            }
+//        });
 
         mSecQuestion = (EditText) findViewById(R.id.security_question);
-        mSecQuestion.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (textView.getText().toString().length() > 1) {
-                    chk_sec_question = true;
-                    return true;
-                } else {
-                    chk_sec_question = false;
-                    //Somehow display that there was no question entered
-                    mSecQuestion.setError("No question has been entered.");
-                    return false;
-                }
-            }
-        });
+//        mSecQuestion.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+//                if (textView.getText().toString().length() > 1) {
+//                    chk_sec_question = true;
+//                    return true;
+//                } else {
+//                    chk_sec_question = false;
+//                    //Somehow display that there was no question entered
+//                    mSecQuestion.setError("No question has been entered.");
+//                    return false;
+//                }
+//            }
+//        });
 
         mSecAnswer = (EditText) findViewById(R.id.security_answer);
-        mSecAnswer.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (textView.getText().toString().length() > 1) {
-                    chk_sec_answer = true;
-                    return true;
-                } else {
-                    chk_sec_answer = false;
-                    mSecAnswer.setError("Answer is too short.");
-                    return false;
-                }
-            }
-        });
+//        mSecAnswer.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+//                if (textView.getText().toString().length() > 1) {
+//                    chk_sec_answer = true;
+//                    return true;
+//                } else {
+//                    chk_sec_answer = false;
+//                    mSecAnswer.setError("Answer is too short.");
+//                    return false;
+//                }
+//            }
+//        }
+//        );
 
         CheckBox terms_chkBox = (CheckBox) findViewById(R.id.terms_check);
         terms_chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                chk_ToS = isChecked;
+                if (isChecked) {
+                    chk_ToS = true;
+                } else {
+                    chk_ToS = false;
+                }
             }
         });
 
@@ -179,6 +185,7 @@ public class Registration extends ActionBarActivity {
             public void onClick(View v) {
 
                 attemptRegister();
+
             }
         });
     }
@@ -241,7 +248,7 @@ public class Registration extends ActionBarActivity {
     }
 
 
-    public void attemptRegister(){
+    public void attemptRegister() {
 
         String email = mEmailView.getText().toString();
         String password = mPassPrompt.getText().toString();
@@ -276,6 +283,7 @@ public class Registration extends ActionBarActivity {
 
         int valid = Verification.isEmailValid(email);
         if(valid == Verification.VALID_EMAIL){
+            validCheck = true;
         }else if(valid == Verification.BLANK) {
             validCheck = false;
             mEmailView.setError("Email Can't be blank");
@@ -308,7 +316,7 @@ public class Registration extends ActionBarActivity {
 
         valid = Verification.isPasswordValid(password);
         if(valid == Verification.VALID_PASSWORD){
-
+            validCheck = true;
         }else if(valid == Verification.SHORT_PASSWORD){
             validCheck = false;
             mPassPrompt.setError("Password Is Too Short");
@@ -328,70 +336,73 @@ public class Registration extends ActionBarActivity {
             mPassPrompt.requestFocus();
         } else {
 
-            if(validCheck) {
-                showProgress(true);
-                (new registerUser()).execute(email, password, question, answer);
-            }
+            //do nothing
+
+        }
+
+        /**
+         * check password and re-entered password
+         */
+        if(mPassPrompt.getText().toString().equals(mPassConfirm.getText().toString())){
+            validCheck = true;
+        } else {
+            validCheck = false;
+            mPassConfirm.setError("Passwords do not match");
         }
 
 
+        if(chk_ToS == false) {
+            Context context = getApplicationContext();
+            CharSequence text = "Please read the terms of service";
+            int duration = Toast.LENGTH_SHORT;
 
-        // Show a progress spinner, and kick off a background task to
-        // perform the user login attempt.
-
-
-    }
-
-    public void showProgress(final boolean show)
-    {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2)
-        {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mRegisterFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter()
-            {
-                @Override
-                public void onAnimationEnd(Animator animation)
-                {
-                    mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-            mRegisterFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
         }
+
+        if(validCheck == true && chk_ToS == true) {
+            //showProgress(true);
+            AsyncTask<String, Void, String[]> var =
+                    (new registerUser()).execute(new String[]{email, password, question, answer});
+        }
+
     }
 
 
-    class registerUser extends AsyncTask<String, Void, String> {
 
-        protected String doInBackground(String... params) {
+
+    class registerUser extends AsyncTask<String, Void, String[]> {
+
+
+        protected String[] doInBackground(String... params) {
             Uri.Builder builder = new Uri.Builder();
 
-            builder.scheme(getString(R.string.web_service_protocol))
-                    .authority(getString(R.string.web_service_url))
+            builder.scheme("http")
+                    .authority("450.atwebpages.com")
                     .appendPath("adduser.php")
                     .appendQueryParameter("email", params[0])
                     .appendQueryParameter("password", params[1])
                     .appendQueryParameter("question", params[2])
                     .appendQueryParameter("answer", params[3]);
             String url = builder.build().toString();
+
+
             HttpClient client = new DefaultHttpClient();
             HttpGet get = new HttpGet(url);
 
+
             /**
              * Link example
-             * 450.atwebpages.com/adduser.php?email=smith@aol.com&password=mypass&question=favorite%20color%3F&answer=blue
+             * 450.atwebpages.com/adduser.php?email=smith@aol.com&password=mypass& question=favorite%20color%3F&answer=blue
              */
+
+
+
 
             try {
                 HttpResponse response = client.execute(get);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        response.getEntity().getContent(), "UTF-8"));
-                return reader.readLine();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                return new String[]{params[0], reader.readLine()};
             } catch (UnsupportedEncodingException e) {
                 return null;
             } catch (ClientProtocolException e) {
@@ -401,91 +412,52 @@ public class Registration extends ActionBarActivity {
             }
         }
 
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(String[] result) {
 
-            JSONTokener tokener = new JSONTokener(result);
+            JSONTokener tokener = new JSONTokener(result[1]);
             JSONObject finalResult = null;
             String regResult = "";
-
             try {
                 finalResult = new JSONObject(tokener);
                 regResult = finalResult.getString("result");
-                if (regResult.equals("success")) {
-                    Context context = getApplicationContext();
-                    CharSequence text = "Registration complete";
-                    int duration = Toast.LENGTH_SHORT;
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-
-                    //if success, url has been posted and user has been created, send activity to login
-                    //may want to auto complete email field on login activity from here
-                    Intent i = new Intent(Registration.this, Login.class);
-                    startActivity(i);
-                    finish();
-                } else {
-                    String err = finalResult.getString("error");
-                //temp error.  replace with json error message
-                Context context = getApplicationContext();
-                CharSequence text = "Generic Error message";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, err, duration);
-                toast.show();
-            }
             } catch (JSONException e) {
                 Log.i("mAuthTask", "ERROR");
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "INTERNAL ERROR", Toast.LENGTH_LONG).show();
             }
+
+
+            if (regResult.equals("success")) {
+
+
+                Context context = getApplicationContext();
+                CharSequence text = "Registration complete";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+                //if success, url has been posted and user has been created, send activity to login
+                //may want to auto complete email field on login activity from here
+                Intent i = new Intent(Registration.this, Login.class);
+                startActivity(i);
+                finish();
+
+
+            } else {
+                //TODO: generic error message is thrown when user already exsists or some other possible error
+                //temp error.  replace with json error message
+                Context context = getApplicationContext();
+                CharSequence text = "User already exists";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+
+            }
+
+
         }
-    }
 
-    class getAgreement extends AsyncTask<Void, Void, String> {
 
-        protected String doInBackground(Void... params) {
-            Uri.Builder builder = new Uri.Builder();
-            builder.scheme(getString(R.string.web_service_protocol))
-                    .authority(getString(R.string.web_service_url))
-                    .appendPath("agreement.php");
-            String url = builder.build().toString();
-            HttpClient client = new DefaultHttpClient();
-            HttpGet get = new HttpGet(url);
-
-            /**
-             * Link example
-             * 450.atwebpages.com/agreement.php
-             */
-
-            try {
-                HttpResponse response = client.execute(get);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        response.getEntity().getContent(), "UTF-8"));
-                return reader.readLine();
-            } catch (UnsupportedEncodingException e) {
-                return null;
-            } catch (ClientProtocolException e) {
-                return null;
-            } catch (IOException e) {
-                return null;
-            }
-        }
-
-        protected void onPostExecute(String result) {
-            //result = " {\"agreement\": \"This is a correctly formated Test EULA\"}";
-            //Log.i("mAuthTask", result);
-            JSONTokener tokener = new JSONTokener(result);
-            String regResult = "";
-            try {
-                JSONObject finalResult = new JSONObject(tokener);
-                regResult = finalResult.getString("agreement");
-            } catch (JSONException e) {
-                Log.i("mAuthTask", "Illegal JSON from agreement.php ERROR");
-                e.printStackTrace();
-            }
-            if (!regResult.equals("")) {
-                TextView termsView = (TextView) findViewById(R.id.terms);
-                termsView.setText(regResult);
-            }
-        }
     }
 }
