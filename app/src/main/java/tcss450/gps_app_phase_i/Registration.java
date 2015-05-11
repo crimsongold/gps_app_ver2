@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -74,6 +75,13 @@ public class Registration extends ActionBarActivity {
         setContentView(R.layout.activity_register);
         new getAgreement().execute();
         user_base = new AuthTable(this.getApplicationContext());
+
+
+
+
+        WebView myView = (WebView) findViewById(R.id.eula_frag);
+        myView.loadUrl("http://450.atwebpages.com/agreement.php");
+
 
         mEmailView = (EditText) findViewById(R.id.email_prompt);
         mEmailView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -259,6 +267,9 @@ public class Registration extends ActionBarActivity {
         /**
          * Left over code from initial validation of question and answer length.
          */
+
+
+
         if (mSecQuestion.getText().toString().length() > 2) {
             validCheck = true;
         } else {
@@ -446,8 +457,8 @@ public class Registration extends ActionBarActivity {
                 e.printStackTrace();
             }
             if (!regResult.equals("")) {
-                TextView termsView = (TextView) findViewById(R.id.terms);
-                termsView.setText(regResult);
+                //TextView termsView = (TextView) findViewById(R.id.terms);
+                //termsView.setText(regResult);
             }
         }
     }

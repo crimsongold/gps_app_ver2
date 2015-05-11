@@ -1728,7 +1728,7 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0a0043;
         public static final int action_mode_bar_stub=0x7f0a0042;
         public static final int action_mode_close_button=0x7f0a0035;
-        public static final int action_settings=0x7f0a0076;
+        public static final int action_settings=0x7f0a0074;
         public static final int activity_chooser_view_content=0x7f0a0036;
         public static final int adjust_height=0x7f0a0017;
         public static final int adjust_width=0x7f0a0018;
@@ -1750,14 +1750,12 @@ containing a value of this type.
         public static final int edit_query=0x7f0a0048;
         public static final int email=0x7f0a005d;
         public static final int email_login_form=0x7f0a005c;
-        public static final int email_prompt=0x7f0a006d;
+        public static final int email_prompt=0x7f0a006b;
         public static final int email_sign_in_button=0x7f0a0060;
         public static final int end=0x7f0a0015;
-        public static final int end_date_text=0x7f0a0067;
-        public static final int enter_end_date=0x7f0a006b;
-        public static final int enter_end_time=0x7f0a006c;
-        public static final int enter_start_date=0x7f0a006a;
-        public static final int enter_start_time=0x7f0a0068;
+        public static final int end_button=0x7f0a0069;
+        public static final int end_date_text=0x7f0a0068;
+        public static final int eula_frag=0x7f0a0072;
         public static final int expand_activities_button=0x7f0a0037;
         public static final int expanded_menu=0x7f0a003d;
         public static final int forgot_cancel=0x7f0a0057;
@@ -1779,15 +1777,15 @@ containing a value of this type.
         public static final int login=0x7f0a005f;
         public static final int login_form=0x7f0a005b;
         public static final int login_progress=0x7f0a005a;
-        public static final int logout_button=0x7f0a0069;
+        public static final int logout_button=0x7f0a0066;
         public static final int match_parent=0x7f0a002b;
         public static final int middle=0x7f0a0016;
         public static final int monochrome=0x7f0a0032;
         public static final int never=0x7f0a001f;
         public static final int none=0x7f0a000e;
         public static final int normal=0x7f0a000a;
-        public static final int pass_confirm=0x7f0a006f;
-        public static final int pass_prompt=0x7f0a006e;
+        public static final int pass_confirm=0x7f0a006d;
+        public static final int pass_prompt=0x7f0a006c;
         public static final int password=0x7f0a005e;
         public static final int production=0x7f0a0026;
         public static final int progress_circular=0x7f0a0005;
@@ -1795,9 +1793,10 @@ containing a value of this type.
         public static final int raccoon_img=0x7f0a0059;
         public static final int radio=0x7f0a0040;
         public static final int register_button=0x7f0a0061;
-        public static final int rowTextView=0x7f0a0075;
+        public static final int rowTextView=0x7f0a0073;
         public static final int sandbox=0x7f0a0027;
         public static final int satellite=0x7f0a001a;
+        public static final int scrollView=0x7f0a006f;
         public static final int search_badge=0x7f0a004a;
         public static final int search_bar=0x7f0a0049;
         public static final int search_button=0x7f0a004b;
@@ -1808,8 +1807,8 @@ containing a value of this type.
         public static final int search_plate=0x7f0a004e;
         public static final int search_src_text=0x7f0a004f;
         public static final int search_voice_btn=0x7f0a0053;
-        public static final int security_answer=0x7f0a0070;
-        public static final int security_question=0x7f0a0071;
+        public static final int security_answer=0x7f0a006e;
+        public static final int security_question=0x7f0a0070;
         public static final int selectionDetails=0x7f0a002a;
         public static final int send_pw=0x7f0a0056;
         public static final int shortcut=0x7f0a003f;
@@ -1818,14 +1817,13 @@ containing a value of this type.
         public static final int showTitle=0x7f0a0011;
         public static final int slide=0x7f0a0013;
         public static final int split_action_bar=0x7f0a0007;
-        public static final int start_date_text=0x7f0a0066;
+        public static final int start_button=0x7f0a006a;
+        public static final int start_date_text=0x7f0a0067;
         public static final int strict_sandbox=0x7f0a0028;
         public static final int submit_area=0x7f0a0051;
         public static final int tabMode=0x7f0a000b;
-        public static final int terms=0x7f0a0073;
-        public static final int terms_check=0x7f0a0072;
+        public static final int terms_check=0x7f0a0071;
         public static final int terrain=0x7f0a001b;
-        public static final int textView=0x7f0a0074;
         public static final int title=0x7f0a003c;
         public static final int up=0x7f0a0008;
         public static final int useLogo=0x7f0a0012;
@@ -1876,7 +1874,8 @@ containing a value of this type.
         public static final int menu_movement_data=0x7f0e0001;
         public static final int menu_my_account=0x7f0e0002;
         public static final int menu_register=0x7f0e0003;
-        public static final int menu_to=0x7f0e0004;
+        public static final int menu_start_date=0x7f0e0004;
+        public static final int menu_to=0x7f0e0005;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
@@ -1958,16 +1957,17 @@ containing a value of this type.
         public static final int title_activity_movement_data=0x7f0c0045;
         public static final int title_activity_my_account=0x7f0c0046;
         public static final int title_activity_register=0x7f0c0047;
-        public static final int validate_email_blank=0x7f0c0048;
-        public static final int validate_email_invalid_symbols=0x7f0c0049;
-        public static final int validate_email_no_at=0x7f0c004a;
-        public static final int validate_email_no_domain_name=0x7f0c004b;
-        public static final int validate_email_no_dot=0x7f0c004c;
-        public static final int validate_email_no_top_domain=0x7f0c004d;
-        public static final int validate_email_no_user=0x7f0c004e;
-        public static final int wallet_buy_button_place_holder=0x7f0c004f;
-        public static final int web_service_protocol=0x7f0c0050;
-        public static final int web_service_url=0x7f0c0051;
+        public static final int title_activity_start_date=0x7f0c0048;
+        public static final int validate_email_blank=0x7f0c0049;
+        public static final int validate_email_invalid_symbols=0x7f0c004a;
+        public static final int validate_email_no_at=0x7f0c004b;
+        public static final int validate_email_no_domain_name=0x7f0c004c;
+        public static final int validate_email_no_dot=0x7f0c004d;
+        public static final int validate_email_no_top_domain=0x7f0c004e;
+        public static final int validate_email_no_user=0x7f0c004f;
+        public static final int wallet_buy_button_place_holder=0x7f0c0050;
+        public static final int web_service_protocol=0x7f0c0051;
+        public static final int web_service_url=0x7f0c0052;
     }
     public static final class style {
         public static final int Animation_AppCompat_DropDownUp=0x7f0d0000;

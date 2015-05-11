@@ -59,7 +59,7 @@ public class MovementData extends ActionBarActivity
 
         SharedPreferences prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
 
-        (new GetPointsTask()).execute(prefs.getString("ID", ""), prefs.getString("startTime",""), prefs.getString("endTime",""));
+       // (new GetPointsTask()).execute(prefs.getString("ID", ""), prefs.getString("startTime",""), prefs.getString("endTime",""));
     }
 
 

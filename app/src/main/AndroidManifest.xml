@@ -1,70 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450.
-  -->
-
-<manifest package="tcss450.gps_app_phase_i"
-          xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.READ_PROFILE"/>
-    <uses-permission android:name="android.permission.READ_CONTACTS"/>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+<!--   ~ Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tcss450.gps_app_phase_i" >
 
     <uses-sdk
         android:maxSdkVersion="22"
         android:minSdkVersion="15"
-        android:targetSdkVersion="22"/>
+        android:targetSdkVersion="22" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <android:uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <android:uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/raccoon_transparent"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme" >
         <service
             android:name=".GPSService"
             android:exported="false" >
         </service>
+
         <activity
             android:name=".Login"
             android:label="@string/app_name"
-            android:windowSoftInputMode="adjustResize|stateVisible">
+            android:windowSoftInputMode="adjustResize|stateVisible" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Registration"
-            android:label="@string/title_activity_register">
+            android:label="@string/title_activity_register" >
         </activity>
         <activity
             android:name=".MyAccount"
-            android:label="@string/title_activity_my_account">
+            android:label="@string/title_activity_my_account" >
         </activity>
         <activity
             android:name=".MovementData"
-            android:label="@string/title_activity_movement_data">
+            android:label="@string/title_activity_movement_data" >
         </activity>
         <activity
             android:name=".ForgotPass"
-            android:label="Forgot Pass">
-            </activity>
-        <receiver android:name=".GPSReceiver"
-            android:enabled="false">
+            android:label="Forgot Pass" >
+        </activity>
+        <activity android:name=".Settings"
+                  android:label ="Settings">
+
+        </activity>
+        <receiver
+            android:name=".GPSReceiver"
+            android:enabled="false" >
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAjOTq3ExKQdhNVLvk7HGE66s-irOKMOOk" />
+
+
     </application>
 
 </manifest>

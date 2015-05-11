@@ -28,4 +28,5 @@
     <string name="validate_email_no_domain_name">Email needs a domain name</string>
     <string name="validate_email_no_dot">Email needs a \'.\' after the domain name</string>
     <string name="validate_email_no_top_domain">Email needs a valid top level domain</string>
+    <string name="title_activity_start_date">StartDate</string>
 </resources>
