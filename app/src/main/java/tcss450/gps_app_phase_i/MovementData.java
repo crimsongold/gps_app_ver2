@@ -57,9 +57,12 @@ public class MovementData extends ActionBarActivity
         listAdapter = new ArrayAdapter<String>(this, R.layout.list_item);
         mainListView.setAdapter(listAdapter);
 
-        SharedPreferences prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
+        SharedPreferences prefs = this.getSharedPreferences("tcss450.gps_app_phase_i",
+                Context.MODE_PRIVATE);
 
-       // (new GetPointsTask()).execute(prefs.getString("ID", ""), prefs.getString("startTime",""), prefs.getString("endTime",""));
+        (new GetPointsTask()).execute(prefs.getString("ID", ""),
+                Long.toString(prefs.getLong("startTime", 0)),
+                Long.toString(prefs.getLong("endTime", 0)));
     }
 
 
