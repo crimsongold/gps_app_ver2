@@ -30,8 +30,9 @@ public class GPSService extends IntentService {
         super("GPSService");
     }
 
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        super.onStartCommand(intent, flags, startId);
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        Log.i(TAG, "Received an Intent: " + intent);
         location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
 
@@ -42,15 +43,13 @@ public class GPSService extends IntentService {
         android.location.LocationListener locationListener = new android.location.LocationListener() {
             public void onLocationChanged(Location location) {
                 String uid = prefs.getString("ID", "default");
-                if (!uid.equals("default"))
-                {
-                    double longitude = location.getLongitude();
-                    double latitude = location.getLatitude();
-                    long timestamp = System.currentTimeMillis() / 1000L;
-                    Log.i(TAG, "Latitude: " + latitude + " Longitude: " + longitude + " Timestamp: " +
-                            timestamp);
-                    location_data.add_point(uid, timestamp, latitude, longitude);
-                }
+                double longitude = location.getLongitude();
+                double latitude = location.getLatitude();
+                long timestamp = System.currentTimeMillis() / 1000L;
+                Log.i(TAG, "Latitude: " + latitude + " Longitude: " + longitude + " Timestamp: " +
+                        timestamp);
+                location_data.add_point(uid, timestamp, latitude, longitude);
+                location_data.push_data();
             }
             public void onStatusChanged(String provider, int status, Bundle extras) {}
 
@@ -61,18 +60,9 @@ public class GPSService extends IntentService {
 
             public void onProviderDisabled(String provider) {}
         };
-
-        locationManager.removeUpdates(locationListener);
         // Register the listener with the Location Manager to receive location updates
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                 2000, 10, locationListener);
-
-        return START_NOT_STICKY;
-    }
-
-    @Override
-    protected void onHandleIntent(Intent intent) {
-        Log.i(TAG, "Received an Intent: " + intent);
     }
 
     /**

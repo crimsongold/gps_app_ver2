@@ -18,7 +18,7 @@ public class GPSReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
 
-            GPSService.setServiceAlarm(context, true);
+        GPSService.setServiceAlarm(context, true);
 
 
     }
