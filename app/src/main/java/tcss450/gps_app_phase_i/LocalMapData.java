@@ -65,7 +65,7 @@ public class LocalMapData {
         init_vals.put(key_long, longitude);
         init_vals.put(key_lat, latitude);
 
-        //my_db.insert(table_name, null, init_vals);
+        my_db.insert(table_name, null, init_vals);
         my_helper.close();
         new PushTask().execute("" + latitude,"" + longitude,"" + user_id,"" + unix_datetime);
     }

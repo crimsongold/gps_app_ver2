@@ -349,7 +349,6 @@ public class Registration extends ActionBarActivity {
              * Link example
              * 450.atwebpages.com/adduser.php?email=smith@aol.com&password=mypass&question=favorite%20color%3F&answer=blue
              */
-
             try {
                 HttpResponse response = client.execute(get);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
