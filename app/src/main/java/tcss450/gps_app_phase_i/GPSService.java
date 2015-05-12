@@ -46,8 +46,6 @@ public class GPSService extends Service
                 MINIMUM_TIME, 0, new MyLocationListener());
         Location location = locationManager
                 .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        float latitude = (float) location.getLatitude();
-        float longitude = (float) location.getLongitude();
         String uid = prefs.getString("ID", null);
         if (location != null && uid != null) {
             location.getLongitude();
