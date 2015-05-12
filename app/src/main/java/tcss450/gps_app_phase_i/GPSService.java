@@ -24,6 +24,7 @@ public class GPSService extends Service {
     private static final long MINIMUM_TIME = 2000; // in
     // Milliseconds
     protected LocationManager locationManager;
+    protected LocationListener locationListener;
 
     @Override
     public IBinder onBind(Intent arg0) {
@@ -37,8 +38,9 @@ public class GPSService extends Service {
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         location_data = new LocalMapData(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new MyLocationListener();
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                MINIMUM_TIME, 0, new MyLocationListener());
+                MINIMUM_TIME, 0, locationListener);
         Location location = locationManager
                 .getLastKnownLocation(LocationManager.GPS_PROVIDER);
         String uid = prefs.getString("ID", null);
@@ -46,6 +48,12 @@ public class GPSService extends Service {
             location.getLongitude();
             location.getLatitude();
         }
+    }
+
+    public void onDestroy()
+    {
+        super.onDestroy();
+        locationManager.removeUpdates(locationListener);
     }
 
     private class MyLocationListener implements LocationListener {
