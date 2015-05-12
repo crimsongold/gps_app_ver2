@@ -209,6 +209,7 @@ public class MyAccount extends ActionBarActivity {
                 prefs_editor.clear();
                 prefs_editor.commit();
                 stopService(new Intent(MyAccount.this, GPSService.class));
+
                 location_data.push_data();
                 location_data.wipe_data();
                 Intent intent = new Intent(MyAccount.this, Login.class);
