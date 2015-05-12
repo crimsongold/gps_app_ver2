@@ -16,8 +16,11 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -33,22 +36,24 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
-
-public class MovementData extends ActionBarActivity {
-    private ListView mainListView;
-    private ArrayAdapter<String> listAdapter;
-
+public class MovementData extends ActionBarActivity
+{
+    private ListView mainListView ;
+    private ArrayAdapter<String> listAdapter ;
     @Override
     /**
      * {@inheritDoc}
      */
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movement_data);
 
-        mainListView = (ListView) findViewById(R.id.listView);
+        mainListView = (ListView) findViewById( R.id.listView );
         listAdapter = new ArrayAdapter<String>(this, R.layout.list_item);
         mainListView.setAdapter(listAdapter);
 
@@ -58,7 +63,7 @@ public class MovementData extends ActionBarActivity {
         (new GetPointsTask()).execute(prefs.getString("ID", ""),
                 Long.toString(prefs.getLong("startTime", 0)),
                 Long.toString(prefs.getLong("endTime", 0)));
-
+        
     }
 
 
@@ -66,7 +71,8 @@ public class MovementData extends ActionBarActivity {
     /**
      * {@inheritDoc}
      */
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_movement_data, menu);
         return true;
@@ -76,14 +82,16 @@ public class MovementData extends ActionBarActivity {
     /**
      * {@inheritDoc}
      */
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_settings)
+        {
             return true;
         }
 
@@ -94,16 +102,18 @@ public class MovementData extends ActionBarActivity {
     /**
      * {@inheritDoc}
      */
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         Intent intent = new Intent(MovementData.this, MyAccount.class);
         startActivity(intent);
         finish();
     }
-
-    class GetPointsTask extends AsyncTask<String, Void, String> {
+    class GetPointsTask extends AsyncTask<String, Void, String>
+    {
 
         //Push the recent data from the database into the webservice database
-        protected String doInBackground(String... params) {
+        protected String doInBackground(String... params)
+        {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme(getString(R.string.web_service_protocol))
                     .authority(getString(R.string.web_service_url))
@@ -129,29 +139,30 @@ public class MovementData extends ActionBarActivity {
             }
         }
 
-        protected void onPostExecute(String result) {
+        protected void onPostExecute(String result)
+        {
             //result = "{ \"result\": \"success\", \"error\": \"\", \"points\": [ { \"lat\": \"51.000\", \"lon\": \"51.000\", \"speed\": \" 70.000\", \"heading\": \"10.000\", \"time\": 1430118118 }, { \"lat\": \"51.000\", \"lon\": \"51.000\", \"speed\": \"70.000\", \"heading\": \"10.000\", \"time\": 1430118118 } ] }";
             JSONTokener tokener = new JSONTokener(result);
             JSONObject finalResult = null;
-            Log.i("GPSService", result);
+            Log.i("GPSService",result);
             try {
                 finalResult = new JSONObject(tokener);
                 String regResult = finalResult.getString("result");
-                if (regResult.equals("success")) {
+                if (regResult.equals("success")){
                     JSONArray points = finalResult.getJSONArray("points");
 
                     String r = "";
                     for (int i = 0; i < points.length(); i++) {
                         JSONObject point = points.getJSONObject(i);
                         String tmp = "Latitude: " + point.getString("lat") + "\n" +
-                                "Longitude: " + point.getString("lon") + "\n" +
+                                "Longitude: " + point.getString("lon") + "\n"+
                                 "TimeStamp: " + point.getString("time");
 
                         listAdapter.add(tmp);
 
                     }
 
-                } else {
+                }else{
                     listAdapter.add(finalResult.getString("error"));
                 }
             } catch (JSONException e) {

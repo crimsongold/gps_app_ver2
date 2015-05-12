@@ -51,7 +51,7 @@ public class DataLog {
         init_vals.put(lat, lat_p);
         init_vals.put(lng, lng_p);
         init_vals.put(uploaded, 0);
-        my_db.insert(TABLE_NAME, null, init_vals);
+        //my_db.insert(TABLE_NAME, null, init_vals);
         my_helper.close();
 
 
