@@ -56,16 +56,20 @@ public class MyAccount extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
+
         location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
-        GPSService.setServiceAlarm(this, true);
+
+        startService(new Intent(this, GPSService.class));
+
+        /*GPSService.setServiceAlarm(this, true);
         ComponentName receiver = new ComponentName(MyAccount.this, GPSService.class);
         PackageManager pm = MyAccount.this.getPackageManager();
 
         pm.setComponentEnabledSetting(receiver,
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);
+                PackageManager.DONT_KILL_APP);*/
 
 
         Button startDate = (Button) findViewById(R.id.start_button);
@@ -204,6 +208,8 @@ public class MyAccount extends ActionBarActivity {
             public void onClick(View v) {
                 prefs_editor.clear();
                 prefs_editor.commit();
+                stopService(new Intent(MyAccount.this, GPSService.class));
+                location_data.push_data();
                 location_data.wipe_data();
                 Intent intent = new Intent(MyAccount.this, Login.class);
                 startActivity(intent);

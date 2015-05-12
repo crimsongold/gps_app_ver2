@@ -50,7 +50,11 @@ public class LocalMapData {
     private DatabaseHelper my_helper;
     private SQLiteDatabase my_db;
 
-    protected LocalMapData(Context context) { ctxt = context; }
+    protected LocalMapData(Context context)
+    {
+        ctxt = context;
+        my_helper = new DatabaseHelper(ctxt);
+    }
 
     //places a new data point into the local data table
     protected void add_point(final String user_id, final long unix_datetime,
@@ -75,21 +79,21 @@ public class LocalMapData {
         private String selected_pk;
 
         //Push the recent data from the database into the webservice database
-        protected String[] doInBackground(String... params)
+        protected String[] doInBackground(String[] params)
         {
 
             http://450.atwebpages.com/logAdd.php?lat=65.9667&lon=-18.5333&heading=0.0&speed=0.0&timestamp=1431369860&source=7f704b56d4a5c10420f64a6d9708c2060eff434b
-            selected_pk = params[3];
+            selected_pk = params[2];
             Uri.Builder builder = new Uri.Builder();
             builder.scheme(ctxt.getString(R.string.web_service_protocol))
                     .authority(ctxt.getString(R.string.web_service_url))
                     .appendPath("logAdd.php")
                     .appendQueryParameter("lat", params[0])
                     .appendQueryParameter("lon", params[1])
-                    .appendQueryParameter("heading", params[2])
-                    .appendQueryParameter("speed", params[3])
-                    .appendQueryParameter("timestamp", params[4])
-                    .appendQueryParameter("source", params[5]);
+                    .appendQueryParameter("heading", "0.0")
+                    .appendQueryParameter("speed", "0.0")
+                    .appendQueryParameter("timestamp", params[2])
+                    .appendQueryParameter("source", params[3]);
             String url = builder.build().toString();
             Log.i("PushTask",url);
             HttpClient client = new DefaultHttpClient();
@@ -129,34 +133,37 @@ public class LocalMapData {
 
             if (regResult.equals("success")) {
                 // drop row with timestamp = ""
+                my_helper = new DatabaseHelper(ctxt);
+                my_db = my_helper.getWritableDatabase();
                 my_db.execSQL("DELETE FROM " + table_name + " WHERE " + key_datetime + " == " +
                         selected_pk);
+                my_helper.close();
+                my_db.close();
             } else {
                 // do something
             }
         }
     }
 
-    protected void push_data()
-    {
-        crs = my_db.rawQuery("SELECT " + key_datetime + " FROM " + table_name, null);
-        int rowCount = crs.getCount();
-        crs = my_db.rawQuery("SELECT " + key_lat + ", " +  key_long + ", " + key_uid + ", " +
-            key_datetime + " FROM " + table_name, null);
+    protected void push_data() {
+        my_helper = new DatabaseHelper(ctxt);
+        my_db = my_helper.getReadableDatabase();
+        crs = my_db.rawQuery("SELECT " + key_lat + ", " + key_long + ", " + key_uid + ", " +
+                key_datetime + " FROM " + table_name, null);
         crs.moveToFirst();
 
         String[] parameters = new String[4];
-
-        for (int i = 0; i < rowCount; i+=4)
+        while (!crs.isAfterLast())
         {
-            parameters[i] = Double.toString(crs.getDouble(i));
-            parameters[i+1] = Double.toString(crs.getDouble(i+1));
-            parameters[i+2] = "0.0";
-            parameters[i+3] = "0.0";
-            parameters[i+5] = crs.getString(i+2);
-            parameters[i+4] = Integer.toString(crs.getInt(i+3));
+            parameters[0] = Double.toString(crs.getDouble(crs.getColumnIndex("lat")));
+            parameters[1] = Double.toString(crs.getDouble(crs.getColumnIndex("lon")));
+            parameters[2] = Integer.toString(crs.getInt(crs.getColumnIndex("timestamp")));
+            parameters[3] = crs.getString(crs.getColumnIndex("source"));
             AsyncTask<String, Void, String[]> push = (new PushTask().execute(parameters));
+            crs.moveToNext();
         }
+        my_db.close();
+        my_helper.close();
     }
 
     protected boolean isTableEmpty()
@@ -172,7 +179,7 @@ public class LocalMapData {
     {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getWritableDatabase();
-        my_db.execSQL("DROP TABLE IF EXISTS " + table_name);
+        my_db.execSQL("DELETE FROM " + table_name);
         my_helper.close();
     }
 
