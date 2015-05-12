@@ -37,19 +37,19 @@ public class Verification {
         //pattern for valid password
         //String pattern = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
         //TODO: Replace this with your own logic
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             return BLANK;
-        }else if(email.matches(".*[+\\-,!#$%^&*();\\\\/|<>\"']+.*")){
+        } else if (email.matches(".*[+\\-,!#$%^&*();\\\\/|<>\"']+.*")) {
             return INVALID_SYMBOLS;
-        }else if(!email.matches("[a-zA-Z0-9._%+-]+.*")){
+        } else if (!email.matches("[a-zA-Z0-9._%+-]+.*")) {
             return NO_USER;
-        }else if(!email.matches("^[a-zA-Z0-9._%+-]+@.*")){
+        } else if (!email.matches("^[a-zA-Z0-9._%+-]+@.*")) {
             return NO_AT;
-        }else if(!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-].*")){
+        } else if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-].*")) {
             return NO_DOMAIN_NAME;
-        }else if(!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\\..*")){
+        } else if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9-]+\\..*")) {
             return NO_DOT;
-        }else if(!email.matches("^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")) {
+        } else if (!email.matches("^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$")) {
             return NO_TOP_DOMAIN;
         }
         return VALID_EMAIL;
@@ -61,15 +61,14 @@ public class Verification {
      * @param password is the string representing the password to be checked.
      * @return boolean representing whether or not the password is valid.
      */
-    public static int isPasswordValid(final String password)
-    {
-        if (!password.matches(".{6,}")){
+    public static int isPasswordValid(final String password) {
+        if (!password.matches(".{6,}")) {
             return SHORT_PASSWORD;
-        }else if(!password.matches(".*[A-Z]+.*")){
+        } else if (!password.matches(".*[A-Z]+.*")) {
             return NO_UPPER;
-        }else if(!password.matches(".*[a-z]+.*")){
+        } else if (!password.matches(".*[a-z]+.*")) {
             return NO_LOWER;
-        }else if(!password.matches(".*[+\\-.,!@#$%^&*();\\\\/|<>\"']+.*")){
+        } else if (!password.matches(".*[+\\-.,!@#$%^&*();\\\\/|<>\"']+.*")) {
             return NO_SPECIAL;
         }
         return VALID_PASSWORD;

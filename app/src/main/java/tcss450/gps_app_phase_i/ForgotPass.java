@@ -44,7 +44,6 @@ public class ForgotPass extends Activity {
         //forgotEmailText = (EditText) findViewById(R.id.forgot_email_text);
 
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
@@ -60,8 +59,6 @@ public class ForgotPass extends Activity {
                 sendEmail();
             }
         });
-
-
 
 
         Button cancel = (Button) findViewById(R.id.forgot_cancel);
@@ -80,7 +77,7 @@ public class ForgotPass extends Activity {
 
 
         /**
-         *used to send the url for a forgotten password
+         * used to send the url for a forgotten password
          *
          * @param params
          * @return
@@ -152,7 +149,6 @@ public class ForgotPass extends Activity {
     }
 
 
-
     public void sendEmail() {
 
         forgotEmailText.setError(null);
@@ -207,7 +203,6 @@ public class ForgotPass extends Activity {
 
 
     }
-
 
 
 }

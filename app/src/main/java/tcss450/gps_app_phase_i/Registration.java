@@ -77,8 +77,6 @@ public class Registration extends ActionBarActivity {
         user_base = new AuthTable(this.getApplicationContext());
 
 
-
-
         WebView myView = (WebView) findViewById(R.id.eula_frag);
         myView.loadUrl("http://450.atwebpages.com/agreement.php");
 
@@ -174,13 +172,6 @@ public class Registration extends ActionBarActivity {
         });
 
 
-
-
-
-
-
-
-
         Button registerButton = (Button) findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -249,7 +240,7 @@ public class Registration extends ActionBarActivity {
     }
 
 
-    public void attemptRegister(){
+    public void attemptRegister() {
 
         String email = mEmailView.getText().toString();
         String password = mPassPrompt.getText().toString();
@@ -263,11 +254,9 @@ public class Registration extends ActionBarActivity {
         mPassPrompt.setError(null);
 
 
-
         /**
          * Left over code from initial validation of question and answer length.
          */
-
 
 
         if (mSecQuestion.getText().toString().length() > 2) {
@@ -286,54 +275,53 @@ public class Registration extends ActionBarActivity {
 
 
         int valid = Verification.isEmailValid(email);
-        if(valid == Verification.VALID_EMAIL)
-        {
+        if (valid == Verification.VALID_EMAIL) {
             valid = Verification.isPasswordValid(password);
-            if(valid == Verification.VALID_PASSWORD){
+            if (valid == Verification.VALID_PASSWORD) {
                 (new registerUser()).execute(email, password, question, answer);
-            }else if(valid == Verification.SHORT_PASSWORD){
+            } else if (valid == Verification.SHORT_PASSWORD) {
                 validCheck = false;
                 mPassPrompt.setError("Password Is Too Short");
                 mPassPrompt.requestFocus();
-            }else if(valid == Verification.NO_UPPER){
+            } else if (valid == Verification.NO_UPPER) {
                 validCheck = false;
                 mPassPrompt.setError("Password Must contain an upper case letter");
                 mPassPrompt.requestFocus();
-            }else if(valid == Verification.NO_LOWER){
+            } else if (valid == Verification.NO_LOWER) {
                 validCheck = false;
                 mPassPrompt.setError("Password Must contain a Lower case letter");
                 mPassPrompt.requestFocus();
-            }else if(valid == Verification.NO_SPECIAL){
+            } else if (valid == Verification.NO_SPECIAL) {
                 validCheck = false;
                 mPassPrompt.setError(
                         "Password Must contain one of the following: +\\-.,!@#$%^&*();\\\\/|<>\"'");
                 mPassPrompt.requestFocus();
             }
-        }else if(valid == Verification.BLANK) {
+        } else if (valid == Verification.BLANK) {
             validCheck = false;
             mEmailView.setError("Email Can't be blank");
             mEmailView.requestFocus();
-        }else if(valid == Verification.INVALID_SYMBOLS){
+        } else if (valid == Verification.INVALID_SYMBOLS) {
             validCheck = false;
             mEmailView.setError("Email can't contain +-,!#$%^&*();\\/|<>\"'");
             mEmailView.requestFocus();
-        }else if(valid == Verification.NO_USER){
+        } else if (valid == Verification.NO_USER) {
             validCheck = false;
             mEmailView.setError("Email needs to have a user");
             mEmailView.requestFocus();
-        }else if(valid == Verification.NO_AT){
+        } else if (valid == Verification.NO_AT) {
             validCheck = false;
             mEmailView.setError("Email needs an '@' symbol");
             mEmailView.requestFocus();
-        }else if(valid == Verification.NO_DOMAIN_NAME){
+        } else if (valid == Verification.NO_DOMAIN_NAME) {
             validCheck = false;
             mEmailView.setError("Email needs a domain name");
             mEmailView.requestFocus();
-        }else if(valid == Verification.NO_DOT){
+        } else if (valid == Verification.NO_DOT) {
             validCheck = false;
             mEmailView.setError("Email needs a '.' after the domain name");
             mEmailView.requestFocus();
-        }else if(valid == Verification.NO_TOP_DOMAIN){
+        } else if (valid == Verification.NO_TOP_DOMAIN) {
             validCheck = false;
             mEmailView.setError("Email needs a valid top level domain");
             mEmailView.requestFocus();
@@ -398,14 +386,14 @@ public class Registration extends ActionBarActivity {
                     finish();
                 } else {
                     String err = finalResult.getString("error");
-                //temp error.  replace with json error message
-                Context context = getApplicationContext();
-                CharSequence text = "Generic Error message";
-                int duration = Toast.LENGTH_SHORT;
+                    //temp error.  replace with json error message
+                    Context context = getApplicationContext();
+                    CharSequence text = "Generic Error message";
+                    int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, err, duration);
-                toast.show();
-            }
+                    Toast toast = Toast.makeText(context, err, duration);
+                    toast.show();
+                }
             } catch (JSONException e) {
                 Log.i("mAuthTask", "ERROR");
                 e.printStackTrace();

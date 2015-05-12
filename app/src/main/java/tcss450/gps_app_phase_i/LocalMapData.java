@@ -41,7 +41,7 @@ public class LocalMapData {
     public static final String db_name = "LOCALDATA.db";
     public static final String table_name = "LOCAL_MAP_DATA";
     public static final String key_lat = "lat";                     //Stored as REAL
-    public static final String key_long =  "lon";                   //Stored as REAL
+    public static final String key_long = "lon";                   //Stored as REAL
     public static final String key_uid = "source";                  //Stored as TEXT
     public static final String key_datetime = "timestamp";          //"YYYY-MM-DD HH:MM:SS.SSS"
 
@@ -50,16 +50,14 @@ public class LocalMapData {
     private DatabaseHelper my_helper;
     private SQLiteDatabase my_db;
 
-    protected LocalMapData(Context context)
-    {
+    protected LocalMapData(Context context) {
         ctxt = context;
         my_helper = new DatabaseHelper(ctxt);
     }
 
     //places a new data point into the local data table
     protected void add_point(final String user_id, final long unix_datetime,
-                             final double latitude, final double longitude)
-    {
+                             final double latitude, final double longitude) {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getWritableDatabase();
 
@@ -71,18 +69,17 @@ public class LocalMapData {
 
         my_db.insert(table_name, null, init_vals);
         my_helper.close();
-        new PushTask().execute("" + latitude,"" + longitude,"" + user_id,"" + unix_datetime);
+        new PushTask().execute("" + latitude, "" + longitude, "" + user_id, "" + unix_datetime);
     }
 
-    class PushTask extends AsyncTask<String, Void, String[]>
-    {
+    class PushTask extends AsyncTask<String, Void, String[]> {
         private String selected_pk;
 
         //Push the recent data from the database into the webservice database
-        protected String[] doInBackground(String[] params)
-        {
+        protected String[] doInBackground(String[] params) {
 
-            http://450.atwebpages.com/logAdd.php?lat=65.9667&lon=-18.5333&heading=0.0&speed=0.0&timestamp=1431369860&source=7f704b56d4a5c10420f64a6d9708c2060eff434b
+            http:
+//450.atwebpages.com/logAdd.php?lat=65.9667&lon=-18.5333&heading=0.0&speed=0.0&timestamp=1431369860&source=7f704b56d4a5c10420f64a6d9708c2060eff434b
             selected_pk = params[2];
             Uri.Builder builder = new Uri.Builder();
             builder.scheme(ctxt.getString(R.string.web_service_protocol))
@@ -95,7 +92,7 @@ public class LocalMapData {
                     .appendQueryParameter("timestamp", params[2])
                     .appendQueryParameter("source", params[3]);
             String url = builder.build().toString();
-            Log.i("PushTask",url);
+            Log.i("PushTask", url);
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost(url);
             try {
@@ -104,10 +101,10 @@ public class LocalMapData {
                         new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
                 String r = "";
                 String line;
-                while((line = reader.readLine())!= null) {
+                while ((line = reader.readLine()) != null) {
                     r += line;
                 }
-                return new String[]{params[0],r};
+                return new String[]{params[0], r};
             } catch (UnsupportedEncodingException e) {
                 return null;
             } catch (ClientProtocolException e) {
@@ -117,8 +114,7 @@ public class LocalMapData {
             }
         }
 
-        protected void onPostExecute(String[] result)
-        {
+        protected void onPostExecute(String[] result) {
             JSONTokener tokener = new JSONTokener(result[1]);
             JSONObject finalResult = null;
             String regResult = "";
@@ -153,8 +149,7 @@ public class LocalMapData {
         crs.moveToFirst();
 
         String[] parameters = new String[4];
-        while (!crs.isAfterLast())
-        {
+        while (!crs.isAfterLast()) {
             parameters[0] = Double.toString(crs.getDouble(crs.getColumnIndex("lat")));
             parameters[1] = Double.toString(crs.getDouble(crs.getColumnIndex("lon")));
             parameters[2] = Integer.toString(crs.getInt(crs.getColumnIndex("timestamp")));
@@ -166,8 +161,7 @@ public class LocalMapData {
         my_helper.close();
     }
 
-    protected boolean isTableEmpty()
-    {
+    protected boolean isTableEmpty() {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getReadableDatabase();
         crs = my_db.rawQuery("SELECT * FROM " + table_name, null);
@@ -175,20 +169,19 @@ public class LocalMapData {
         return crs.moveToFirst();
     }
 
-    protected void wipe_data()
-    {
+    protected void wipe_data() {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getWritableDatabase();
         my_db.execSQL("DELETE FROM " + table_name);
         my_helper.close();
     }
 
-    private class DatabaseHelper extends SQLiteOpenHelper
-    {
-        DatabaseHelper(Context context) { super(context, db_name, null, 1); }
+    private class DatabaseHelper extends SQLiteOpenHelper {
+        DatabaseHelper(Context context) {
+            super(context, db_name, null, 1);
+        }
 
-        public void onCreate(SQLiteDatabase db)
-        {
+        public void onCreate(SQLiteDatabase db) {
             Log.i("Database", "Creating Database...");
             db.execSQL("CREATE TABLE IF NOT EXISTS LOCAL_MAP_DATA (" +
                     "lat REAL, " +
@@ -197,20 +190,19 @@ public class LocalMapData {
                     "timestamp TEXT INTEGER KEY)");
         }
 
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-        {
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             //No changes to make so far...
         }
 
         public String getTableAsString(SQLiteDatabase db, long start, long end) {
             Log.d("DB", "getTableAsString called");
             String tableString = String.format("Table %s:\n", table_name);
-            Cursor allRows  = db.rawQuery("SELECT * FROM " + table_name + " WHERE " +
+            Cursor allRows = db.rawQuery("SELECT * FROM " + table_name + " WHERE " +
                     key_datetime + " <= " + end + " AND " + key_datetime + " >= " + start, null);
-            if (allRows.moveToFirst() ){
+            if (allRows.moveToFirst()) {
                 String[] columnNames = allRows.getColumnNames();
                 do {
-                    for (String name: columnNames) {
+                    for (String name : columnNames) {
                         tableString += String.format("%s: %s\n", name,
                                 allRows.getString(allRows.getColumnIndex(name)));
                     }

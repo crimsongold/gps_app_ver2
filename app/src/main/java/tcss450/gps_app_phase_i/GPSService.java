@@ -4,9 +4,6 @@
 
 package tcss450.gps_app_phase_i;
 
-import android.app.AlarmManager;
-import android.app.IntentService;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -19,8 +16,7 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
-public class GPSService extends Service
-{
+public class GPSService extends Service {
     private SharedPreferences prefs;
     private LocalMapData location_data;
     private static final long MINIMUM_DISTANCE = 10; // in
@@ -36,8 +32,7 @@ public class GPSService extends Service
     }
 
     @Override
-    public void onCreate()
-    {
+    public void onCreate() {
         super.onCreate();
         prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
         location_data = new LocalMapData(this);
@@ -53,12 +48,10 @@ public class GPSService extends Service
         }
     }
 
-    private class MyLocationListener implements LocationListener
-    {
+    private class MyLocationListener implements LocationListener {
         public void onLocationChanged(Location location) {
             String uid = prefs.getString("ID", null);
-            if (uid != null)
-            {
+            if (uid != null) {
                 double longitude = location.getLongitude();
                 double latitude = location.getLatitude();
                 long timestamp = System.currentTimeMillis() / 1000L;
@@ -69,7 +62,8 @@ public class GPSService extends Service
             }
         }
 
-        public void onStatusChanged(String s, int i, Bundle b) {}
+        public void onStatusChanged(String s, int i, Bundle b) {
+        }
 
         public void onProviderDisabled(String s) {
             Toast.makeText(GPSService.this,
@@ -84,7 +78,6 @@ public class GPSService extends Service
         }
     }
 }
-
 
 
 /**
@@ -137,11 +130,11 @@ public class GPSService extends Service
                 2000, 10, locationListener);
     }*/
 
-    /**
-     * Used to set the service alarm
-     * @param context context
-     * @param active if the setting is to be enabled or disabled
-     */
+/**
+ * Used to set the service alarm
+ * @param context context
+ * @param active if the setting is to be enabled or disabled
+ */
     /*public static void setServiceAlarm(Context context, boolean active){
 
         Intent i = new Intent(context, GPSService.class);

@@ -34,7 +34,7 @@ public class DataLog {
     private static final String DATABASE_CREATE = "CREATE TABLE IF NOT EXISTS " + DATABASE_NAME + " ( "
             + " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
             lat + " REAL NOT NULL, " +
-            lng +  "REAL NOT NULL, " +
+            lng + "REAL NOT NULL, " +
             uploaded + " INTEGER NOT NULL )";
 
 
@@ -42,13 +42,13 @@ public class DataLog {
         this.ctxt = ctxt;
     }
 
-    public void addPoint(double lat_p, double lng_p){
+    public void addPoint(double lat_p, double lng_p) {
 
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getWritableDatabase();
 
         ContentValues init_vals = new ContentValues();
-        init_vals.put(lat, lat_p );
+        init_vals.put(lat, lat_p);
         init_vals.put(lng, lng_p);
         init_vals.put(uploaded, 0);
         my_db.insert(TABLE_NAME, null, init_vals);
@@ -57,7 +57,7 @@ public class DataLog {
 
     }
 
-    public void clearCache(){
+    public void clearCache() {
 
         this.my_db.delete(TABLE_NAME, "WHERE UP > 0", null);
     }
@@ -66,29 +66,23 @@ public class DataLog {
         //this.my_db.update();
     }
 
-    private class DatabaseHelper extends SQLiteOpenHelper
-    {
+    private class DatabaseHelper extends SQLiteOpenHelper {
 
-        DatabaseHelper(Context context)
-        {
+        DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, 1);
 
 
         }
 
-        public void onCreate(SQLiteDatabase db)
-        {
+        public void onCreate(SQLiteDatabase db) {
             Log.i("Database", "Creating Database...");
             db.execSQL(DATABASE_CREATE);
         }
 
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
-        {
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             //No changes to make so far...
         }
     }
-
-
 
 
 }
