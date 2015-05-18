@@ -8,8 +8,6 @@ package tcss450.gps_app_phase_i;
  * Created by caleb on 5/4/15.
  */
 public class Verification {
-
-    //TODO I think that these should return a string or result number. A boolean doesn't provide enough info.
     public static final int VALID_EMAIL = 0;
     public static final int VALID_PASSWORD = 0;
 
