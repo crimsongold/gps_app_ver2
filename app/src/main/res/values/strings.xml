@@ -21,7 +21,12 @@
         information, and that we are not liable for any damages that could be caused by such.
         </string>
 
-
+    <string name="register_email_prompt">Enter your email.</string>
+    <string name="register_password_prompt">Enter a password.</string>
+    <string name="register_retype_password_prompt">Retype the password.</string>
+    <string name="register_security_question_prompt">Enter a security question.</string>
+    <string name="register_security_question_answer_prompt">Enter the answer to the question.</string>
+    <string name="register_agreement">Check here to confirm that you have read and agree to the above Terms of Service.</string>
     <string name="validate_email_blank">Email can\'t be blank</string>
     <string name="validate_email_invalid_symbols">Email can\'t contain: +-,!#$%^*();\/|&quot;&apos;&lt;&gt;&amp;</string>
     <string name="validate_email_no_user">Email needs to have a user</string>
