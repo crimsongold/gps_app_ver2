@@ -4,7 +4,6 @@
 
 <resources>
     <string name="app_name">Sly</string>
-    <string name="hello_world" translatable="false">Hello world!</string>
     <string name="log_in">Log In</string>
     <string name="register">Register</string>
     <string name="forgot_password">Forgot Password</string>
@@ -20,6 +19,11 @@
         location data. By checking this box, you are agreeing to provide us with the aforementioned
         information, and that we are not liable for any damages that could be caused by such.
         </string>
+
+    <string name="forgot_password_instructions">An email will be sent to your email account with your password information.</string>
+    <string name="forgot_password_reset">Reset Password</string>
+    <string name="forgot_password_cancel">Cancel</string>
+    <string name="forgot_password_prompt_email">Enter your email</string>
 
     <string name="register_email_prompt">Enter your email.</string>
     <string name="register_password_prompt">Enter a password.</string>
