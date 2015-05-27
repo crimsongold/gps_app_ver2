@@ -49,7 +49,7 @@ public class MovementData extends ActionBarActivity {
         setContentView(R.layout.activity_movement_data);
 
         mainListView = (ListView) findViewById(R.id.listView);
-        listAdapter = new ArrayAdapter<String>(this, R.layout.list_item);
+        listAdapter = new ArrayAdapter<>(this, R.layout.list_item);
         mainListView.setAdapter(listAdapter);
 
         SharedPreferences prefs = this.getSharedPreferences("tcss450.gps_app_phase_i",
@@ -130,9 +130,8 @@ public class MovementData extends ActionBarActivity {
         }
 
         protected void onPostExecute(String result) {
-            //result = "{ \"result\": \"success\", \"error\": \"\", \"points\": [ { \"lat\": \"51.000\", \"lon\": \"51.000\", \"speed\": \" 70.000\", \"heading\": \"10.000\", \"time\": 1430118118 }, { \"lat\": \"51.000\", \"lon\": \"51.000\", \"speed\": \"70.000\", \"heading\": \"10.000\", \"time\": 1430118118 } ] }";
             JSONTokener tokener = new JSONTokener(result);
-            JSONObject finalResult = null;
+            JSONObject finalResult;
             Log.i("GPSService", result);
             try {
                 finalResult = new JSONObject(tokener);
@@ -140,12 +139,12 @@ public class MovementData extends ActionBarActivity {
                 if (regResult.equals("success")) {
                     JSONArray points = finalResult.getJSONArray("points");
 
-                    String r = "";
+
                     for (int i = 0; i < points.length(); i++) {
                         JSONObject point = points.getJSONObject(i);
-                        String tmp = "Latitude: " + point.getString("lat") + "\n" +
-                                "Longitude: " + point.getString("lon") + "\n" +
-                                "TimeStamp: " + point.getString("time");
+                        String tmp = getString(R.string.movement_data_latitude) + ": " + point.getString("lat") + "\n" +
+                                getString(R.string.movement_data_longitude) + ": " + point.getString("lon") + "\n" +
+                                getString(R.string.movement_data_time) + ": " + point.getString("time");
 
                         listAdapter.add(tmp);
 

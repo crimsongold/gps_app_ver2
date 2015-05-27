@@ -19,7 +19,11 @@
         location data. By checking this box, you are agreeing to provide us with the aforementioned
         information, and that we are not liable for any damages that could be caused by such.
         </string>
-
+    
+    <string name="movement_data_latitude">Latitude</string>
+    <string name="movement_data_longitude">Longitude</string>
+    <string name="movement_data_time">Time Stamp</string>
+    
     <string name="forgot_password_instructions">An email will be sent to your email account with your password information.</string>
     <string name="forgot_password_reset">Reset Password</string>
     <string name="forgot_password_cancel">Cancel</string>
