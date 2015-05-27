@@ -19,7 +19,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="My Account"
+        android:text="@string/my_account"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="36sp"/>
 
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="42dp"
-        android:text="Start Date:"
+        android:text="@string/my_account_start_date_label"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_below="@+id/acct_text"
         android:layout_alignParentLeft="true"
@@ -51,7 +51,7 @@
         android:id="@+id/end_date_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="End Date:"
+        android:text="@string/my_account_end_date_label"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_above="@+id/end_button"
         android:layout_alignLeft="@+id/end_button"
@@ -61,7 +61,7 @@
         android:id="@+id/logout_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log out"
+        android:text="@string/my_account_logout"
         android:textSize="20sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -73,7 +73,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start Date"
+        android:text="@string/my_account_start_date"
 
         android:id="@+id/start_button"
         android:layout_below="@+id/start_date_text"
@@ -84,7 +84,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="End Date"
+        android:text="@string/my_account_end_date"
 
         android:id="@+id/end_button"
         android:layout_alignTop="@+id/start_button"
