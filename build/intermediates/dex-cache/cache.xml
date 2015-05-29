@@ -2,172 +2,172 @@
 <items version="2" >
 
     <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-14b4474523dd2183582bf284f222968732ad8510.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-6e18a2d0a84f38884fe47d53168d68df343e09c7.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-d91641604a476f3c76dcc3f676090bba33149380.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-b31068f5ca26b29b1849191973084205f8904375.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-8ea7973def79eb6cd40d4d2fb5aa4beabc6bd07c.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-d99aed07a712d062f30cafdd0ce4d144c922e939.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-24e397a7c12fa06116255a7d7608bccc232974d4.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-514f8b66ae79f2a6f11c10c54db29643608c2732.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-c727c4a138ac78f4cb565c204ff52be18cd9255d.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-17b40ab56d649c850de137c40e305cd0d343b18b.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="055783146ba9654a725442563be78cad303aad1f">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-faf2ab7f531ce6133497e7bad3e1a6f92c26d036.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-bb9aeb4ed3d8309933d0d531254eea4a872043f2.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-3050f62ae0406c5db4e7cc6def0c59891e5ddce2.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-5652eea5cd1f524f6eeecec0b8b7e00bd04f119c.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-abf97f85c8eddcd2355b946bee88f282e816d3e4.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-6f30d94c57d17e3935051053b92e9ab562aee9fb.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-463585169ed73b5df4a4659f8e3e14bb5475914a.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-d00d9967094f45cd2940d5d411bc669a6a0cb2ea.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-91ac002ef91043a85d3854bff5404023c69ba2af.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-4b472dbe4266f00fc7fd8b6fcbee03c22d2f0c3f.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.0.0/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-0666694c68ce9ddd0212e27ce809cd163ff9d41b.jar" />
-    </item>
-    <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.0.0/classes.jar"
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-plus\7.0.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="0e8228b4bc69c6a2c8d7c18498a77e53417d2574">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-70cb2da1b294f63e48bfcc224cf53233a890cd77.jar" />
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-847b80fde65400da5a5c4c7f81ff61832cdafdfa.jar" />
     </item>
     <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/libs/robotium-solo-5.3.1.jar"
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="29fd6d3794b71491c2789708cd8d03c71feb8954">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-689b9c734f38b534083d9541f65c36cd1a95d1ec.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-cast\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4cd0b093824b3228fffc21ea369b98d0b1db6566">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-588f30be6121b085beb97e6f8efe74d8a80816ef.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="e3d791b42eaa90416cd0b2d2e608092794a3baa4">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-c20ac81cb097b87bbb8cc1d880a496f3b714a134.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-drive\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="41b3870cbe5fa546d8095b5b89d42cb69f3dd175">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-822ea31d58a1425ab4e0b5519fe232f8849eb798.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="73ccb92b70112f2e463e415ef8d7275de7da6516">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-aeec482b8e128d93c7b8b420bea10a4ae13d444b.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.0.0\support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\support-annotations-22.0.0-331a3a5a2541192858261c7d890bdb039d724fdc.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-66bb6e0ad8c74b040dffdc7211a7c9e0a3e6eaf2.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-9351f1a665fe5de4dbee059e438669e328c6e0cc.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-identity\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="fb04b12526b0073c7fb1ebb70c5842d82ee95596">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-d17f692b329b22bd83ba27fc02f5c0921516c2d0.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\libs\robotium-solo-5.3.1.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="e6e664ab1b59d2504c3529f128747c13487f96ca">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/robotium-solo-5.3.1-47ca5c18b18f7b6f1c7bd66a58c9ef36c1364898.jar" />
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\robotium-solo-5.3.1-b491a3efef287032edd894ec872ecab07c060776.jar" />
     </item>
     <item
-        jar="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.0.0/classes.jar"
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-panorama\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1c5a76debf0c2857ccad422c4a80ed785982f8df">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-d50ef6c57c3c4c00336b2df550f57056d6960611.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wallet\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a96b762bde4139de855735f175ec4d17dca55a6d">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-6855b0fba10d3552c790a7179c117875fcec2118.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4c93d99d454c975536bbe3b42283eee847f03ea3">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-2e7b16bc93a91fcef3dc34f34267c19624888291.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-wearable\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="3033cc3a2c68dff3e5b646d6d084bdbdf7d00b25">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-2d5f38a369437f75250b775a51e3db08a99f809e.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-nearby\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="ef5f051e7308febe289dc93c67c5f32785b4260a">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-92be7d51debc2cf98cc97cc31e64907d927758df.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-safetynet\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="c976518693e89ad44fbfccfc654941eaec198d08">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-07fa9a32c166980e08ca93edcff82864f60874c5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="17f8750d5c0749e44dd7c54aa390d9c937803825">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-f6810220b64ac61b2689d87e2b71a2efe086c0a5.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.0.0\libs\internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\internal_impl-22.0.0-09c057156d26d3f0dcfba5aa373b4d4b854a8c37.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-games\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="055783146ba9654a725442563be78cad303aad1f">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-31aef6fb72d1461a52c9317a3086cb8d021bf9bc.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="9224bc4c54ba95147c7eabd874573763c07cb6be">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-61e2dc9b53e39d8eead8bcea88985437133acda9.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="a08d65794b844d8e7540bf9a33859bf3b2482d7f">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-e0422aa6e51657196b7a9bdbd8e0c078407617dd.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-fitness\7.0.0\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="3c0b099f9de16b265ecd6122fcb603e7d0d29f90">
-        <dex dex="/home/caleb/Documents/gps_app_ver2/app/build/intermediates/pre-dexed/debug/classes-5a2c9d5fdec4c6b0d0ba898089710e9e750f9569.jar" />
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-f22e9f3aaaa57c00df94b7e65e3ebcddabb7d746.jar" />
+    </item>
+    <item
+        jar="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appstate\7.0.0\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7ff613bf78ab057293892fdbd4169eda899c89b9">
+        <dex dex="C:\Users\Caleb\StudioProjects\gps_app_ver2\app\build\intermediates\pre-dexed\debug\classes-41f85e3d4b6b487e4adad537a84552041f506256.jar" />
     </item>
 
 </items>

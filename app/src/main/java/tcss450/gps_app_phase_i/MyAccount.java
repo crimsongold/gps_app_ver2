@@ -56,28 +56,18 @@ public class MyAccount extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
-
         location_data = new LocalMapData(this);
-        prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
+        prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
 
         startService(new Intent(this, GPSService.class));
-
-        /*GPSService.setServiceAlarm(this, true);
-        ComponentName receiver = new ComponentName(MyAccount.this, GPSService.class);
-        PackageManager pm = MyAccount.this.getPackageManager();
-
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);*/
-
 
         Button startDate = (Button) findViewById(R.id.start_button);
         startDate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(v);
-                dateFlag = "start";
+                dateFlag = getString(R.string.web_service_start);
 
             }
 
@@ -89,7 +79,7 @@ public class MyAccount extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog(v);
-                dateFlag = "end";
+                dateFlag = getString(R.string.web_service_end);
 
             }
         });
@@ -101,11 +91,9 @@ public class MyAccount extends ActionBarActivity {
             public void onClick(View v) {
                 //set shared preferences date
 
-                prefs.edit().remove("startTime").commit();
-                prefs.edit().remove("endTime").commit();
-
+                prefs.edit().remove(getString(R.string.shared_preferences_start)).commit();
+                prefs.edit().remove(getString(R.string.shared_preferences_end)).commit();
                 if (start == null || end == null) {
-
                     if (start == null && end == null) {
                         Calendar cal = GregorianCalendar.getInstance();
                         cal.setTime(new Date());
@@ -116,7 +104,7 @@ public class MyAccount extends ActionBarActivity {
 
 
                         Context context = getApplicationContext();
-                        CharSequence text = "Last 7 days shown";
+                        CharSequence text = getString(R.string.date_picker_last_seven);
                         int duration = Toast.LENGTH_SHORT;
 
                         Toast toast = Toast.makeText(context, text, duration);
@@ -125,16 +113,13 @@ public class MyAccount extends ActionBarActivity {
                         Intent intent = new Intent(MyAccount.this, MovementData.class);
                         startActivity(intent);
 
-                        prefs_editor.putLong("startTime", start.getTime() / 1000);
-                        prefs_editor.putLong("endTime", end.getTime() / 1000);
+                        prefs_editor.putLong(getString(R.string.shared_preferences_start), start.getTime() / 1000);
+                        prefs_editor.putLong(getString(R.string.shared_preferences_end), end.getTime() / 1000);
                         prefs_editor.commit();
 
                         start = null;
                         end = null;
-
-
                     }
-
                     if (start == null && end != null) {
                         Calendar cal = GregorianCalendar.getInstance();
                         cal.setTime(end);
@@ -142,7 +127,7 @@ public class MyAccount extends ActionBarActivity {
                         start = cal.getTime();
 
                         Context context = getApplicationContext();
-                        CharSequence text = "Showing 1 day before end date";
+                        CharSequence text = getString(R.string.date_picker_day_before);
                         int duration = Toast.LENGTH_SHORT;
 
                         Toast toast = Toast.makeText(context, text, duration);
@@ -151,27 +136,21 @@ public class MyAccount extends ActionBarActivity {
                         Intent intent = new Intent(MyAccount.this, MovementData.class);
                         startActivity(intent);
 
-                        prefs_editor.putLong("startTime", start.getTime() / 1000);
-                        prefs_editor.putLong("endTime", end.getTime() / 1000);
+                        prefs_editor.putLong(getString(R.string.shared_preferences_start), start.getTime() / 1000);
+                        prefs_editor.putLong(getString(R.string.shared_preferences_end), end.getTime() / 1000);
                         prefs_editor.commit();
                         start = null;
                         end = null;
-
-
                     }
-
-
                     if (end == null && start != null) {
-
                         Calendar cal = GregorianCalendar.getInstance();
                         cal.setTime(start);
-
 
                         cal.add(Calendar.DAY_OF_YEAR, 1);
                         end = cal.getTime();
 
                         Context context = getApplicationContext();
-                        CharSequence text = "Showing 1 day past start date";
+                        CharSequence text = getString(R.string.date_picker_day_after);
                         int duration = Toast.LENGTH_SHORT;
 
                         Toast toast = Toast.makeText(context, text, duration);
@@ -180,18 +159,16 @@ public class MyAccount extends ActionBarActivity {
                         Intent intent = new Intent(MyAccount.this, MovementData.class);
                         startActivity(intent);
 
-                        prefs_editor.putLong("startTime", start.getTime() / 1000);
-                        prefs_editor.putLong("endTime", end.getTime() / 1000);
+                        prefs_editor.putLong(getString(R.string.shared_preferences_start), start.getTime() / 1000);
+                        prefs_editor.putLong(getString(R.string.shared_preferences_end), end.getTime() / 1000);
                         prefs_editor.commit();
                         start = null;
                         end = null;
                     }
-
-
                 } else {
 
-                    prefs_editor.putLong("startTime", start.getTime() / 1000);
-                    prefs_editor.putLong("endTime", end.getTime() / 1000);
+                    prefs_editor.putLong(getString(R.string.shared_preferences_start), start.getTime() / 1000);
+                    prefs_editor.putLong(getString(R.string.shared_preferences_end), end.getTime() / 1000);
                     prefs_editor.commit();
                     start = null;
                     end = null;
@@ -218,7 +195,6 @@ public class MyAccount extends ActionBarActivity {
             }
         });
     }
-
 
     @Override
     /**
@@ -272,10 +248,10 @@ public class MyAccount extends ActionBarActivity {
             Calendar cal = new GregorianCalendar();
             cal.set(year, month, day);
 
-            if (dateFlag.equals("start")) {
+            if (dateFlag.equals(getString(R.string.web_service_start))) {
                 start = cal.getTime();
 
-            } else if (dateFlag.equals("end")) {
+            } else if (dateFlag.equals(getString(R.string.web_service_end))) {
 
                 end = cal.getTime();
 
@@ -287,14 +263,14 @@ public class MyAccount extends ActionBarActivity {
 
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "Start Date");
+        newFragment.show(getSupportFragmentManager(), getString(R.string.date_picker_start));
 
     }
 
 
     public void showDatePickerDialogEnd(View v) {
         DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "End Date");
+        newFragment.show(getSupportFragmentManager(), getString(R.string.date_picker_end));
 
     }
 

@@ -35,20 +35,14 @@ import java.io.UnsupportedEncodingException;
  */
 public class ForgotPass extends Activity {
 
-
     private EditText forgotEmailText;
     private String email;
 
     protected void onCreate(Bundle savedInstanceState) {
-
-        //forgotEmailText = (EditText) findViewById(R.id.forgot_email_text);
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
         forgotEmailText = (EditText) this.findViewById(R.id.forgot_email_text);
-
 
         Button submit = (Button) findViewById(R.id.send_pw);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +54,6 @@ public class ForgotPass extends Activity {
             }
         });
 
-
         Button cancel = (Button) findViewById(R.id.forgot_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,13 +62,9 @@ public class ForgotPass extends Activity {
                 startActivity(intent);
             }
         });
-
-
     }
 
     class forgotPass extends AsyncTask<String, Void, String> {
-
-
         /**
          * used to send the url for a forgotten password
          *
@@ -84,21 +73,18 @@ public class ForgotPass extends Activity {
          */
         protected String doInBackground(String... params) {
             Uri.Builder builder = new Uri.Builder();
-
             builder.scheme(getString(R.string.web_service_protocol))
                     .authority(getString(R.string.web_service_url))
-                    .appendPath("reset.php")
-                    .appendQueryParameter("email", params[0]);
-
+                    .appendPath(getString(R.string.web_service_reset))
+                            .appendQueryParameter(getString(R.string.web_service_parameter_email), params[0]);
             String url = builder.build().toString();
             HttpClient client = new DefaultHttpClient();
             HttpGet get = new HttpGet(url);
 
-
             try {
                 HttpResponse response = client.execute(get);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        response.getEntity().getContent(), "UTF-8"));
+                        response.getEntity().getContent(), getString(R.string.web_service_string_format)));
                 return reader.readLine();
             } catch (UnsupportedEncodingException e) {
                 return null;
@@ -110,17 +96,16 @@ public class ForgotPass extends Activity {
         }
 
         protected void onPostExecute(String result) {
-
             JSONTokener tokener = new JSONTokener(result);
             JSONObject finalResult = null;
             String regResult = "";
 
             try {
                 finalResult = new JSONObject(tokener);
-                regResult = finalResult.getString("result");
-                if (regResult.equals("success")) {
+                regResult = finalResult.getString(getString(R.string.web_service_result));
+                if (regResult.equals(getString(R.string.web_service_success))) {
                     Context context = getApplicationContext();
-                    CharSequence text = "Success: Email sent";
+                    CharSequence text = getString(R.string.web_service_success_message);
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
@@ -131,31 +116,22 @@ public class ForgotPass extends Activity {
                     startActivity(i);
                     finish();
                 } else {
-                    String err = finalResult.getString("error");
-                    //temp error.  replace with json error message
+                    String err = finalResult.getString(getString(R.string.web_service_error));
                     Context context = getApplicationContext();
-                    //CharSequence text = "Generic Error message";
                     int duration = Toast.LENGTH_SHORT;
-
                     Toast toast = Toast.makeText(context, err, duration);
                     toast.show();
                 }
             } catch (JSONException e) {
-                Log.i("mAuthTask", "ERROR");
-                e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "INTERNAL ERROR", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.web_service_error_message), Toast.LENGTH_LONG).show();
             }
         }
     }
 
 
     public void sendEmail() {
-
         forgotEmailText.setError(null);
-
-        //email = "joncoons@gmail.com";
         email = forgotEmailText.getText().toString();
-
         boolean flag = true;
 
         int valid = Verification.isEmailValid(email);
@@ -190,19 +166,8 @@ public class ForgotPass extends Activity {
             forgotEmailText.requestFocus();
         }
 
-
-        //if flag = true try to send the link
-        //some stuff
-
-
-        if (flag == true) {
+        if (flag) {
             (new forgotPass()).execute(email);
-
-
         }
-
-
     }
-
-
 }

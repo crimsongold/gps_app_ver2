@@ -8,8 +8,6 @@ package tcss450.gps_app_phase_i;
  * Created by caleb on 5/4/15.
  */
 public class Verification {
-
-    //TODO I think that these should return a string or result number. A boolean doesn't provide enough info.
     public static final int VALID_EMAIL = 0;
     public static final int VALID_PASSWORD = 0;
 
@@ -34,9 +32,6 @@ public class Verification {
      * @return boolean indicating whether or not the email is valid.
      */
     public static int isEmailValid(final String email) {
-        //pattern for valid password
-        //String pattern = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-        //TODO: Replace this with your own logic
         if (email.isEmpty()) {
             return BLANK;
         } else if (email.matches(".*[+\\-,!#$%^&*();\\\\/|<>\"']+.*")) {

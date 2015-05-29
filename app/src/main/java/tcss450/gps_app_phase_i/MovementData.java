@@ -16,11 +16,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -36,34 +33,32 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 
-public class MovementData extends ActionBarActivity
-{
-    private ListView mainListView ;
-    private ArrayAdapter<String> listAdapter ;
+
+public class MovementData extends ActionBarActivity {
+    private ListView mainListView;
+    private ArrayAdapter<String> listAdapter;
+
     @Override
     /**
      * {@inheritDoc}
      */
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movement_data);
 
-        mainListView = (ListView) findViewById( R.id.listView );
-        listAdapter = new ArrayAdapter<String>(this, R.layout.list_item);
+        mainListView = (ListView) findViewById(R.id.listView);
+        listAdapter = new ArrayAdapter<>(this, R.layout.list_item);
         mainListView.setAdapter(listAdapter);
 
-        SharedPreferences prefs = this.getSharedPreferences("tcss450.gps_app_phase_i",
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name),
                 Context.MODE_PRIVATE);
 
-        (new GetPointsTask()).execute(prefs.getString("ID", ""),
-                Long.toString(prefs.getLong("startTime", 0)),
-                Long.toString(prefs.getLong("endTime", 0)));
-        
+        (new GetPointsTask()).execute(prefs.getString(getString(R.string.shared_preferences_user_ID), ""),
+                Long.toString(prefs.getLong(getString(R.string.shared_preferences_start), 0)),
+                Long.toString(prefs.getLong(getString(R.string.shared_preferences_end), 0)));
+
     }
 
 
@@ -71,8 +66,7 @@ public class MovementData extends ActionBarActivity
     /**
      * {@inheritDoc}
      */
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
+    public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_movement_data, menu);
         return true;
@@ -82,16 +76,14 @@ public class MovementData extends ActionBarActivity
     /**
      * {@inheritDoc}
      */
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings)
-        {
+        if (id == R.id.action_settings) {
             return true;
         }
 
@@ -102,25 +94,23 @@ public class MovementData extends ActionBarActivity
     /**
      * {@inheritDoc}
      */
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         Intent intent = new Intent(MovementData.this, MyAccount.class);
         startActivity(intent);
         finish();
     }
-    class GetPointsTask extends AsyncTask<String, Void, String>
-    {
+
+    class GetPointsTask extends AsyncTask<String, Void, String> {
 
         //Push the recent data from the database into the webservice database
-        protected String doInBackground(String... params)
-        {
+        protected String doInBackground(String... params) {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme(getString(R.string.web_service_protocol))
                     .authority(getString(R.string.web_service_url))
-                    .appendPath("view.php")
-                    .appendQueryParameter("uid", params[0])
-                    .appendQueryParameter("start", params[1])
-                    .appendQueryParameter("end", params[2]);
+                    .appendPath(getString(R.string.web_service_view))
+                    .appendQueryParameter(getString(R.string.web_service_uid), params[0])
+                    .appendQueryParameter(getString(R.string.web_service_start), params[1])
+                    .appendQueryParameter(getString(R.string.web_service_end), params[2]);
             String url = builder.build().toString();
 
             HttpClient client = new DefaultHttpClient();
@@ -128,7 +118,7 @@ public class MovementData extends ActionBarActivity
             try {
                 HttpResponse response = client.execute(post);
                 BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                        new InputStreamReader(response.getEntity().getContent(), getString(R.string.web_service_string_format)));
                 return reader.readLine();
             } catch (UnsupportedEncodingException e) {
                 return null;
@@ -139,35 +129,32 @@ public class MovementData extends ActionBarActivity
             }
         }
 
-        protected void onPostExecute(String result)
-        {
-            //result = "{ \"result\": \"success\", \"error\": \"\", \"points\": [ { \"lat\": \"51.000\", \"lon\": \"51.000\", \"speed\": \" 70.000\", \"heading\": \"10.000\", \"time\": 1430118118 }, { \"lat\": \"51.000\", \"lon\": \"51.000\", \"speed\": \"70.000\", \"heading\": \"10.000\", \"time\": 1430118118 } ] }";
+        protected void onPostExecute(String result) {
             JSONTokener tokener = new JSONTokener(result);
-            JSONObject finalResult = null;
-            Log.i("GPSService",result);
+            JSONObject finalResult;
             try {
                 finalResult = new JSONObject(tokener);
-                String regResult = finalResult.getString("result");
-                if (regResult.equals("success")){
-                    JSONArray points = finalResult.getJSONArray("points");
+                String regResult = finalResult.getString(getString(R.string.web_service_result));
+                if (regResult.equals(getString(R.string.web_service_success))) {
+                    JSONArray points = finalResult.getJSONArray(getString(R.string.web_service_points));
 
-                    String r = "";
+
                     for (int i = 0; i < points.length(); i++) {
                         JSONObject point = points.getJSONObject(i);
-                        String tmp = "Latitude: " + point.getString("lat") + "\n" +
-                                "Longitude: " + point.getString("lon") + "\n"+
-                                "TimeStamp: " + point.getString("time");
+                        String tmp = getString(R.string.movement_data_latitude) + ": " + point.getString(getString(R.string.web_service_latitude)) + "\n" +
+                                getString(R.string.movement_data_longitude) + ": " + point.getString(getString(R.string.web_service_longitude)) + "\n" +
+                                getString(R.string.movement_data_time) + ": " + point.getString(getString(R.string.web_service_time));
 
                         listAdapter.add(tmp);
 
                     }
 
-                }else{
-                    listAdapter.add(finalResult.getString("error"));
+                } else {
+                    listAdapter.add(finalResult.getString(getString(R.string.web_service_error)));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                listAdapter.add("Server Error Please Try Again Later");
+                listAdapter.add(getString(R.string.web_service_error_message));
             }
 
         }
