@@ -52,12 +52,12 @@ public class MovementData extends ActionBarActivity {
         listAdapter = new ArrayAdapter<>(this, R.layout.list_item);
         mainListView.setAdapter(listAdapter);
 
-        SharedPreferences prefs = this.getSharedPreferences("tcss450.gps_app_phase_i",
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name),
                 Context.MODE_PRIVATE);
 
-        (new GetPointsTask()).execute(prefs.getString("ID", ""),
-                Long.toString(prefs.getLong("startTime", 0)),
-                Long.toString(prefs.getLong("endTime", 0)));
+        (new GetPointsTask()).execute(prefs.getString(getString(R.string.shared_preferences_user_ID), ""),
+                Long.toString(prefs.getLong(getString(R.string.shared_preferences_start), 0)),
+                Long.toString(prefs.getLong(getString(R.string.shared_preferences_end), 0)));
 
     }
 
@@ -107,10 +107,10 @@ public class MovementData extends ActionBarActivity {
             Uri.Builder builder = new Uri.Builder();
             builder.scheme(getString(R.string.web_service_protocol))
                     .authority(getString(R.string.web_service_url))
-                    .appendPath("view.php")
-                    .appendQueryParameter("uid", params[0])
-                    .appendQueryParameter("start", params[1])
-                    .appendQueryParameter("end", params[2]);
+                    .appendPath(getString(R.string.web_service_view))
+                    .appendQueryParameter(getString(R.string.web_service_uid), params[0])
+                    .appendQueryParameter(getString(R.string.web_service_start), params[1])
+                    .appendQueryParameter(getString(R.string.web_service_end), params[2]);
             String url = builder.build().toString();
 
             HttpClient client = new DefaultHttpClient();
@@ -118,7 +118,7 @@ public class MovementData extends ActionBarActivity {
             try {
                 HttpResponse response = client.execute(post);
                 BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                        new InputStreamReader(response.getEntity().getContent(), getString(R.string.web_service_string_format)));
                 return reader.readLine();
             } catch (UnsupportedEncodingException e) {
                 return null;
@@ -132,30 +132,29 @@ public class MovementData extends ActionBarActivity {
         protected void onPostExecute(String result) {
             JSONTokener tokener = new JSONTokener(result);
             JSONObject finalResult;
-            Log.i("GPSService", result);
             try {
                 finalResult = new JSONObject(tokener);
-                String regResult = finalResult.getString("result");
-                if (regResult.equals("success")) {
-                    JSONArray points = finalResult.getJSONArray("points");
+                String regResult = finalResult.getString(getString(R.string.web_service_result));
+                if (regResult.equals(getString(R.string.web_service_success))) {
+                    JSONArray points = finalResult.getJSONArray(getString(R.string.web_service_points));
 
 
                     for (int i = 0; i < points.length(); i++) {
                         JSONObject point = points.getJSONObject(i);
-                        String tmp = getString(R.string.movement_data_latitude) + ": " + point.getString("lat") + "\n" +
-                                getString(R.string.movement_data_longitude) + ": " + point.getString("lon") + "\n" +
-                                getString(R.string.movement_data_time) + ": " + point.getString("time");
+                        String tmp = getString(R.string.movement_data_latitude) + ": " + point.getString(getString(R.string.web_service_latitude)) + "\n" +
+                                getString(R.string.movement_data_longitude) + ": " + point.getString(getString(R.string.web_service_longitude)) + "\n" +
+                                getString(R.string.movement_data_time) + ": " + point.getString(getString(R.string.web_service_time));
 
                         listAdapter.add(tmp);
 
                     }
 
                 } else {
-                    listAdapter.add(finalResult.getString("error"));
+                    listAdapter.add(finalResult.getString(getString(R.string.web_service_error)));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                listAdapter.add("Server Error Please Try Again Later");
+                listAdapter.add(getString(R.string.web_service_error_message));
             }
 
         }

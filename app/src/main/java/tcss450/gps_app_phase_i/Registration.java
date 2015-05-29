@@ -6,17 +6,13 @@
 
 package tcss450.gps_app_phase_i;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +22,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
@@ -73,7 +68,7 @@ public class Registration extends ActionBarActivity {
         setContentView(R.layout.activity_register);
 
         WebView myView = (WebView) findViewById(R.id.eula_frag);
-        myView.loadUrl("http://450.atwebpages.com/agreement.php");
+        myView.loadUrl(getString(R.string.web_service_protocol)+"://"+ getString(R.string.web_service_url)+"/"+ getString(R.string.web_service_agreement));
 
 
         mEmailView = (EditText) findViewById(R.id.email_prompt);
@@ -86,7 +81,7 @@ public class Registration extends ActionBarActivity {
                         chk_email = true;
                         return;
                     } else {
-                        mEmailView.setError("Not a valid email.");
+                        mEmailView.setError(getString(R.string.validate_email_not_valid));
                         chk_email = false;
                         return;
                     }
@@ -102,7 +97,7 @@ public class Registration extends ActionBarActivity {
                             m_pass_prompt_string = mPassPrompt.getText().toString();
                             return;
                         } else {
-                            mPassPrompt.setError("Password is too short.");
+                            mPassPrompt.setError(getString(R.string.validate_password_short));
                             chk_pass_prompt = false;
                             return;
                         }
@@ -120,12 +115,12 @@ public class Registration extends ActionBarActivity {
                                 return;
                             } else {
                                 chk_pass_confirm = false;
-                                mPassConfirm.setError("Passwords do not match");
+                                mPassConfirm.setError(getString(R.string.validate_password_no_match));
                                 return;
                             }
                         } else {
                             chk_pass_confirm = false;
-                            mPassConfirm.setError("Invalid password entered.");
+                            mPassConfirm.setError(getString(R.string.validate_password_not_valid));
                             return;
                         }
                     }
@@ -142,7 +137,7 @@ public class Registration extends ActionBarActivity {
                         } else {
                             chk_sec_question = false;
                             //Somehow display that there was no question entered
-                            mSecQuestion.setError("No question has been entered.");
+                            mSecQuestion.setError(getString(R.string.validate_question));
                             return;
                         }
                     }
@@ -158,7 +153,7 @@ public class Registration extends ActionBarActivity {
                             return;
                         } else {
                             chk_sec_answer = false;
-                            mSecAnswer.setError("Answer is too short.");
+                            mSecAnswer.setError(getString(R.string.validate_answer));
                             return;
                         }
                     }
@@ -259,14 +254,14 @@ public class Registration extends ActionBarActivity {
                 if (mSecQuestion.getText().toString().length() > 2) {
                     validCheck = true;
                 } else {
-                    mSecQuestion.setError("Length");
+                    mSecQuestion.setError(getString(R.string.validate_question));
                     validCheck = false;
                 }
 
                 if (mSecAnswer.getText().toString().length() > 2) {
                     validCheck = true;
                 } else {
-                    mSecAnswer.setError("Length");
+                    mSecAnswer.setError(getString(R.string.validate_answer));
                     validCheck = false;
                 }
 
@@ -278,49 +273,49 @@ public class Registration extends ActionBarActivity {
                         (new registerUser()).execute(email, password, question, answer);
                     } else if (valid == Verification.SHORT_PASSWORD) {
                         validCheck = false;
-                        mPassPrompt.setError("Password Is Too Short");
+                        mPassPrompt.setError(getString(R.string.validate_password_short));
                         mPassPrompt.requestFocus();
                     } else if (valid == Verification.NO_UPPER) {
                         validCheck = false;
-                        mPassPrompt.setError("Password Must contain an upper case letter");
+                        mPassPrompt.setError(getString(R.string.validate_password_upper_case));
                         mPassPrompt.requestFocus();
                     } else if (valid == Verification.NO_LOWER) {
                         validCheck = false;
-                        mPassPrompt.setError("Password Must contain a Lower case letter");
+                        mPassPrompt.setError(getString(R.string.validate_password_lower_case));
                         mPassPrompt.requestFocus();
                     } else if (valid == Verification.NO_SPECIAL) {
                         validCheck = false;
                         mPassPrompt.setError(
-                                "Password Must contain one of the following: +\\-.,!@#$%^&*();\\\\/|<>\"'");
+                                getString(R.string.validate_password_symbol));
                         mPassPrompt.requestFocus();
                     }
                 } else if (valid == Verification.BLANK) {
                     validCheck = false;
-                    mEmailView.setError("Email Can't be blank");
+                    mEmailView.setError(getString(R.string.validate_email_blank));
                     mEmailView.requestFocus();
                 } else if (valid == Verification.INVALID_SYMBOLS) {
                     validCheck = false;
-                    mEmailView.setError("Email can't contain +-,!#$%^&*();\\/|<>\"'");
+                    mEmailView.setError(getString(R.string.validate_email_invalid_symbols));
                     mEmailView.requestFocus();
                 } else if (valid == Verification.NO_USER) {
                     validCheck = false;
-                    mEmailView.setError("Email needs to have a user");
+                    mEmailView.setError(getString(R.string.validate_email_no_user));
                     mEmailView.requestFocus();
                 } else if (valid == Verification.NO_AT) {
                     validCheck = false;
-                    mEmailView.setError("Email needs an '@' symbol");
+                    mEmailView.setError(getString(R.string.validate_email_no_at));
                     mEmailView.requestFocus();
                 } else if (valid == Verification.NO_DOMAIN_NAME) {
                     validCheck = false;
-                    mEmailView.setError("Email needs a domain name");
+                    mEmailView.setError(getString(R.string.validate_email_no_domain_name));
                     mEmailView.requestFocus();
                 } else if (valid == Verification.NO_DOT) {
                     validCheck = false;
-                    mEmailView.setError("Email needs a '.' after the domain name");
+                    mEmailView.setError(getString(R.string.validate_email_no_dot));
                     mEmailView.requestFocus();
                 } else if (valid == Verification.NO_TOP_DOMAIN) {
                     validCheck = false;
-                    mEmailView.setError("Email needs a valid top level domain");
+                    mEmailView.setError(getString(R.string.validate_email_no_top_domain));
                     mEmailView.requestFocus();
                 }
             }
@@ -332,11 +327,11 @@ public class Registration extends ActionBarActivity {
 
                     builder.scheme(getString(R.string.web_service_protocol))
                             .authority(getString(R.string.web_service_url))
-                            .appendPath("adduser.php")
-                            .appendQueryParameter("email", params[0])
-                            .appendQueryParameter("password", params[1])
-                            .appendQueryParameter("question", params[2])
-                            .appendQueryParameter("answer", params[3]);
+                            .appendPath(getString(R.string.web_service_add_user))
+                            .appendQueryParameter(getString(R.string.web_service_parameter_email), params[0])
+                            .appendQueryParameter(getString(R.string.web_service_parameter_password), params[1])
+                            .appendQueryParameter(getString(R.string.web_service_parameter_question), params[2])
+                            .appendQueryParameter(getString(R.string.web_service_parameter_answer), params[3]);
                     String url = builder.build().toString();
                     HttpClient client = new DefaultHttpClient();
                     HttpGet get = new HttpGet(url);
@@ -349,7 +344,7 @@ public class Registration extends ActionBarActivity {
                     try {
                         HttpResponse response = client.execute(get);
                         BufferedReader reader = new BufferedReader(new InputStreamReader(
-                                response.getEntity().getContent(), "UTF-8"));
+                                response.getEntity().getContent(), getString(R.string.web_service_string_format)));
                         return reader.readLine();
                     } catch (UnsupportedEncodingException e) {
                         return null;
@@ -368,10 +363,10 @@ public class Registration extends ActionBarActivity {
 
                     try {
                         finalResult = new JSONObject(tokener);
-                        regResult = finalResult.getString("result");
-                        if (regResult.equals("success")) {
+                        regResult = finalResult.getString(getString(R.string.web_service_result));
+                        if (regResult.equals(getString(R.string.web_service_success))) {
                             Context context = getApplicationContext();
-                            CharSequence text = "Registration complete";
+                            CharSequence text = getString(R.string.web_service_success);
                             int duration = Toast.LENGTH_SHORT;
                             Toast toast = Toast.makeText(context, text, duration);
                             toast.show();
@@ -382,19 +377,18 @@ public class Registration extends ActionBarActivity {
                             startActivity(i);
                             finish();
                         } else {
-                            String err = finalResult.getString("error");
+                            String err = finalResult.getString(getString(R.string.web_service_error));
                             //temp error.  replace with json error message
                             Context context = getApplicationContext();
-                            CharSequence text = "Generic Error message";
+                            CharSequence text = getString(R.string.web_service_error_message);
                             int duration = Toast.LENGTH_SHORT;
 
                             Toast toast = Toast.makeText(context, err, duration);
                             toast.show();
                         }
                     } catch (JSONException e) {
-                        Log.i("mAuthTask", "ERROR");
                         e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "INTERNAL ERROR", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.web_service_error_message), Toast.LENGTH_LONG).show();
                     }
                 }
             }

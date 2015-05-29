@@ -35,7 +35,7 @@ public class GPSService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
+        prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
         location_data = new LocalMapData(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationListener = new MyLocationListener();
@@ -43,7 +43,7 @@ public class GPSService extends Service {
                 MINIMUM_TIME, 0, locationListener);
         Location location = locationManager
                 .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        String uid = prefs.getString("ID", null);
+        String uid = prefs.getString(getString(R.string.shared_preferences_user_ID), null);
         if (location != null && uid != null) {
             location.getLongitude();
             location.getLatitude();
@@ -58,12 +58,12 @@ public class GPSService extends Service {
 
     private class MyLocationListener implements LocationListener {
         public void onLocationChanged(Location location) {
-            String uid = prefs.getString("ID", null);
+            String uid = prefs.getString(getString(R.string.shared_preferences_user_ID), null);
             if (uid != null) {
                 double longitude = location.getLongitude();
                 double latitude = location.getLatitude();
                 long timestamp = System.currentTimeMillis() / 1000L;
-                Log.i("GPSService", "Latitude: " + latitude + " Longitude: " + longitude + " Timestamp: " +
+                Log.i("GPSService", getString(R.string.movement_data_latitude)+ ": " + latitude + " "+getString(R.string.movement_data_longitude)+": " + longitude + " "+getString(R.string.movement_data_time)+": " +
                         timestamp);
                 location_data.add_point(uid, timestamp, latitude, longitude);
                 location_data.push_data();
@@ -75,13 +75,13 @@ public class GPSService extends Service {
 
         public void onProviderDisabled(String s) {
             Toast.makeText(GPSService.this,
-                    "GPS turned off",
+                    getText(R.string.GPS_off),
                     Toast.LENGTH_LONG).show();
         }
 
         public void onProviderEnabled(String s) {
             Toast.makeText(GPSService.this,
-                    "GPS turned on",
+                    getText(R.string.GPS_on),
                     Toast.LENGTH_LONG).show();
         }
     }

@@ -87,8 +87,8 @@ public class ForgotPass extends Activity {
 
             builder.scheme(getString(R.string.web_service_protocol))
                     .authority(getString(R.string.web_service_url))
-                    .appendPath("reset.php")
-                    .appendQueryParameter("email", params[0]);
+                    .appendPath(getString(R.string.web_service_reset))
+                            .appendQueryParameter(getString(R.string.web_service_parameter_email), params[0]);
 
             String url = builder.build().toString();
             HttpClient client = new DefaultHttpClient();
@@ -98,7 +98,7 @@ public class ForgotPass extends Activity {
             try {
                 HttpResponse response = client.execute(get);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        response.getEntity().getContent(), "UTF-8"));
+                        response.getEntity().getContent(), getString(R.string.web_service_string_format)));
                 return reader.readLine();
             } catch (UnsupportedEncodingException e) {
                 return null;
@@ -117,10 +117,10 @@ public class ForgotPass extends Activity {
 
             try {
                 finalResult = new JSONObject(tokener);
-                regResult = finalResult.getString("result");
-                if (regResult.equals("success")) {
+                regResult = finalResult.getString(getString(R.string.web_service_result));
+                if (regResult.equals(getString(R.string.web_service_success))) {
                     Context context = getApplicationContext();
-                    CharSequence text = "Success: Email sent";
+                    CharSequence text = getString(R.string.web_service_success_message);
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
@@ -131,7 +131,7 @@ public class ForgotPass extends Activity {
                     startActivity(i);
                     finish();
                 } else {
-                    String err = finalResult.getString("error");
+                    String err = finalResult.getString(getString(R.string.web_service_error));
                     //temp error.  replace with json error message
                     Context context = getApplicationContext();
                     //CharSequence text = "Generic Error message";
@@ -141,9 +141,7 @@ public class ForgotPass extends Activity {
                     toast.show();
                 }
             } catch (JSONException e) {
-                Log.i("mAuthTask", "ERROR");
-                e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "INTERNAL ERROR", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.web_service_error_message), Toast.LENGTH_LONG).show();
             }
         }
     }

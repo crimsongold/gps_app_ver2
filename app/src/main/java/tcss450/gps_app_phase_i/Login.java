@@ -22,16 +22,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -73,10 +69,10 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        prefs = this.getSharedPreferences("tcss450.gps_app_phase_i", Context.MODE_PRIVATE);
+        prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
 
-        if (prefs.contains("Email") && prefs.contains("ID")) {
+        if (prefs.contains(getString(R.string.shared_preferences_user_email)) && prefs.contains(getString(R.string.shared_preferences_user_ID))) {
             Intent intent = new Intent(Login.this, MyAccount.class);
             startActivity(intent);
             finish();
@@ -150,7 +146,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         mPasswordView.setError(null);
         boolean flag = true;
 
-        //TODO: Make strings for this.
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
@@ -192,20 +187,19 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
 
         } else if (valid == Verification.SHORT_PASSWORD) {
             flag = false;
-            mPasswordView.setError("Password Is Too Short");
+            mPasswordView.setError(getString(R.string.validate_password_short));
             mPasswordView.requestFocus();
         } else if (valid == Verification.NO_UPPER) {
             flag = false;
-            mPasswordView.setError("Password Must contain an upper case letter");
+            mPasswordView.setError(getString(R.string.validate_password_upper_case));
             mPasswordView.requestFocus();
         } else if (valid == Verification.NO_LOWER) {
             flag = false;
-            mPasswordView.setError("Password Must contain a Lower case letter");
+            mPasswordView.setError(getString(R.string.validate_password_lower_case));
             mPasswordView.requestFocus();
         } else if (valid == Verification.NO_SPECIAL) {
             flag = false;
-            mPasswordView.setError(
-                    "Password Must contain one of the following: +\\-.,!@#$%^&*();\\\\/|<>\"'");
+            mPasswordView.setError(getString(R.string.validate_password_symbol));
             mPasswordView.requestFocus();
         } else {
 //            showProgress(true);
@@ -214,9 +208,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         }
 
         if (flag == true) {
-            System.out.println("IM HERE AND IM CORY");
-
-
             /**
              * This seems to be breaking for me (jon)
              */
@@ -334,9 +325,9 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
             //TODO: Make strings for these.
             builder.scheme(getString(R.string.web_service_protocol))
                     .authority(getString(R.string.web_service_url))
-                    .appendPath("login.php")
-                    .appendQueryParameter("email", params[0])
-                    .appendQueryParameter("password", params[1]);
+                    .appendPath(getString(R.string.web_service_login))
+                    .appendQueryParameter(getString(R.string.web_service_parameter_email), params[0])
+                    .appendQueryParameter(getString(R.string.web_service_parameter_password), params[1]);
             String url = builder.build().toString();
 
 //String url = "http://450.atwebpages.com/login.php?email=" + params[0]+"&password=" + params[1];
@@ -345,7 +336,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
             try {
                 HttpResponse response = client.execute(get);
                 BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                        new InputStreamReader(response.getEntity().getContent(), getString(R.string.web_service_string_format)));
                 return new String[]{params[0], reader.readLine()};
             } catch (UnsupportedEncodingException e) {
                 return null;
@@ -357,9 +348,9 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         }
 
         protected void login(final String email, final String ID) {
-            prefs_editor.putString("Email", email);
+            prefs_editor.putString(getString(R.string.shared_preferences_user_email), email);
             prefs_editor.commit();
-            prefs_editor.putString("ID", ID); //uid for logging stored as ID
+            prefs_editor.putString(getString(R.string.shared_preferences_user_ID), ID); //uid for logging stored as ID
             prefs_editor.commit();
             Intent intent = new Intent(Login.this, MyAccount.class);
             startActivity(intent);
@@ -367,25 +358,20 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         }
 
         protected void onPostExecute(String[] result) {
-            Log.i("mAuthTask", result[1]);
-            //Test For successful login
-            //result[1] = "{\"result\": \"success\", \"userid\": \"5567899878\"}";
             JSONTokener tokener = new JSONTokener(result[1]);
             JSONObject finalResult = null;
             String success = "";
             try {
                 finalResult = new JSONObject(tokener);
-                success = finalResult.getString("result");
+                success = finalResult.getString(getString(R.string.web_service_result));
             } catch (JSONException e) {
-                Log.i("mAuthTask", "ERROR");
                 e.printStackTrace();
             }
-            //TODO: Make strings for this.
-            if (success.equals("success")) {
+            if (success.equals(getString(R.string.web_service_success))) {
                 try {
-                    login(result[0], finalResult.getString("userid"));
+                    login(result[0], finalResult.getString(getString(R.string.web_service_userid)));
                 } catch (JSONException e) {
-                    mPasswordView.setError("Internal Error");
+                    mPasswordView.setError(getString(R.string.web_service_error_message));
                     return;
                 }
                 Intent intent = new Intent(Login.this, MyAccount.class);
@@ -394,10 +380,9 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
                 finish();
             } else {
                 try {
-                    mPasswordView.setError(finalResult.getString("error"));
+                    mPasswordView.setError(finalResult.getString(getString(R.string.web_service_error)));
                 } catch (JSONException e) {
-                    //TODO: Make strings for this.
-                    mPasswordView.setError("Incorrect Email/Password combination");
+                    mPasswordView.setError(getString(R.string.validate_bad_email_password));
                     e.printStackTrace();
                 }
                 mPasswordView.requestFocus();

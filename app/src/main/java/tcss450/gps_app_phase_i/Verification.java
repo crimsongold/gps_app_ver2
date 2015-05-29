@@ -32,9 +32,6 @@ public class Verification {
      * @return boolean indicating whether or not the email is valid.
      */
     public static int isEmailValid(final String email) {
-        //pattern for valid password
-        //String pattern = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
-        //TODO: Replace this with your own logic
         if (email.isEmpty()) {
             return BLANK;
         } else if (email.matches(".*[+\\-,!#$%^&*();\\\\/|<>\"']+.*")) {
