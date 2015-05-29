@@ -103,6 +103,11 @@
     <string name="validate_password_not_valid">Not a valid password</string>
     <string name="validate_question">Question is too short</string>
     <string name="validate_answer">Answer is too short</string>
+    
+    <string name="settings_data">Only upload on wifi</string>
+    <string name="settings_location">Track location</string>
+    <string name="settings_interval">Choose sampling interval</string>
+    <string name="settings_power_save">Power Saver</string>
 
     <string name="title_activity_start_date">StartDate</string>
 </resources>
