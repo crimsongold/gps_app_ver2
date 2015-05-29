@@ -56,21 +56,11 @@ public class MyAccount extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_account);
 
-
         location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
 
         startService(new Intent(this, GPSService.class));
-
-        /*GPSService.setServiceAlarm(this, true);
-        ComponentName receiver = new ComponentName(MyAccount.this, GPSService.class);
-        PackageManager pm = MyAccount.this.getPackageManager();
-
-        pm.setComponentEnabledSetting(receiver,
-                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
-                PackageManager.DONT_KILL_APP);*/
-
 
         Button startDate = (Button) findViewById(R.id.start_button);
         startDate.setOnClickListener(new OnClickListener() {
@@ -103,9 +93,7 @@ public class MyAccount extends ActionBarActivity {
 
                 prefs.edit().remove(getString(R.string.shared_preferences_start)).commit();
                 prefs.edit().remove(getString(R.string.shared_preferences_end)).commit();
-
                 if (start == null || end == null) {
-
                     if (start == null && end == null) {
                         Calendar cal = GregorianCalendar.getInstance();
                         cal.setTime(new Date());
@@ -131,10 +119,7 @@ public class MyAccount extends ActionBarActivity {
 
                         start = null;
                         end = null;
-
-
                     }
-
                     if (start == null && end != null) {
                         Calendar cal = GregorianCalendar.getInstance();
                         cal.setTime(end);
@@ -156,16 +141,10 @@ public class MyAccount extends ActionBarActivity {
                         prefs_editor.commit();
                         start = null;
                         end = null;
-
-
                     }
-
-
                     if (end == null && start != null) {
-
                         Calendar cal = GregorianCalendar.getInstance();
                         cal.setTime(start);
-
 
                         cal.add(Calendar.DAY_OF_YEAR, 1);
                         end = cal.getTime();
@@ -186,8 +165,6 @@ public class MyAccount extends ActionBarActivity {
                         start = null;
                         end = null;
                     }
-
-
                 } else {
 
                     prefs_editor.putLong(getString(R.string.shared_preferences_start), start.getTime() / 1000);
@@ -218,7 +195,6 @@ public class MyAccount extends ActionBarActivity {
             }
         });
     }
-
 
     @Override
     /**
