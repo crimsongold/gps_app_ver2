@@ -22,6 +22,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -83,23 +84,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
-        /*mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
-            {
-                if (id == R.id.login || id == EditorInfo.IME_NULL)
-                {
-                     I commented out attemptLogin() because this is effectively like clicking
-                    the login button every time you edit the password, which is not how this should
-                    function.
-
-                    //attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });*/
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -329,6 +313,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
                     .appendQueryParameter(getString(R.string.web_service_parameter_email), params[0])
                     .appendQueryParameter(getString(R.string.web_service_parameter_password), params[1]);
             String url = builder.build().toString();
+            Log.i("caleb", url);
 
 //String url = "http://450.atwebpages.com/login.php?email=" + params[0]+"&password=" + params[1];
             HttpClient client = new DefaultHttpClient();
@@ -358,6 +343,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         }
 
         protected void onPostExecute(String[] result) {
+            Log.i("caleb", result[1]);
             JSONTokener tokener = new JSONTokener(result[1]);
             JSONObject finalResult = null;
             String success = "";
