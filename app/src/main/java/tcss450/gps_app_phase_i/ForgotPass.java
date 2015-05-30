@@ -59,6 +59,8 @@ public class ForgotPass extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ForgotPass.this, Login.class);
+                Log.i(getString(R.string.forgot_password_cancel),
+                        getString(R.string.forgot_password_cancel_message));
                 startActivity(intent);
             }
         });
