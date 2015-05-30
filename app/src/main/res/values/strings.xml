@@ -87,8 +87,10 @@
 
     <string name="my_account">My Account</string>
     <string name="my_account_start_date">Start date</string>
+    <string name="my_account_start_date_label">Start date: </string>
     <string name="my_account_start_date_message">Selecting start date.</string>
     <string name="my_account_end_date">End date</string>
+    <string name="my_account_end_date_label">End date: </string>
     <string name="my_account_end_date_message">Selecting end date.</string>
     <string name="my_account_logout">Logout</string>
     <string name="my_account_logout_message">Logging out.</string>

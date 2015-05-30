@@ -179,24 +179,6 @@ public class MyAccount extends ActionBarActivity {
 
             }
         });
-
-        Button logOut = (Button) findViewById(R.id.logout_button);
-        logOut.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(getString(R.string.my_account_logout),
-                        getString(R.string.my_account_logout_message));
-                prefs_editor.clear();
-                prefs_editor.commit();
-                stopService(new Intent(MyAccount.this, GPSService.class));
-
-                location_data.push_data();
-                location_data.wipe_data();
-                Intent intent = new Intent(MyAccount.this, Login.class);
-                startActivity(intent);
-                finish();
-            }
-        });
     }
 
     @Override
