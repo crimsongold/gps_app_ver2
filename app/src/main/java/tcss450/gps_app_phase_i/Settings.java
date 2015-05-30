@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -31,7 +32,7 @@ public class Settings extends ActionBarActivity {
         prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
         TextView head = (TextView) findViewById(R.id.textViewSettings);
-        head.setText("Settings: " + prefs.getString(getString(R.string.shared_preferences_user_email),getString(R.string.web_service_error)));
+        head.setText(prefs.getString(getString(R.string.shared_preferences_user_email),getString(R.string.web_service_error)));
         Switch location = (Switch) findViewById(R.id.switchLocation);
         location.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -73,7 +74,20 @@ public class Settings extends ActionBarActivity {
                 location_data.wipe_data();
                 Intent intent = new Intent(Settings.this, Login.class);
                 startActivity(intent);
-                finish();
+            }
+        });
+        SeekBar mSeekbar = (SeekBar) findViewById(R.id.seekBarSeconds);
+
+        mSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            TextView seconds = (TextView) findViewById(R.id.textViewSeconds);
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seconds.setText(Integer.toString(progress + 10));
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
             }
         });
     }

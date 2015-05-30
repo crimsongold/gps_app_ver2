@@ -6,9 +6,10 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context="tcss450.gps_app_phase_i.MyAccountActivity">
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never"/>
+    <item android:id="@+id/action_settings"
+        android:icon="@drawable/gear"
+        android:title="Settings"
+        app:showAsAction="always" />
+
+
 </menu>

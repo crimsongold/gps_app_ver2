@@ -224,7 +224,6 @@ public class MyAccount extends ActionBarActivity {
         if (id == R.id.action_settings) {
             Intent intent = new Intent(MyAccount.this, Settings.class);
             startActivity(intent);
-            finish();
             return true;
         }
 
