@@ -6,18 +6,15 @@
 
 package tcss450.gps_app_phase_i;
 
-import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +23,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -66,6 +62,8 @@ public class MyAccount extends ActionBarActivity {
         startDate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i(getString(R.string.my_account_start_date),
+                        getString(R.string.my_account_start_date_message));
                 showDatePickerDialog(v);
                 dateFlag = getString(R.string.web_service_start);
 
@@ -78,6 +76,8 @@ public class MyAccount extends ActionBarActivity {
         endDate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i(getString(R.string.my_account_end_date),
+                        getString(R.string.my_account_end_date_message));
                 showDatePickerDialog(v);
                 dateFlag = getString(R.string.web_service_end);
 
@@ -90,7 +90,8 @@ public class MyAccount extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //set shared preferences date
-
+                Log.i(getString(R.string.my_account_tracking_data),
+                        getString(R.string.my_account_tracking_data_message));
                 prefs.edit().remove(getString(R.string.shared_preferences_start)).commit();
                 prefs.edit().remove(getString(R.string.shared_preferences_end)).commit();
                 if (start == null || end == null) {
@@ -110,7 +111,7 @@ public class MyAccount extends ActionBarActivity {
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
 
-                        Intent intent = new Intent(MyAccount.this, MovementData.class);
+                        Intent intent = new Intent(MyAccount.this, MapTest.class);
                         startActivity(intent);
 
                         prefs_editor.putLong(getString(R.string.shared_preferences_start), start.getTime() / 1000);
@@ -176,22 +177,6 @@ public class MyAccount extends ActionBarActivity {
                     startActivity(intent);
                 }
 
-            }
-        });
-
-        Button logOut = (Button) findViewById(R.id.logout_button);
-        logOut.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                prefs_editor.clear();
-                prefs_editor.commit();
-                stopService(new Intent(MyAccount.this, GPSService.class));
-
-                location_data.push_data();
-                location_data.wipe_data();
-                Intent intent = new Intent(MyAccount.this, Login.class);
-                startActivity(intent);
-                finish();
             }
         });
     }

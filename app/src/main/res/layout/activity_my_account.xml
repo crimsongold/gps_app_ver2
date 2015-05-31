@@ -29,12 +29,9 @@
         android:layout_height="wrap_content"
         android:text="View Tracking Data"
         android:textSize="20sp"
-        android:layout_above="@+id/logout_button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="140dp"
-        android:layout_alignRight="@+id/logout_button"
-        android:layout_alignEnd="@+id/logout_button" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="140dp" />
 
     <TextView
         android:id="@+id/start_date_text"
@@ -56,18 +53,6 @@
         android:layout_above="@+id/end_button"
         android:layout_alignLeft="@+id/end_button"
         android:layout_alignStart="@+id/end_button" />
-
-    <Button
-        android:id="@+id/logout_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/my_account_logout"
-        android:textSize="20sp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
