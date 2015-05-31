@@ -98,7 +98,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         registerButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                register();
+                Agree();
             }
         });
 
@@ -270,12 +270,11 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     /**
-     * Redirects the user from the Login to the Registration.
+     * Redirects the user from the Login to the Agreement.
      */
-    private void register() {
-        Intent intent = new Intent(Login.this, Registration.class);
+    private void Agree() {
+        Intent intent = new Intent(Login.this, Agreement.class);
         startActivity(intent);
-        finish();
     }
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {

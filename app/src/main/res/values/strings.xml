@@ -14,11 +14,10 @@
     <string name="web_service_protocol" translatable="false">http</string>
     <string name="web_service_url" translatable="false">450.atwebpages.com</string>
     <string name="title_activity_movement_data">Movement Data</string>
-    <string name="terms_of_service">Terms of Service
-        We reserve the right to capture and use any and all user and
-        location data. By checking this box, you are agreeing to provide us with the aforementioned
-        information, and that we are not liable for any damages that could be caused by such.
-        </string>
+    <string name="terms_of_service">Loading...</string>
+    <string name="agreement_accept">Accept</string>
+    <string name="agreement_reject">Reject</string>
+    <string name="agreement">agreement</string>
     <string name="web_service_add_user">adduser.php</string>
     <string name="web_service_reset">reset.php</string>
     <string name="web_service_login">login.php</string>
@@ -41,7 +40,7 @@
     <string name="web_service_points">points</string>
     <string name="web_service_latitude">lat</string>
     <string name="web_service_longitude">lon</string>
-    <string name="web_service_time">timestamp</string>
+    <string name="web_service_time">time</string>
 
     <string name="shared_preferences_name">tcss450.gps_app_phase_i</string>
     <string name="shared_preferences_user_ID">ID</string>

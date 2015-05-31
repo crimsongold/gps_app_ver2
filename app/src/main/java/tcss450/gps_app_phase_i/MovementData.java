@@ -62,15 +62,7 @@ public class MovementData extends ActionBarActivity {
     }
 
 
-    @Override
-    /**
-     * {@inheritDoc}
-     */
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_movement_data, menu);
-        return true;
-    }
+
 
     @Override
     /**
@@ -112,14 +104,19 @@ public class MovementData extends ActionBarActivity {
                     .appendQueryParameter(getString(R.string.web_service_start), params[1])
                     .appendQueryParameter(getString(R.string.web_service_end), params[2]);
             String url = builder.build().toString();
-
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost(url);
             try {
                 HttpResponse response = client.execute(post);
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(response.getEntity().getContent(), getString(R.string.web_service_string_format)));
-                return reader.readLine();
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null)
+                {
+                    sb.append(line);
+                }
+                return sb.toString();
             } catch (UnsupportedEncodingException e) {
                 return null;
             } catch (ClientProtocolException e) {
@@ -130,14 +127,15 @@ public class MovementData extends ActionBarActivity {
         }
 
         protected void onPostExecute(String result) {
+            //result = "{\"result\":\"success\",\"error\":\"\",\"points\":[{\"lat\":\"65.96670000\",\"lon\":\"-18.53330000\",\"speed\":\"0.000\",\"heading\":\"0.000\",\"time\":1431369860}]}";
             JSONTokener tokener = new JSONTokener(result);
             JSONObject finalResult;
             try {
                 finalResult = new JSONObject(tokener);
                 String regResult = finalResult.getString(getString(R.string.web_service_result));
                 if (regResult.equals(getString(R.string.web_service_success))) {
-                    JSONArray points = finalResult.getJSONArray(getString(R.string.web_service_points));
 
+                    JSONArray points = finalResult.getJSONArray(getString(R.string.web_service_points));
 
                     for (int i = 0; i < points.length(); i++) {
                         JSONObject point = points.getJSONObject(i);
