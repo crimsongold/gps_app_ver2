@@ -44,6 +44,8 @@ public class LocalMapData {
     public static final String key_long = "lon";                   //Stored as REAL
     public static final String key_uid = "source";                  //Stored as TEXT
     public static final String key_datetime = "timestamp";          //"YYYY-MM-DD HH:MM:SS.SSS"
+    public static final String key_speed = "speed";
+    public static final String key_heading = "heading";
 
     private Context ctxt;
     private Cursor crs;
@@ -58,18 +60,21 @@ public class LocalMapData {
     //places a new data point into the local data table
     protected void add_point(final String user_id, final long unix_datetime,
                              final double latitude, final double longitude) {
-        my_helper = new DatabaseHelper(ctxt);
-        my_db = my_helper.getWritableDatabase();
+        if (user_id != null && unix_datetime > 0)
+        {
+            my_helper = new DatabaseHelper(ctxt);
+            my_db = my_helper.getWritableDatabase();
 
-        ContentValues init_vals = new ContentValues();
-        init_vals.put(key_uid, user_id);
-        init_vals.put(key_datetime, unix_datetime);
-        init_vals.put(key_long, longitude);
-        init_vals.put(key_lat, latitude);
+            ContentValues init_vals = new ContentValues();
+            init_vals.put(key_uid, user_id);
+            init_vals.put(key_datetime, unix_datetime);
+            init_vals.put(key_long, longitude);
+            init_vals.put(key_lat, latitude);
 
-        my_db.insert(table_name, null, init_vals);
-        my_helper.close();
-        new PushTask().execute("" + latitude, "" + longitude, "" + user_id, "" + unix_datetime);
+            my_db.insert(table_name, null, init_vals);
+            my_helper.close();
+            new PushTask().execute("" + latitude, "" + longitude, "" + user_id, "" + unix_datetime);
+        }
     }
 
     class PushTask extends AsyncTask<String, Void, String[]> {
@@ -78,19 +83,18 @@ public class LocalMapData {
         //Push the recent data from the database into the webservice database
         protected String[] doInBackground(String[] params) {
 
-            http:
 //450.atwebpages.com/logAdd.php?lat=65.9667&lon=-18.5333&heading=0.0&speed=0.0&timestamp=1431369860&source=7f704b56d4a5c10420f64a6d9708c2060eff434b
             selected_pk = params[2];
             Uri.Builder builder = new Uri.Builder();
             builder.scheme(ctxt.getString(R.string.web_service_protocol))
                     .authority(ctxt.getString(R.string.web_service_url))
                     .appendPath("logAdd.php")
-                    .appendQueryParameter("lat", params[0])
-                    .appendQueryParameter("lon", params[1])
-                    .appendQueryParameter("heading", "0.0")
-                    .appendQueryParameter("speed", "0.0")
-                    .appendQueryParameter("timestamp", params[2])
-                    .appendQueryParameter("source", params[3]);
+                    .appendQueryParameter(key_lat, params[0])
+                    .appendQueryParameter(key_long, params[1])
+                    .appendQueryParameter(key_heading, "0.0")
+                    .appendQueryParameter(key_speed, "0.0")
+                    .appendQueryParameter(key_datetime, params[2])
+                    .appendQueryParameter(key_uid, params[3]);
             String url = builder.build().toString();
             Log.i("PushTask", url);
             HttpClient client = new DefaultHttpClient();

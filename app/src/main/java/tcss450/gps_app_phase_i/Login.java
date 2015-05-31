@@ -22,6 +22,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -83,37 +84,25 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         populateAutoComplete();
 
         mPasswordView = (EditText) findViewById(R.id.password);
-        /*mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener()
-        {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent)
-            {
-                if (id == R.id.login || id == EditorInfo.IME_NULL)
-                {
-                     I commented out attemptLogin() because this is effectively like clicking
-                    the login button every time you edit the password, which is not how this should
-                    function.
-
-                    //attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });*/
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
+                Log.i(getString(R.string.log_in), getString(R.string.login_login_button_message));
                 attemptLogin();
             }
         });
 
 
         Button registerButton = (Button) findViewById(R.id.register_button);
-        registerButton.setOnClickListener(new OnClickListener() {
+        registerButton.setOnClickListener(new OnClickListener()
+        {
             @Override
             public void onClick(View v) {
+                Log.i(getString(R.string.log_in),
+                        getString(R.string.login_register_button_message));
                 register();
             }
         });
@@ -121,9 +110,12 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         mLoginFormView = findViewById(R.id.login_form);
 
         Button forgotPass = (Button) findViewById(R.id.forgot_pass_button);
-        forgotPass.setOnClickListener(new OnClickListener() {
+        forgotPass.setOnClickListener(new OnClickListener()
+        {
             @Override
             public void onClick(View v) {
+                Log.i(getString(R.string.log_in),
+                        getString(R.string.login_reset_password_button_message));
                 Intent intent = new Intent(Login.this, ForgotPass.class);
                 startActivity(intent);
             }
@@ -201,13 +193,9 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
             flag = false;
             mPasswordView.setError(getString(R.string.validate_password_symbol));
             mPasswordView.requestFocus();
-        } else {
-//            showProgress(true);
-//            AsyncTask<String, Void, String[]> var =
-//                    (new LoginTask()).execute(new String[]{email, password});
         }
 
-        if (flag == true) {
+        if (flag) {
             /**
              * This seems to be breaking for me (jon)
              */
@@ -291,7 +279,6 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
     private void register() {
         Intent intent = new Intent(Login.this, Registration.class);
         startActivity(intent);
-        finish();
     }
 
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
@@ -329,6 +316,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
                     .appendQueryParameter(getString(R.string.web_service_parameter_email), params[0])
                     .appendQueryParameter(getString(R.string.web_service_parameter_password), params[1]);
             String url = builder.build().toString();
+            Log.i("caleb", url);
 
 //String url = "http://450.atwebpages.com/login.php?email=" + params[0]+"&password=" + params[1];
             HttpClient client = new DefaultHttpClient();
@@ -358,6 +346,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         }
 
         protected void onPostExecute(String[] result) {
+            Log.i("caleb", result[1]);
             JSONTokener tokener = new JSONTokener(result[1]);
             JSONObject finalResult = null;
             String success = "";

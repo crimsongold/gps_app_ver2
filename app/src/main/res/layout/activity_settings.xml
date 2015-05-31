@@ -39,6 +39,23 @@
         android:text="@string/settings_power_save"
         android:layout_weight="0.07"
         android:checked="false" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textViewSeconds"
+        android:layout_weight="0.07"
+        android:digits="true"
+        android:editable="true" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBarSeconds"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.07"
+        android:max="290"/>
+
     <Button
         android:id="@+id/button_logout"
         android:layout_width="fill_parent"
