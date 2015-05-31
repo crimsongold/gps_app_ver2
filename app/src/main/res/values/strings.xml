@@ -15,6 +15,8 @@
     <string name="web_service_url" translatable="false">450.atwebpages.com</string>
     <string name="title_activity_movement_data">Movement Data</string>
     <string name="terms_of_service">Loading...</string>
+    <string name="title_activity_map_test">Testicle</string>
+    <string name="forgot_password_cancel_message">An email will be sent to your email account with instructions to reset your password.</string>
     <string name="agreement_accept">Accept</string>
     <string name="agreement_reject">Reject</string>
     <string name="agreement">agreement</string>

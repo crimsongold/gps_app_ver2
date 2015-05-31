@@ -62,8 +62,6 @@ public class MyAccount extends ActionBarActivity {
         startDate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(getString(R.string.my_account_start_date),
-                        getString(R.string.my_account_start_date_message));
                 showDatePickerDialog(v);
                 dateFlag = getString(R.string.web_service_start);
 
@@ -76,8 +74,6 @@ public class MyAccount extends ActionBarActivity {
         endDate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(getString(R.string.my_account_end_date),
-                        getString(R.string.my_account_end_date_message));
                 showDatePickerDialog(v);
                 dateFlag = getString(R.string.web_service_end);
 
@@ -90,8 +86,6 @@ public class MyAccount extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //set shared preferences date
-                Log.i(getString(R.string.my_account_tracking_data),
-                        getString(R.string.my_account_tracking_data_message));
                 prefs.edit().remove(getString(R.string.shared_preferences_start)).commit();
                 prefs.edit().remove(getString(R.string.shared_preferences_end)).commit();
                 if (start == null || end == null) {
