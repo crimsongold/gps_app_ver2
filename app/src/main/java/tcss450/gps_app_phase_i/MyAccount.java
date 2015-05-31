@@ -111,7 +111,7 @@ public class MyAccount extends ActionBarActivity {
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
 
-                        Intent intent = new Intent(MyAccount.this, MovementData.class);
+                        Intent intent = new Intent(MyAccount.this, MapTest.class);
                         startActivity(intent);
 
                         prefs_editor.putLong(getString(R.string.shared_preferences_start), start.getTime() / 1000);
