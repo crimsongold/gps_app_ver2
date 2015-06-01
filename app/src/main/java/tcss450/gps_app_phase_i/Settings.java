@@ -37,9 +37,9 @@ public class Settings extends ActionBarActivity {
         location.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    // Location is enabled
+                    startService(new Intent(Settings.this, GPSService.class));
                 } else {
-                    // Location is disabled
+                    stopService(new Intent(Settings.this, GPSService.class));
                 }
             }
         });
@@ -57,9 +57,13 @@ public class Settings extends ActionBarActivity {
         power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    // save power
+                    prefs_editor.putLong(getString(
+                            R.string.shared_preferences_push_interval), 6000000);
+                    prefs_editor.commit();
                 } else {
-                    // go crazy
+                    prefs_editor.putLong(getString(
+                            R.string.shared_preferences_push_interval), 60000);
+                    prefs_editor.commit();
                 }
             }
         });

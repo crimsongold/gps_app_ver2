@@ -49,7 +49,8 @@
     <string name="shared_preferences_user_email">Email</string>
     <string name="shared_preferences_start">startTime</string>
     <string name="shared_preferences_end">endTime</string>
-    <string name="shared_preferences_interval">interval</string>
+    <string name="shared_preferences_interval">pollInterval</string>
+    <string name="shared_preferences_push_interval">pushInterval</string>
 
     <string name="date_picker_start">Start Date</string>
     <string name="date_picker_end">End Date</string>

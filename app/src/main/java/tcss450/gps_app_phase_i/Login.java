@@ -338,6 +338,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
             //Adds the interval to the shared preferences for updating in settings
             prefs_editor.putLong(getString(R.string.shared_preferences_interval),  60000);
             prefs_editor.commit();
+            prefs_editor.putLong(getString(R.string.shared_preferences_push_interval), 6000000);
             Intent intent = new Intent(Login.this, MyAccount.class);
             startActivity(intent);
             finish();

@@ -94,7 +94,6 @@ public class GPSService extends Service {
                 Log.i("GPSService", getString(R.string.movement_data_latitude)+ ": " + latitude + " "+getString(R.string.movement_data_longitude)+": " + longitude + " "+getString(R.string.movement_data_time)+": " +
                         timestamp);
                 location_data.add_point(uid, timestamp, latitude, longitude);
-                location_data.push_data();
             }
         }
 
