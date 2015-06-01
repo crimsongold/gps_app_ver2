@@ -14,16 +14,12 @@
     <string name="web_service_protocol" translatable="false">http</string>
     <string name="web_service_url" translatable="false">450.atwebpages.com</string>
     <string name="title_activity_movement_data">Movement Data</string>
-    <string name="terms_of_service">Terms of Service
-        We reserve the right to capture and use any and all user and
-        location data. By checking this box, you are agreeing to provide us with the aforementioned
-        information, and that we are not liable for any damages that could be caused by such.
-        </string>
-
-    <string name="login_login_button_message">Logging in.</string>
-    <string name="login_register_button_message">Opening registration.</string>
-    <string name="login_reset_password_button_message">Opening password reset.</string>
-
+    <string name="terms_of_service">Loading...</string>
+    <string name="title_activity_map_test">Testicle</string>
+    <string name="forgot_password_cancel_message">An email will be sent to your email account with instructions to reset your password.</string>
+    <string name="agreement_accept">Accept</string>
+    <string name="agreement_reject">Reject</string>
+    <string name="agreement">agreement</string>
     <string name="web_service_add_user">adduser.php</string>
     <string name="web_service_reset">reset.php</string>
     <string name="web_service_login">login.php</string>
@@ -46,7 +42,7 @@
     <string name="web_service_points">points</string>
     <string name="web_service_latitude">lat</string>
     <string name="web_service_longitude">lon</string>
-    <string name="web_service_time">timestamp</string>
+    <string name="web_service_time">time</string>
 
     <string name="shared_preferences_name">tcss450.gps_app_phase_i</string>
     <string name="shared_preferences_user_ID">ID</string>
@@ -72,8 +68,7 @@
     <string name="movement_data_latitude">Latitude</string>
     <string name="movement_data_longitude">Longitude</string>
     <string name="movement_data_time">Time Stamp</string>
-
-    <string name="forgot_password_cancel_message">Password reset cancelled.</string>
+    
     <string name="forgot_password_instructions">An email will be sent to your email account with your password information.</string>
     <string name="forgot_password_reset">Reset Password</string>
     <string name="forgot_password_cancel">Cancel</string>
@@ -87,16 +82,11 @@
     <string name="register_agreement">Check here to confirm that you have read and agree to the above Terms of Service.</string>
 
     <string name="my_account">My Account</string>
-    <string name="my_account_start_date">Start date</string>
-    <string name="my_account_start_date_label">Start date: </string>
-    <string name="my_account_start_date_message">Selecting start date.</string>
-    <string name="my_account_end_date">End date</string>
-    <string name="my_account_end_date_label">End date: </string>
-    <string name="my_account_end_date_message">Selecting end date.</string>
+    <string name="my_account_start_date">Start Date</string>
+    <string name="my_account_end_date">End Date</string>
+    <string name="my_account_start_date_label">Start Date:</string>
+    <string name="my_account_end_date_label">End Date:</string>
     <string name="my_account_logout">Logout</string>
-    <string name="my_account_logout_message">Logging out.</string>
-    <string name="my_account_tracking_data">View tracking data</string>
-    <string name="my_account_tracking_data_message">Displaying data.</string>
 
     <string name="validate_email_blank">Email can\'t be blank</string>
     <string name="validate_email_invalid_symbols">Email can\'t contain: +-,!#$%^*();\/|&quot;&apos;&lt;&gt;&amp;</string>
@@ -122,7 +112,4 @@
     <string name="settings_power_save">Power Saver</string>
 
     <string name="title_activity_start_date">StartDate</string>
-    <string name="title_activity_map_test">MapTest</string>
-
-    <string name="hello_world">Hello world!</string>
 </resources>

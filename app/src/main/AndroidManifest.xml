@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ~ Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450. -->
+<!--   ~ Copyright (c) 2015. This product is a brain-product of Jacob Langholz, Jonathan Coons, and Caleb Jaeger. The collective content within was created by them and them alone to fulfill the requirements of the mobile gps application project for TCSS 450. -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="tcss450.gps_app_phase_i" >
 
@@ -21,12 +21,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
-
-
-
-
-
 
     <application
         android:allowBackup="true"
@@ -76,11 +70,14 @@
             android:name=".ForgotPass"
             android:label="Forgot Pass" >
         </activity>
-        <activity
-            android:name=".Settings"
-            android:label="Settings" >
-        </activity>
+        <activity android:name=".Settings"
+                  android:label ="Settings">
 
+        </activity>
+        <activity android:name=".Agreement"
+            android:label="Agreement">
+
+        </activity>
         <receiver
             android:name=".GPSReceiver"
             android:enabled="false" >

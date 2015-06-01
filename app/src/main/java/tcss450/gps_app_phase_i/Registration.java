@@ -66,11 +66,6 @@ public class Registration extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_register);
-
-        WebView myView = (WebView) findViewById(R.id.eula_frag);
-        myView.loadUrl(getString(R.string.web_service_protocol)+"://"+ getString(R.string.web_service_url)+"/"+ getString(R.string.web_service_agreement));
-
-
         mEmailView = (EditText) findViewById(R.id.email_prompt);
         mEmailView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
@@ -175,17 +170,6 @@ public class Registration extends ActionBarActivity {
                         attemptRegister();
                     }
                 });
-            }
-
-
-            @Override
-            /**
-             * {@inheritDoc}
-             */
-            public boolean onCreateOptionsMenu(Menu menu) {
-                // Inflate the menu; this adds items to the action bar if it is present.
-                getMenuInflater().inflate(R.menu.menu_register, menu);
-                return true;
             }
 
             @Override

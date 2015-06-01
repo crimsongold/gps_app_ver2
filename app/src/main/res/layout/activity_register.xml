@@ -107,14 +107,5 @@
         android:layout_alignParentStart="true"
         android:text="@string/register_agreement"/>
 
-    <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="android.webkit.WebViewFragment"
-        android:id="@+id/eula_frag"
-        android:layout_centerHorizontal="true"
-        tools:layout="@layout/abc_expanded_menu_layout"
-        android:layout_below="@+id/scrollView"
-        android:layout_above="@+id/terms_check" />
 
 </RelativeLayout>

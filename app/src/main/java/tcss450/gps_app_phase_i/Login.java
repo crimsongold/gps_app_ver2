@@ -88,34 +88,26 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view)
-            {
-                Log.i(getString(R.string.log_in), getString(R.string.login_login_button_message));
+            public void onClick(View view) {
                 attemptLogin();
             }
         });
 
 
         Button registerButton = (Button) findViewById(R.id.register_button);
-        registerButton.setOnClickListener(new OnClickListener()
-        {
+        registerButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(getString(R.string.log_in),
-                        getString(R.string.login_register_button_message));
-                register();
+                Agree();
             }
         });
 
         mLoginFormView = findViewById(R.id.login_form);
 
         Button forgotPass = (Button) findViewById(R.id.forgot_pass_button);
-        forgotPass.setOnClickListener(new OnClickListener()
-        {
+        forgotPass.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(getString(R.string.log_in),
-                        getString(R.string.login_reset_password_button_message));
                 Intent intent = new Intent(Login.this, ForgotPass.class);
                 startActivity(intent);
             }
@@ -193,9 +185,13 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
             flag = false;
             mPasswordView.setError(getString(R.string.validate_password_symbol));
             mPasswordView.requestFocus();
+        } else {
+//            showProgress(true);
+//            AsyncTask<String, Void, String[]> var =
+//                    (new LoginTask()).execute(new String[]{email, password});
         }
 
-        if (flag) {
+        if (flag == true) {
             /**
              * This seems to be breaking for me (jon)
              */
@@ -274,10 +270,10 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     /**
-     * Redirects the user from the Login to the Registration.
+     * Redirects the user from the Login to the Agreement.
      */
-    private void register() {
-        Intent intent = new Intent(Login.this, Registration.class);
+    private void Agree() {
+        Intent intent = new Intent(Login.this, Agreement.class);
         startActivity(intent);
     }
 
