@@ -28,7 +28,6 @@ public class GPSService extends Service {
     protected LocationManager locationManager;
     protected LocationListener locationListener;
     protected BroadcastReceiver pc_receiver;
-    protected BroadcastReceiver pdc_receiver;
 
     @Override
     public IBinder onBind(Intent arg0) {
@@ -45,33 +44,29 @@ public class GPSService extends Service {
         pc_filter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED");
         prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
 
-        if (hasInternetAccess())
-        {
-            long min_time = prefs.getLong(getString(R.string.shared_preferences_interval), 0);
-            //Creates the actual location gathering part of the service
-            location_data = new LocalMapData(this);
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            locationListener = new MyLocationListener();
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                    min_time, 0, locationListener);
-            Location location = locationManager
-                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            String uid = prefs.getString(getString(R.string.shared_preferences_user_ID), null);
-            if (location != null && uid != null) {
-                location.getLongitude();
-                location.getLatitude();
-            }
-        }
-
-        BroadcastReceiver pc_receiver = new PowerConnectedReceiver();
+        pc_receiver = new PowerConnectedReceiver();
         registerReceiver(pc_receiver, pc_filter);
+
+        long min_time = prefs.getLong(getString(R.string.shared_preferences_interval), 0);
+        //Creates the actual location gathering part of the service
+        location_data = new LocalMapData(this);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new MyLocationListener();
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                min_time, 0, locationListener);
+        Location location = locationManager
+                .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        String uid = prefs.getString(getString(R.string.shared_preferences_user_ID), null);
+        if (location != null && uid != null) {
+            location.getLongitude();
+            location.getLatitude();
+        }
     }
 
     public void onDestroy()
     {
         super.onDestroy();
         unregisterReceiver(pc_receiver);
-        unregisterReceiver(pdc_receiver);
         locationManager.removeUpdates(locationListener);
     }
 
@@ -91,7 +86,7 @@ public class GPSService extends Service {
                 double longitude = location.getLongitude();
                 double latitude = location.getLatitude();
                 long timestamp = System.currentTimeMillis() / 1000L;
-                Log.i("GPSService", getString(R.string.movement_data_latitude)+ ": " + latitude + " "+getString(R.string.movement_data_longitude)+": " + longitude + " "+getString(R.string.movement_data_time)+": " +
+                Log.i("GPSService", getString(R.string.movement_data_latitude) + ": " + latitude + " " + getString(R.string.movement_data_longitude) + ": " + longitude + " " + getString(R.string.movement_data_time) + ": " +
                         timestamp);
                 location_data.add_point(uid, timestamp, latitude, longitude);
             }
