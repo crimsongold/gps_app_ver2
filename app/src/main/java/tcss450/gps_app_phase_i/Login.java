@@ -309,14 +309,13 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         @Override
         protected String[] doInBackground(String... params) {
             Uri.Builder builder = new Uri.Builder();
-            //TODO: Make strings for these.
             builder.scheme(getString(R.string.web_service_protocol))
                     .authority(getString(R.string.web_service_url))
                     .appendPath(getString(R.string.web_service_login))
                     .appendQueryParameter(getString(R.string.web_service_parameter_email), params[0])
                     .appendQueryParameter(getString(R.string.web_service_parameter_password), params[1]);
             String url = builder.build().toString();
-            Log.i("caleb", url);
+            Log.i("meow", url);
 
 //String url = "http://450.atwebpages.com/login.php?email=" + params[0]+"&password=" + params[1];
             HttpClient client = new DefaultHttpClient();
@@ -339,6 +338,9 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
             prefs_editor.putString(getString(R.string.shared_preferences_user_email), email);
             prefs_editor.commit();
             prefs_editor.putString(getString(R.string.shared_preferences_user_ID), ID); //uid for logging stored as ID
+            prefs_editor.commit();
+            //Adds the interval to the shared preferences for updating in settings
+            prefs_editor.putLong(getString(R.string.shared_preferences_interval),  60000);
             prefs_editor.commit();
             Intent intent = new Intent(Login.this, MyAccount.class);
             startActivity(intent);

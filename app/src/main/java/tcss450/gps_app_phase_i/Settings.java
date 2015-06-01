@@ -85,9 +85,16 @@ public class Settings extends ActionBarActivity {
             }
 
             public void onStartTrackingTouch(SeekBar seekBar) {
+                //do nothing
             }
 
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {
+                long interval = (long) seekBar.getProgress();
+                interval += 10;
+                interval *= 1000;
+                prefs_editor.putLong(getString(R.string.shared_preferences_interval), interval);
+                prefs_editor.commit();
             }
         });
     }
