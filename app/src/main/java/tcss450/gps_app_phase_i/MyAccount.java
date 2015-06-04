@@ -6,10 +6,12 @@
 
 package tcss450.gps_app_phase_i;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -38,7 +40,8 @@ public class MyAccount extends ActionBarActivity {
     private LocalMapData location_data;
     private SharedPreferences prefs;
     private SharedPreferences.Editor prefs_editor;
-    //static Date tempDate;
+    private OnBootReceiver boot_rec;
+    private AlarmManager alarm;
     static Date start;
     static Date end;
     static String dateFlag;
@@ -55,6 +58,14 @@ public class MyAccount extends ActionBarActivity {
         location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
+
+        alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
+        Intent alarm_intent = new Intent(MyAccount.this, AlarmReceiver.class);
+
+        IntentFilter br_filter = new IntentFilter();
+        br_filter.addAction("android.intent.action.BOOT_COMPLETED");
+        boot_rec = new OnBootReceiver();
+        registerReceiver(boot_rec, br_filter);
 
         startService(new Intent(this, GPSService.class));
 

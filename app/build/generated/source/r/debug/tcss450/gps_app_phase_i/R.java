@@ -2195,12 +2195,11 @@ containing a value of this type.
     public static final class menu {
         public static final int menu_load_screen=0x7f0e0000;
         public static final int menu_map=0x7f0e0001;
-        public static final int menu_map_test=0x7f0e0002;
-        public static final int menu_movement_data=0x7f0e0003;
-        public static final int menu_my_account=0x7f0e0004;
-        public static final int menu_register=0x7f0e0005;
-        public static final int menu_start_date=0x7f0e0006;
-        public static final int menu_to=0x7f0e0007;
+        public static final int menu_movement_data=0x7f0e0002;
+        public static final int menu_my_account=0x7f0e0003;
+        public static final int menu_register=0x7f0e0004;
+        public static final int menu_start_date=0x7f0e0005;
+        public static final int menu_to=0x7f0e0006;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;
