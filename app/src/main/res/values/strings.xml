@@ -113,4 +113,7 @@
     <string name="settings_power_save">Power Saver</string>
 
     <string name="title_activity_start_date">StartDate</string>
+    <string name="title_activity_map">Map</string>
+
+    <string name="hello_world">Hello world!</string>
 </resources>
