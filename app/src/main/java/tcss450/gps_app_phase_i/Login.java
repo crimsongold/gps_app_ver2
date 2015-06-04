@@ -52,7 +52,6 @@ import java.util.List;
  */
 public class Login extends Activity implements LoaderCallbacks<Cursor> {
 
-    private SharedPreferences prefs;
     private SharedPreferences.Editor prefs_editor;
 
 
@@ -70,7 +69,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
+        SharedPreferences prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
 
         if (prefs.contains(getString(R.string.shared_preferences_user_email)) && prefs.contains(getString(R.string.shared_preferences_user_ID))) {
@@ -185,17 +184,9 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
             flag = false;
             mPasswordView.setError(getString(R.string.validate_password_symbol));
             mPasswordView.requestFocus();
-        } else {
-//            showProgress(true);
-//            AsyncTask<String, Void, String[]> var =
-//                    (new LoginTask()).execute(new String[]{email, password});
         }
 
         if (flag == true) {
-            /**
-             * This seems to be breaking for me (jon)
-             */
-            //showProgress(true);
             AsyncTask<String, Void, String[]> var =
                     (new LoginTask()).execute(email, password);
         }
