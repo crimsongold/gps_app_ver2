@@ -141,7 +141,7 @@ public class MyAccount extends ActionBarActivity {
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
 
-                        Intent intent = new Intent(MyAccount.this, MovementData.class);
+                        Intent intent = new Intent(MyAccount.this, Map.class);
                         startActivity(intent);
 
                         prefs_editor.putLong(getString(R.string.shared_preferences_start), start.getTime() / 1000);
@@ -164,7 +164,7 @@ public class MyAccount extends ActionBarActivity {
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
 
-                        Intent intent = new Intent(MyAccount.this, MovementData.class);
+                        Intent intent = new Intent(MyAccount.this, Map.class);
                         startActivity(intent);
 
                         prefs_editor.putLong(getString(R.string.shared_preferences_start), start.getTime() / 1000);
@@ -180,7 +180,7 @@ public class MyAccount extends ActionBarActivity {
                     prefs_editor.commit();
                     start = null;
                     end = null;
-                    Intent intent = new Intent(MyAccount.this, MovementData.class);
+                    Intent intent = new Intent(MyAccount.this, Map.class);
                     startActivity(intent);
                 }
 

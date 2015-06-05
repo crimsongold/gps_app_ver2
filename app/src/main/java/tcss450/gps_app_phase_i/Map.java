@@ -11,6 +11,8 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
@@ -67,16 +69,14 @@ public class Map extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        if (hasInternetAccess())
+        {
+            (new GetPointsTask()).execute(prefs.getString(getString(R.string.shared_preferences_user_ID), ""),
+                    Long.toString(prefs.getLong(getString(R.string.shared_preferences_start), 0)),
+                    Long.toString(prefs.getLong(getString(R.string.shared_preferences_end), 0)));
 
-        (new GetPointsTask()).execute(prefs.getString(getString(R.string.shared_preferences_user_ID), ""),
-                Long.toString(prefs.getLong(getString(R.string.shared_preferences_start), 0)),
-                Long.toString(prefs.getLong(getString(R.string.shared_preferences_end), 0)));
-
-        createMap();
-
-        //placeMarkers();
-
-
+            createMap();
+        }
     }
 
     private void placeMarkers() {
@@ -122,8 +122,14 @@ public class Map extends Activity {
     }
 
 
+    private boolean hasInternetAccess()
+    {
+        ConnectivityManager cm =
+                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
+    }
 
     private void createMap() {
         // check if Map has not been created yet

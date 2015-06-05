@@ -80,15 +80,6 @@ public class GPSService extends Service {
         locationManager.removeUpdates(locationListener);
     }
 
-    private boolean hasInternetAccess()
-    {
-        ConnectivityManager cm =
-                (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
-    }
-
     private class MyLocationListener implements LocationListener {
         public void onLocationChanged(Location location) {
 //            String uid = prefs.getString(getString(R.string.shared_preferences_user_ID), null);
