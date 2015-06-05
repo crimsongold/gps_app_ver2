@@ -31,6 +31,10 @@ public class Settings extends ActionBarActivity {
         location_data = new LocalMapData(this);
         prefs = this.getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
         prefs_editor = prefs.edit();
+
+        TextView sec = (TextView) findViewById(R.id.textViewSeconds);
+        sec.setText(getString(R.string.shared_preferences_interval) + ": " +
+                prefs.getLong(getString(R.string.shared_preferences_interval), 0));
         TextView head = (TextView) findViewById(R.id.textViewSettings);
         head.setText(prefs.getString(getString(R.string.shared_preferences_user_email),getString(R.string.web_service_error)));
         Switch location = (Switch) findViewById(R.id.switchLocation);
@@ -43,16 +47,6 @@ public class Settings extends ActionBarActivity {
                 }
             }
         });
-        Switch wifi = (Switch) findViewById(R.id.switchData);
-        wifi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // WIFI only
-                } else {
-                    // data as well as wifi
-                }
-            }
-        });
         Switch power = (Switch) findViewById(R.id.switchPower);
         power.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -62,7 +56,7 @@ public class Settings extends ActionBarActivity {
                     prefs_editor.commit();
                 } else {
                     prefs_editor.putLong(getString(
-                            R.string.shared_preferences_push_interval), 60000);
+                            R.string.shared_preferences_interval), 60000);
                     prefs_editor.commit();
                 }
             }
@@ -85,7 +79,8 @@ public class Settings extends ActionBarActivity {
         mSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             TextView seconds = (TextView) findViewById(R.id.textViewSeconds);
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                seconds.setText(Integer.toString(progress + 10));
+                seconds.setText(getString(R.string.shared_preferences_interval) + ": " +
+                        Integer.toString(progress + 10));
             }
 
             public void onStartTrackingTouch(SeekBar seekBar) {

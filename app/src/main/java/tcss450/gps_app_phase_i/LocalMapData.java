@@ -76,7 +76,8 @@ public class LocalMapData {
 
             my_db.insert(table_name, null, init_vals);
             my_helper.close();
-            new PushTask().execute("" + latitude, "" + longitude, "" + user_id, "" + unix_datetime);
+            new PushTask().execute("" + latitude, "" + longitude, "" + unix_datetime, "" + user_id,
+                    "" + speed, "" + heading);
         }
     }
 
@@ -85,6 +86,7 @@ public class LocalMapData {
 
         //Push the recent data from the database into the webservice database
         protected String[] doInBackground(String[] params) {
+
 
 //450.atwebpages.com/logAdd.php?lat=65.9667&lon=-18.5333&heading=0.0&speed=0.0&timestamp=1431369860&source=7f704b56d4a5c10420f64a6d9708c2060eff434b
             selected_pk = params[2];
@@ -155,7 +157,7 @@ public class LocalMapData {
                 key_datetime + ", " + key_speed + ", " + key_heading +  " FROM " + table_name, null);
         crs.moveToFirst();
 
-        String[] parameters = new String[4];
+        String[] parameters = new String[6];
         while (!crs.isAfterLast()) {
             parameters[0] = Double.toString(crs.getDouble(crs.getColumnIndex("lat")));
             parameters[1] = Double.toString(crs.getDouble(crs.getColumnIndex("lon")));
@@ -195,8 +197,10 @@ public class LocalMapData {
             db.execSQL("CREATE TABLE IF NOT EXISTS LOCAL_MAP_DATA (" +
                     "lat REAL, " +
                     "lon REAL, " +
-                    "source TEXT," +
-                    "timestamp TEXT INTEGER KEY)");
+                    "source TEXT, " +
+                    "timestamp TEXT INTEGER KEY, " +
+                    "speed REAL, " +
+                    "heading REAL)");
         }
 
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

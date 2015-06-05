@@ -189,6 +189,13 @@ public class MyAccount extends ActionBarActivity {
     }
 
     @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        unregisterReceiver(boot_rec);
+    }
+
+    @Override
     /**
      * {@inheritDoc}
      */
@@ -264,6 +271,7 @@ public class MyAccount extends ActionBarActivity {
         newFragment.show(getSupportFragmentManager(), getString(R.string.date_picker_end));
 
     }
+
 
 
 }
