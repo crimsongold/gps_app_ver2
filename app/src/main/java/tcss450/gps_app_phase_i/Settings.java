@@ -34,7 +34,8 @@ public class Settings extends ActionBarActivity {
 
         TextView sec = (TextView) findViewById(R.id.textViewSeconds);
         sec.setText(getString(R.string.shared_preferences_interval) + ": " +
-                prefs.getLong(getString(R.string.shared_preferences_interval), 0));
+                (prefs.getLong(getString(R.string.shared_preferences_interval), 0) / 1000)
+                + " seconds");
         TextView head = (TextView) findViewById(R.id.textViewSettings);
         head.setText(prefs.getString(getString(R.string.shared_preferences_user_email),getString(R.string.web_service_error)));
         Switch location = (Switch) findViewById(R.id.switchLocation);
@@ -80,7 +81,7 @@ public class Settings extends ActionBarActivity {
             TextView seconds = (TextView) findViewById(R.id.textViewSeconds);
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 seconds.setText(getString(R.string.shared_preferences_interval) + ": " +
-                        Integer.toString(progress + 10));
+                        Integer.toString(progress + 10) + " seconds");
             }
 
             public void onStartTrackingTouch(SeekBar seekBar) {

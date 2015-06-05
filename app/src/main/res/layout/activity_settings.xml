@@ -22,7 +22,8 @@
         android:text="@string/settings_location"
         android:id="@+id/switchLocation"
         android:layout_weight="0.07"
-        android:checked="true" />
+        android:checked="true"
+        android:paddingLeft="30dp" />
 
     <Switch
         android:layout_width="fill_parent"
@@ -30,7 +31,8 @@
         android:id="@+id/switchPower"
         android:text="@string/settings_power_save"
         android:layout_weight="0.07"
-        android:checked="false" />
+        android:checked="false"
+        android:paddingLeft="30dp" />
 
     <TextView
         android:layout_width="250dp"
@@ -39,7 +41,8 @@
         android:digits="true"
         android:editable="true"
         android:visibility="visible"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.07"
+        android:paddingLeft="30dp" />
 
     <SeekBar
         android:layout_width="match_parent"
