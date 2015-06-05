@@ -85,8 +85,8 @@ public class LocalMapData {
         private String selected_pk;
 
         //Push the recent data from the database into the webservice database
-        protected String[] doInBackground(String[] params) {
-
+        protected String[] doInBackground(String[] params)
+        {
 
 //450.atwebpages.com/logAdd.php?lat=65.9667&lon=-18.5333&heading=0.0&speed=0.0&timestamp=1431369860&source=7f704b56d4a5c10420f64a6d9708c2060eff434b
             selected_pk = params[2];
@@ -96,8 +96,8 @@ public class LocalMapData {
                     .appendPath("logAdd.php")
                     .appendQueryParameter(key_lat, params[0])
                     .appendQueryParameter(key_long, params[1])
-                    .appendQueryParameter(key_heading, params[5])
                     .appendQueryParameter(key_speed, params[4])
+                    .appendQueryParameter(key_heading, params[5])
                     .appendQueryParameter(key_datetime, params[2])
                     .appendQueryParameter(key_uid, params[3]);
             String url = builder.build().toString();
@@ -105,6 +105,7 @@ public class LocalMapData {
             HttpClient client = new DefaultHttpClient();
             HttpPost post = new HttpPost(url);
             try {
+                Log.i("PushTask", "successful");
                 HttpResponse response = client.execute(post);
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
@@ -154,7 +155,7 @@ public class LocalMapData {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getReadableDatabase();
         crs = my_db.rawQuery("SELECT " + key_lat + ", " + key_long + ", " + key_uid + ", " +
-                key_datetime + ", " + key_speed + ", " + key_heading +  " FROM " + table_name, null);
+                key_datetime  + ", " + key_heading +  " FROM " + table_name, null);
         crs.moveToFirst();
 
         String[] parameters = new String[6];

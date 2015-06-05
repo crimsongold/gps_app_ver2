@@ -68,7 +68,7 @@ public class GPSService extends Service {
                     ": " + location.getLongitude() + " " + getString(R.string.movement_data_time) +
                     ": " + System.currentTimeMillis() + " Speed: " + location.getSpeed() +
                     " Heading: " + location.getBearing());
-            location_data.add_point(uid, System.currentTimeMillis(), location.getLatitude(),
+            location_data.add_point(uid, System.currentTimeMillis() / 1000, location.getLatitude(),
                     location.getLongitude(), location.getSpeed(), location.getBearing());
         }
     }
