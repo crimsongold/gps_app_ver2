@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textViewSettings"
-        android:layout_weight="0.07" />
+        android:layout_weight="0.07"
+        android:paddingLeft="30dp" />
 
     <Switch
         android:layout_width="fill_parent"
