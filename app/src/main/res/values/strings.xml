@@ -88,6 +88,8 @@
     <string name="my_account_start_date_label">Start Date:</string>
     <string name="my_account_end_date_label">End Date:</string>
     <string name="my_account_logout">Logout</string>
+    <string name="my_account_view_data">View Tracking Data</string>
+    <string name="my_account_view_msg">Opening map...</string>
 
     <string name="validate_email_blank">Email can\'t be blank</string>
     <string name="validate_email_invalid_symbols">Email can\'t contain: +-,!#$%^*();\/|&quot;&apos;&lt;&gt;&amp;</string>

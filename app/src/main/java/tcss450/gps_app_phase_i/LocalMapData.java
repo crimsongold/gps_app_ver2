@@ -59,7 +59,8 @@ public class LocalMapData {
 
     //places a new data point into the local data table
     protected void add_point(final String user_id, final long unix_datetime,
-                             final double latitude, final double longitude) {
+                             final double latitude, final double longitude,
+                             final double speed, final double heading) {
         if (user_id != null && unix_datetime > 0)
         {
             my_helper = new DatabaseHelper(ctxt);
@@ -70,6 +71,8 @@ public class LocalMapData {
             init_vals.put(key_datetime, unix_datetime);
             init_vals.put(key_long, longitude);
             init_vals.put(key_lat, latitude);
+            init_vals.put(key_speed, speed);
+            init_vals.put(key_heading, heading);
 
             my_db.insert(table_name, null, init_vals);
             my_helper.close();
@@ -91,8 +94,8 @@ public class LocalMapData {
                     .appendPath("logAdd.php")
                     .appendQueryParameter(key_lat, params[0])
                     .appendQueryParameter(key_long, params[1])
-                    .appendQueryParameter(key_heading, "0.0")
-                    .appendQueryParameter(key_speed, "0.0")
+                    .appendQueryParameter(key_heading, params[5])
+                    .appendQueryParameter(key_speed, params[4])
                     .appendQueryParameter(key_datetime, params[2])
                     .appendQueryParameter(key_uid, params[3]);
             String url = builder.build().toString();
@@ -149,7 +152,7 @@ public class LocalMapData {
         my_helper = new DatabaseHelper(ctxt);
         my_db = my_helper.getReadableDatabase();
         crs = my_db.rawQuery("SELECT " + key_lat + ", " + key_long + ", " + key_uid + ", " +
-                key_datetime + " FROM " + table_name, null);
+                key_datetime + ", " + key_speed + ", " + key_heading +  " FROM " + table_name, null);
         crs.moveToFirst();
 
         String[] parameters = new String[4];
@@ -158,6 +161,8 @@ public class LocalMapData {
             parameters[1] = Double.toString(crs.getDouble(crs.getColumnIndex("lon")));
             parameters[2] = Integer.toString(crs.getInt(crs.getColumnIndex("timestamp")));
             parameters[3] = crs.getString(crs.getColumnIndex("source"));
+            parameters[4] = crs.getString(crs.getColumnIndex("speed"));
+            parameters[5] = crs.getString(crs.getColumnIndex("heading"));
             AsyncTask<String, Void, String[]> push = (new PushTask().execute(parameters));
             crs.moveToNext();
         }

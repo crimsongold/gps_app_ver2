@@ -32,27 +32,23 @@ public class MyAccountTest extends ActivityInstrumentationTestCase2<MyAccount> {
     }
 
     public void testStartDateButton() {
-        solo.clickOnButton("Start date");
-        boolean textFound = solo.searchText("Selecting start date.");
+        solo.clickOnButton(solo.getString(R.string.my_account_start_date));
+        boolean textFound = solo.searchText("Cancel");
+        solo.goBack();
         assertTrue("Start date picker failed", textFound);
     }
 
     public void testEndDateButton() {
-        solo.clickOnButton("End date");
-        boolean textFound = solo.searchText("Selecting end date.");
+        solo.clickOnButton(solo.getString(R.string.my_account_end_date));
+        boolean textFound = solo.searchText("Cancel");
+        solo.goBack();
         assertTrue("End date picker failed", textFound);
     }
 
     public void testTrackingButton() {
-        solo.clickOnButton("View tracking data");
-        boolean textFound = solo.searchText("Displaying data.");
+        solo.clickOnButton(solo.getString(R.string.my_account_view_data));
+        boolean textFound = solo.waitForLogMessage(solo.getString(R.string.my_account_view_msg));
         assertTrue("Tracking data display failed", textFound);
-    }
-
-    public void testLogoutButton() {
-        solo.clickOnButton("Logout");
-        boolean textFound = solo.searchText("Email");
-        assertTrue("Reset failed", textFound);
     }
 
     /*

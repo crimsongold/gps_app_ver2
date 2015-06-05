@@ -48,18 +48,25 @@ public class GPSService extends Service {
         registerReceiver(pc_receiver, pc_filter);
 
         long min_time = prefs.getLong(getString(R.string.shared_preferences_interval), 0);
+        float min_distance = 10; //10 meters is the minimum distance
         //Creates the actual location gathering part of the service
         location_data = new LocalMapData(this);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationListener = new MyLocationListener();
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                min_time, 0, locationListener);
+                min_time, min_distance, locationListener);
         Location location = locationManager
                 .getLastKnownLocation(LocationManager.GPS_PROVIDER);
         String uid = prefs.getString(getString(R.string.shared_preferences_user_ID), null);
         if (location != null && uid != null) {
             location.getLongitude();
             location.getLatitude();
+            location.getSpeed();
+            location.getBearing();
+            Log.i("GPSService", getString(R.string.movement_data_latitude) + ": " + location.getLatitude() + " " + getString(R.string.movement_data_longitude) + ": " +
+                        location.getLongitude() + " " + getString(R.string.movement_data_time) + ": " + System.currentTimeMillis());
+            location_data.add_point(uid, System.currentTimeMillis(), location.getLatitude(),
+                    location.getLongitude(), location.getSpeed(), location.getBearing());
         }
     }
 
@@ -81,15 +88,15 @@ public class GPSService extends Service {
 
     private class MyLocationListener implements LocationListener {
         public void onLocationChanged(Location location) {
-            String uid = prefs.getString(getString(R.string.shared_preferences_user_ID), null);
-            if (uid != null) {
-                double longitude = location.getLongitude();
-                double latitude = location.getLatitude();
-                long timestamp = System.currentTimeMillis() / 1000L;
-                Log.i("GPSService", getString(R.string.movement_data_latitude) + ": " + latitude + " " + getString(R.string.movement_data_longitude) + ": " + longitude + " " + getString(R.string.movement_data_time) + ": " +
-                        timestamp);
-                location_data.add_point(uid, timestamp, latitude, longitude);
-            }
+//            String uid = prefs.getString(getString(R.string.shared_preferences_user_ID), null);
+//            if (uid != null) {
+//                double longitude = location.getLongitude();
+//                double latitude = location.getLatitude();
+//                long timestamp = System.currentTimeMillis() / 1000L;
+//                Log.i("GPSService", getString(R.string.movement_data_latitude) + ": " + latitude + " " + getString(R.string.movement_data_longitude) + ": " +
+//                        longitude + " " + getString(R.string.movement_data_time) + ": " + timestamp);
+//                location_data.add_point(uid, timestamp, latitude, longitude);
+//            }
         }
 
         public void onStatusChanged(String s, int i, Bundle b)

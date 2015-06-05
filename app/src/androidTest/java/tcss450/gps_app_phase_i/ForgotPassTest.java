@@ -5,6 +5,7 @@
 package tcss450.gps_app_phase_i;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
@@ -35,7 +36,8 @@ public class ForgotPassTest extends ActivityInstrumentationTestCase2<ForgotPass>
 
     public void testOrientation()
     {
-        solo.enterText(solo.getEditText("forgot_email_text"), "test.email@gmail.com");
+        EditText t_edit = (EditText) solo.getView(R.id.forgot_email_text);
+        solo.enterText(t_edit, "test.email@gmail.com");
 
         solo.setActivityOrientation(Solo.LANDSCAPE);
         boolean textFound = solo.searchText("test.email@gmail.com");
@@ -48,17 +50,14 @@ public class ForgotPassTest extends ActivityInstrumentationTestCase2<ForgotPass>
 
     public void testResetButton()
     {
-        solo.enterText(solo.getEditText("forgot_email_text"), "test.email@gmail.com");
-
-        solo.clickOnButton("Reset password");
-        boolean textFound = !solo.searchText("Email");
+        solo.clickOnButton(solo.getString(R.string.forgot_password_reset));
+        boolean textFound = solo.searchText(solo.getString(R.string.validate_email_blank));
         assertTrue("Reset failed", textFound);
     }
 
     public void testCancelButton()
     {
-        solo.clickOnButton("Cancel");
-        boolean textFound = solo.searchText("Password reset cancelled.");
-        assertTrue("Cancel failed", textFound);
+        solo.clickOnButton(solo.getString(R.string.forgot_password_cancel));
+        solo.assertCurrentActivity("Activity cancel failed.", Login.class);
     }
 }

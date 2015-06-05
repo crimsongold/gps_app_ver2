@@ -97,6 +97,8 @@ public class MyAccount extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //set shared preferences date
+                Log.i(getString(R.string.my_account_view_data),
+                        getString(R.string.my_account_view_msg));
                 prefs.edit().remove(getString(R.string.shared_preferences_start)).commit();
                 prefs.edit().remove(getString(R.string.shared_preferences_end)).commit();
                 if (start == null || end == null) {

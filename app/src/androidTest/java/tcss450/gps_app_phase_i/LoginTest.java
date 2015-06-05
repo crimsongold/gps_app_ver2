@@ -5,6 +5,7 @@
 package tcss450.gps_app_phase_i;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
@@ -37,17 +38,15 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login>
     public void testReqFields()
     {
         solo.unlockScreen();
-
-        solo.enterText(solo.getEditText("email"), "");
-        solo.clickOnButton("Log in");
-        boolean textFound = solo.searchText("Email") || solo.searchText("Password");
+        solo.clickOnButton(solo.getString(R.string.log_in));
+        boolean textFound = solo.searchText(solo.getString(R.string.validate_password_short));
         assertTrue("Required fields not entered, failed", textFound);
     }
 
     public void testOrientation()
     {
-        solo.enterText(solo.getEditText("email"), "test.email@gmail.com");
-        solo.enterText(solo.getEditText("password"), "T3STp@ssword");
+        EditText t_edit = (EditText) solo.getView(R.id.email);
+        solo.enterText(t_edit, "test.email@gmail.com");
 
         solo.setActivityOrientation(Solo.LANDSCAPE);
         boolean textFound = solo.searchText("test.email@gmail.com");
@@ -58,33 +57,17 @@ public class LoginTest extends ActivityInstrumentationTestCase2<Login>
         assertTrue("Orientation change failed", textFound);
     }
 
-    public void testResetButton()
-    {
-        solo.enterText(solo.getEditText("forgot_email_text"), "test.email@gmail.com");
-
-        solo.clickOnButton("Reset password");
-        boolean textFound = !solo.searchText("Email");
-        assertTrue("Reset failed", textFound);
-    }
-
-    public void testLogInButton()
-    {
-        solo.clickOnButton("Log in");
-        boolean textFound = solo.searchText("Logging in.");
-        assertTrue("Login failed", textFound);
-    }
-
     public void testRegisterButton()
     {
-        solo.clickOnButton("Register");
-        boolean textFound = solo.searchText("Opening registraion.");
+        solo.clickOnButton(solo.getString(R.string.register));
+        boolean textFound = solo.searchText("Terms");
         assertTrue("Failed to switch intents to Register", textFound);
     }
 
     public void testResetPassButton()
     {
-        solo.clickOnButton("Reset password");
-        boolean textFound = solo.searchText("Opening password reset.");
+        solo.clickOnButton(solo.getString(R.string.forgot_password));
+        boolean textFound = solo.searchText(solo.getString(R.string.forgot_password_reset));
         assertTrue("Failed to start password reset", textFound);
     }
 }

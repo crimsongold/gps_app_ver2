@@ -29,7 +29,7 @@ public class VerificationTest extends TestCase
 
     public void testEmail_user()
     {
-        int retVal = Verification.isEmailValid("gmail.com");
+        int retVal = Verification.isEmailValid("@gmail.com");
         boolean testVal = false;
         if (retVal == 2) testVal = true;
         assertTrue("Missing user undetected.", testVal);
@@ -95,7 +95,7 @@ public class VerificationTest extends TestCase
     {
         int retVal = Verification.isPasswordValid("T3sTpassword");
         boolean testVal = false;
-        if (retVal == 7) testVal = true;
+        if (retVal == 10) testVal = true;
         assertTrue("Absent special char undetected.", testVal);
     }
 }

@@ -27,7 +27,7 @@
         android:id="@+id/view_data_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Tracking Data"
+        android:text="@string/my_account_view_data"
         android:textSize="20sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
