@@ -215,7 +215,9 @@ public class Registration extends ActionBarActivity {
                 finish();
             }
 
-
+    /**
+     * This method will attempt to register the user with the given information provided by the user
+     */
             public void attemptRegister() {
 
                 String email = mEmailView.getText().toString();
@@ -304,6 +306,9 @@ public class Registration extends ActionBarActivity {
                 }
             }
 
+    /**
+     * This AsyncTask will register the user
+     */
             class registerUser extends AsyncTask<String, Void, String> {
 
                 protected String doInBackground(String... params) {

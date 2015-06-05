@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+/**
+ * This class is used starting after the platform has been booted
+ */
 public class OnBootReceiver  extends BroadcastReceiver
 {
     @Override

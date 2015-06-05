@@ -208,6 +208,13 @@ public class LocalMapData {
             //No changes to make so far...
         }
 
+        /**
+         * getTableAsString is used to get the entries in the database as a string
+         * @param db database to connect to
+         * @param start start point
+         * @param end end point
+         * @return return type of string
+         */
         public String getTableAsString(SQLiteDatabase db, long start, long end) {
             Log.d("DB", "getTableAsString called");
             String tableString = String.format("Table %s:\n", table_name);

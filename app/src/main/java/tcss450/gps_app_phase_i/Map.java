@@ -131,6 +131,9 @@ public class Map extends Activity {
         return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
     }
 
+    /**
+     * createMap will create a map object to be interacted with
+     */
     private void createMap() {
         // check if Map has not been created yet
         if (mMap == null) {
@@ -161,21 +164,9 @@ public class Map extends Activity {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * This AsyncTask is used to get the list of points from the web service
+     */
     class GetPointsTask extends AsyncTask<String, Void, String> {
 
         //Push the recent data from the database into the webservice database

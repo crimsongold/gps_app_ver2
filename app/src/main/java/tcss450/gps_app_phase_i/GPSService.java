@@ -73,6 +73,9 @@ public class GPSService extends Service {
         }
     }
 
+    /**
+     * onDestroy is used by the GPSService to unregister the reciever.
+     */
     public void onDestroy()
     {
         super.onDestroy();
@@ -98,12 +101,20 @@ public class GPSService extends Service {
             //
         }
 
+        /**
+         * onProviderDisabled displays a toast
+         * @param s string passed to the method
+         */
         public void onProviderDisabled(String s) {
             Toast.makeText(GPSService.this,
                     getText(R.string.GPS_off),
                     Toast.LENGTH_LONG).show();
         }
 
+        /**
+         * onProviderEnabled displays a toast
+         * @param s string passed to the method
+         */
         public void onProviderEnabled(String s) {
             Toast.makeText(GPSService.this,
                     getText(R.string.GPS_on),

@@ -13,6 +13,11 @@ public class AlarmReceiver extends BroadcastReceiver
 {
     private LocalMapData location_data;
 
+    /**
+     * The onReceive method is used for the alarm, when it receives a signal, it will push data
+     * @param context the context
+     * @param intent the intent
+     */
     @Override
     public void onReceive(Context context, Intent intent)
     {

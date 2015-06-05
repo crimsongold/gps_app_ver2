@@ -21,6 +21,7 @@ package tcss450.gps_app_phase_i;
 
         import com.google.android.gms.maps.model.LatLng;
 
+
 public class DirectionsJSONParser {
 
     /** Receives a JSONObject and returns a list of lists containing latitude and longitude */

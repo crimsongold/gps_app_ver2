@@ -219,6 +219,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
 
     @Override
     /**
+     * onCreateLoader is used to get data from the database
      * {@inheritDoc}
      */
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
@@ -239,6 +240,7 @@ public class Login extends Activity implements LoaderCallbacks<Cursor> {
 
     @Override
     /**
+     * onLoadFinished is used to send the email to auto complete
      * {@inheritDoc}
      */
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {

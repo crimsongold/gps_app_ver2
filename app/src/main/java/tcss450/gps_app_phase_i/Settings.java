@@ -88,6 +88,10 @@ public class Settings extends ActionBarActivity {
                 //do nothing
             }
 
+            /**
+             * onStopTrackingTouch will set the interval from a seekbar
+             * @param seekBar seekBar shown to the user to select a time
+             */
             public void onStopTrackingTouch(SeekBar seekBar)
             {
                 long interval = (long) seekBar.getProgress();

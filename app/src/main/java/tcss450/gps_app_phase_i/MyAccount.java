@@ -226,7 +226,9 @@ public class MyAccount extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * This class is used for the datepicker
+     */
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
 
@@ -258,14 +260,20 @@ public class MyAccount extends ActionBarActivity {
         }
     }
 
-
+    /**
+     * This will show the date picker in the activity for the start date
+     * @param v the view the date picker will be contained in
+     */
     public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), getString(R.string.date_picker_start));
 
     }
 
-
+    /**
+     * This will show the date picker in the activity for the end date
+     * @param v the view the date picker will be contained in
+     */
     public void showDatePickerDialogEnd(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), getString(R.string.date_picker_end));
